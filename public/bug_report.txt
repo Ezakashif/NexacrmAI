@@ -1,0 +1,21 @@
+Bug Report for Laravel CRM
+---------------------------
+
+TASKS:
+------
+1. User cannot view other user's tasks and also cannot delete and update their own tasks by default, they can only view their own tasks by default.
+2. Admin can permit any user to: 
+    1.view all tasks. 
+    2.update and delete their own tasks.  
+    3.Assign their task to some other user.
+3. Task card should have delete icon right after edit button on tasks card.
+
+ACTIVITY LOG
+-------------
+1. Admin can view each and every activity of every user right its only logging login and logout.
+2. User can track their every activity right now its only logging login and logout.
+
+
+
+
+

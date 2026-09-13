@@ -1,0 +1,7 @@
+# Railway configuration shared by App/Worker/Cron from this repo.
+# HTTP healthcheck is configured on the App service in Railway (not here),
+# so Worker/Cron queue processes are not probed on /up.
+
+[deploy]
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
