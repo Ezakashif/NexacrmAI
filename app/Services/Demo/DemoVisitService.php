@@ -28,7 +28,7 @@ class DemoVisitService
     }
 
     /**
-     * Prefer Cloudflare's edge country header (already available on algoscrm.com).
+     * Prefer Cloudflare's CF-IPCountry header when the app sits behind Cloudflare.
      */
     public function resolveCountry(Request $request): ?string
     {

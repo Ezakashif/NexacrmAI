@@ -15,7 +15,7 @@
 
 <x-marketing-layout
     title="Contact"
-    :description="$isDemo ? 'Book a demo of Algos CRM with our team.' : 'Contact the Algos team about demos, trials, and partnerships.'"
+    :description="$isDemo ? 'Book a demo of '.$brand.' with our team.' : 'Contact the '.$brand.' team about demos, trials, and partnerships.'"
 >
     <section class="mk-atmosphere">
         <div class="mk-container mk-section pb-10 md:pb-12">
@@ -28,8 +28,8 @@
                 </h1>
                 <p class="mk-lead mx-auto mt-5 max-w-2xl">
                     {{ $isDemo
-                        ? 'Tell us about your team and we’ll schedule a walkthrough of the Algos workspace.'
-                        : 'Questions about Algos, onboarding, or Enterprise plans? Send a message—we usually reply within one business day.' }}
+                        ? 'Tell us about your team and we’ll schedule a walkthrough of the '.$brand.' workspace.'
+                        : 'Questions about '.$brand.', onboarding, or Enterprise plans? Send a message—we usually reply within one business day.' }}
                 </p>
             </div>
         </div>

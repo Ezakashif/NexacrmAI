@@ -9,7 +9,7 @@
 
 <x-marketing-layout
     title="Features"
-    description="Explore every Algos CRM module—leads, customers, tasks, kanban, reports, permissions, and multi-tenant admin."
+    description="Explore every {{ config('marketing.name') }} module—leads, customers, tasks, kanban, reports, permissions, and multi-tenant admin."
 >
     {{-- Hero --}}
     <section class="mk-atmosphere">
@@ -79,6 +79,6 @@
 
     {{-- Closing CTA --}}
     <x-marketing.cta
-        title="See Algos in your workflow"
+        title="See {{ config('marketing.name') }} in your workflow"
     />
 </x-marketing-layout>

@@ -7,7 +7,7 @@
 
 <x-marketing-layout
     title="Pricing"
-    description="Algos CRM pricing for Starter, Professional, and Enterprise—with monthly or annual billing."
+    description="{{ config('marketing.name') }} pricing for Starter, Professional, and Enterprise—with monthly or annual billing."
 >
     {{-- Hero --}}
     <section class="mk-atmosphere">

@@ -10,7 +10,7 @@ class EmailTemplateSeeder extends Seeder
     public function run(): void
     {
         $locale = config('email_templates.default_locale', 'en');
-        $platform = config('app.name', 'Algos');
+        $platform = config('app.name', 'NexaCRM');
 
         $templates = [
             'welcome' => [

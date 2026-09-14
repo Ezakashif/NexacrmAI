@@ -18,15 +18,29 @@ php artisan config:cache
 
 | Variable | Default (example) | Purpose |
 |---|---|---|
-| `APP_NAME` | Laravel | Display name / mail from name |
+| `APP_NAME` | NexaCRM | Display name / mail from name |
 | `APP_ENV` | local | Environment |
 | `APP_KEY` | _(generated)_ | Encryption (required) |
 | `APP_DEBUG` | true | Detailed errors (disable in production) |
 | `APP_URL` | http://localhost | Must match the URL you open (include port) |
+| `APP_TIMEZONE` | UTC | Default application timezone |
 | `APP_LOCALE` | en | Locale |
 | `LOG_CHANNEL` | stack | Logging |
 | `LOG_LEVEL` | debug | Log verbosity |
 | `BCRYPT_ROUNDS` | 12 | Password hashing cost |
+
+---
+
+## Marketing site
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `MARKETING_BRAND_NAME` | NexaCRM | Public brand name |
+| `MARKETING_TAGLINE` | A Modern Multi-Tenant CRM for Growing Businesses | Footer / SEO tagline |
+| `MARKETING_DESCRIPTION` | _(product description)_ | Default meta description |
+| `MARKETING_CONTACT_EMAIL` | hello@example.com | Public contact email |
+| `MARKETING_CONTACT_PHONE` | +1 (555) 010-2000 | Public contact phone |
+| `MARKETING_CONTACT_ADDRESS` | _(empty)_ | Optional public address |
 
 ---
 

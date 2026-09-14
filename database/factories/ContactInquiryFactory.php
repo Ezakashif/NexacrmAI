@@ -31,7 +31,7 @@ class ContactInquiryFactory extends Factory
     {
         return $this->state(fn () => [
             'intent' => 'demo',
-            'message' => 'We would like to book a demo of Algos.',
+            'message' => 'We would like to book a demo of NexaCRM.',
         ]);
     }
 

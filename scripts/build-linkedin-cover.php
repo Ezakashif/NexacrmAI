@@ -104,7 +104,7 @@ imageline($out, $markX + 20, $markY + 10, $markX + 10, $markY + 30, $sky);
 imageline($out, $markX + 20, $markY + 10, $markX + 30, $markY + 30, $sky);
 imageline($out, $markX + 14, $markY + 23, $markX + 26, $markY + 23, $sky);
 imagesetthickness($out, 1);
-imagettftext($out, 22, 0, $markX + $markSize + 12, $markY + 30, $slate, $fontBold, 'algos.');
+imagettftext($out, 22, 0, $markX + $markSize + 12, $markY + 30, $slate, $fontBold, 'nexacrm.');
 
 imagettftext($out, 26, 0, $contentX, 100, $slate, $fontBold, 'Simple CRM.');
 imagettftext($out, 18, 0, $contentX, 130, $accent, $fontBold, 'Smarter Customer Management.');
@@ -119,7 +119,7 @@ imagettftext($out, 11, 0, $contentX + 26, $btnY + 21, $white, $fontBold, 'Visit 
 
 $chipX = $contentX + $btnW + 10;
 imagerectangle($out, $chipX, $btnY, $chipX + 122, $btnY + $btnH, $accent);
-imagettftext($out, 10, 0, $chipX + 14, $btnY + 21, $accent, $fontReg, 'algoscrm.com');
+imagettftext($out, 10, 0, $chipX + 14, $btnY + 21, $accent, $fontReg, 'example.com');
 
 // Product UI on the far right only
 if (is_string($uiSrcPath) && is_file($uiSrcPath)) {

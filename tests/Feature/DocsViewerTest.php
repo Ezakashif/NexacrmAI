@@ -30,7 +30,7 @@ class DocsViewerTest extends TestCase
         $this->actingAs($admin)
             ->get(route('docs.index'))
             ->assertOk()
-            ->assertSee('CRM Documentation', false)
+            ->assertSee('NexaCRM Documentation', false)
             ->assertSee('Contents', false);
 
         $this->actingAs($admin)
@@ -58,11 +58,10 @@ class DocsViewerTest extends TestCase
         $this->actingAs($admin)
             ->get(route('docs.show', ['path' => 'development/contributing']))
             ->assertOk()
-            ->assertSee('Who can contribute', false)
-            ->assertSee('PR-only', false)
-            ->assertSee('What contributors never get', false)
-            ->assertSee('Intellectual property', false)
-            ->assertSee('pull request', false);
+            ->assertSee('Development notes', false)
+            ->assertSee('Codester edition of NexaCRM', false)
+            ->assertSee('Tenant safety', false)
+            ->assertSee('CompanyScope', false);
     }
 
     public function test_docs_rewrite_relative_markdown_links(): void

@@ -1,4 +1,4 @@
-New contact inquiry from the Algos marketing website
+New contact inquiry from the NexaCRM marketing website
 
 Name: {{ $inquiry['name'] }}
 Email: {{ $inquiry['email'] }}

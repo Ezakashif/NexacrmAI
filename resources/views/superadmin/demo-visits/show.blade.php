@@ -104,7 +104,7 @@
             <h2 class="h6 text-white mb-3">Quick actions</h2>
             <div class="d-flex flex-wrap" style="gap: 0.5rem;">
                 @if ($visit->email)
-                    <a href="mailto:{{ $visit->email }}?subject={{ rawurlencode('Following up on your Algos CRM demo — '.config('app.name')) }}" class="btn btn-sm btn-info">
+                    <a href="mailto:{{ $visit->email }}?subject={{ rawurlencode('Following up on your '.config('app.name').' demo') }}" class="btn btn-sm btn-info">
                         <i class="fas fa-reply" aria-hidden="true"></i> Reply by email
                     </a>
                 @endif

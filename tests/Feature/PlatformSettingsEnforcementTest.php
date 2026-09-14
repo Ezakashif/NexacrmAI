@@ -63,7 +63,7 @@ class PlatformSettingsEnforcementTest extends TestCase
 
         $this->actingAs($superAdmin)
             ->put(route('superadmin.settings.update'), [
-                'platform_name' => 'Algos CRM',
+                'platform_name' => 'NexaCRM',
                 'default_timezone' => 'UTC',
                 'default_currency' => 'USD',
                 'trial_duration_days' => 14,
@@ -82,7 +82,7 @@ class PlatformSettingsEnforcementTest extends TestCase
 
         $this->actingAs($superAdmin)
             ->put(route('superadmin.settings.update'), [
-                'platform_name' => 'Algos CRM',
+                'platform_name' => 'NexaCRM',
                 'default_timezone' => 'UTC',
                 'default_currency' => 'USD',
                 'trial_duration_days' => 14,
@@ -189,7 +189,7 @@ class PlatformSettingsEnforcementTest extends TestCase
 
         $this->actingAs($superAdmin)
             ->put(route('superadmin.settings.update'), [
-                'platform_name' => 'Algos CRM',
+                'platform_name' => 'NexaCRM',
                 'default_timezone' => 'UTC',
                 'default_currency' => 'USD',
                 'trial_duration_days' => 14,
@@ -208,7 +208,7 @@ class PlatformSettingsEnforcementTest extends TestCase
 
         $this->actingAs($superAdmin)
             ->put(route('superadmin.settings.update'), [
-                'platform_name' => 'Algos CRM',
+                'platform_name' => 'NexaCRM',
                 'default_timezone' => 'UTC',
                 'default_currency' => 'USD',
                 'trial_duration_days' => 14,

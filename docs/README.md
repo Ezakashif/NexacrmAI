@@ -1,4 +1,4 @@
-# CRM Documentation
+# NexaCRM Documentation
 
 Professional documentation for the multi-tenant Laravel CRM platform.
 

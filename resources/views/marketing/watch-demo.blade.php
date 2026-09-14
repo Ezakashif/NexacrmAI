@@ -7,7 +7,7 @@
 
 <x-marketing-layout
     title="Watch Demo"
-    description="Watch a short walkthrough of Algos CRM—leads, pipeline, WhatsApp conversations, and reports in one workspace."
+    description="Watch a short walkthrough of {{ $brand }}—leads, pipeline, WhatsApp conversations, and reports in one workspace."
 >
     <section class="mk-atmosphere">
         <div class="mk-container mk-section pb-8 md:pb-12">
@@ -16,7 +16,7 @@
                     {{ strtolower($brand) }}<span class="dot">.</span>
                 </p>
                 <h1 class="mk-display mk-page-title">
-                    See Algos CRM in action
+                    See {{ $brand }} in action
                 </h1>
                 <p class="mk-lead mx-auto mt-5 max-w-2xl">
                     A one-minute walkthrough of the workspace your team uses every day.

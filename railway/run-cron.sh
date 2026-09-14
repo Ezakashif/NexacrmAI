@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Scheduler loop for Railway Cron service.
+# Scheduler loop for a dedicated cron/worker process.
 # Make executable: chmod +x railway/run-cron.sh
 set -euo pipefail
 

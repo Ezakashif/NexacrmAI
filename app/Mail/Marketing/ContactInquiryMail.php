@@ -25,11 +25,12 @@ class ContactInquiryMail extends Mailable implements ShouldQueue
         $rendered = $this->rendered();
         $intent = $this->inquiry['intent'] ?? null;
 
+        $brand = (string) config('app.name', 'NexaCRM');
         $subject = $rendered['template'] !== null
             ? $rendered['subject']
             : ($intent === 'demo'
-                ? 'Algos demo request from '.$this->inquiry['name']
-                : 'Algos contact inquiry from '.$this->inquiry['name']);
+                ? $brand.' demo request from '.$this->inquiry['name']
+                : $brand.' contact inquiry from '.$this->inquiry['name']);
 
         return new Envelope(
             subject: $subject,

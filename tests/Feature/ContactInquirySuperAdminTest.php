@@ -30,7 +30,7 @@ class ContactInquirySuperAdminTest extends TestCase
             'email' => 'alex@example.com',
             'company' => 'Northline',
             'phone' => '+1 555 010 2000',
-            'message' => 'We would like a walkthrough of Algos.',
+            'message' => 'We would like a walkthrough of NexaCRM.',
             'intent' => 'demo',
         ];
 
@@ -72,7 +72,7 @@ class ContactInquirySuperAdminTest extends TestCase
             ->assertOk()
             ->assertSee('Demo request')
             ->assertSee('Jordan Lee')
-            ->assertSee('We would like to book a demo of Algos.');
+            ->assertSee('We would like to book a demo of NexaCRM.');
 
         $this->assertSame(ContactInquiry::STATUS_REVIEWED, $inquiry->fresh()->status);
         $this->assertSame($superAdmin->id, $inquiry->fresh()->reviewed_by);

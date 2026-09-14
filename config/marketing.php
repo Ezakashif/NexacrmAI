@@ -8,11 +8,11 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'name' => env('MARKETING_BRAND_NAME', 'Algos'),
-    'tagline' => env('MARKETING_TAGLINE', 'Algo CRM is a simple, affordable CRM for small businesses to manage leads, customers, tasks, and sales in one place. Organize customer information, track leads through your sales pipeline, manage follow-ups, and monitor performance without the complexity of enterprise CRM software.'),
+    'name' => env('MARKETING_BRAND_NAME', 'NexaCRM'),
+    'tagline' => env('MARKETING_TAGLINE', 'A Modern Multi-Tenant CRM for Growing Businesses'),
     'description' => env(
         'MARKETING_DESCRIPTION',
-        'Algos is a modern multi-tenant CRM for lead management, customer success, tasks, and team collaboration.'
+        'NexaCRM is a modern multi-tenant CRM for lead management, customer success, tasks, and team collaboration.'
     ),
 
     /*
@@ -22,7 +22,7 @@ return [
     */
 
     'contact' => [
-        'email' => env('MARKETING_CONTACT_EMAIL', 'hello@algos.test'),
+        'email' => env('MARKETING_CONTACT_EMAIL', 'hello@example.com'),
         'phone' => env('MARKETING_CONTACT_PHONE', '+1 (555) 010-2000'),
         // Optional — leave empty/null to hide address everywhere in the public UI.
         'address' => env('MARKETING_CONTACT_ADDRESS') ?: null,
@@ -144,7 +144,7 @@ return [
             [
                 'id' => 'trial-pricing',
                 'question' => 'Do plans include a free trial?',
-                'answer' => 'Starter and Professional include a free trial so you can evaluate Algos before paying. Enterprise starts with a guided demo.',
+                'answer' => 'Starter and Professional include a free trial so you can evaluate NexaCRM before paying. Enterprise starts with a guided demo.',
             ],
             [
                 'id' => 'limits',
@@ -186,7 +186,7 @@ return [
 
     'home' => [
         'headline' => 'Run your entire sales pipeline in one CRM your team will actually open every day',
-        'subheadline' => 'Algos unifies leads, customers, tasks, kanban boards, and reports so growing teams stop losing follow-ups in spreadsheets and inboxes.',
+        'subheadline' => 'NexaCRM unifies leads, customers, tasks, kanban boards, and reports so growing teams stop losing follow-ups in spreadsheets and inboxes.',
         'trust_chips' => [
             'Multi-tenant SaaS',
             'Secure authentication',
@@ -204,7 +204,7 @@ return [
         ],
         'product_showcase' => [
             'headline' => 'See the CRM in Action',
-            'subheadline' => 'Explore the real Algos workspace—dashboards, pipelines, tasks, reports, and admin controls—before you start your trial.',
+            'subheadline' => 'Explore the real NexaCRM workspace—dashboards, pipelines, tasks, reports, and admin controls—before you start your trial.',
             'items' => [
                 [
                     'id' => 'dashboard',
@@ -434,7 +434,7 @@ return [
             ],
             [
                 'id' => 'tenants',
-                'question' => 'Is Algos multi-tenant?',
+                'question' => 'Is NexaCRM multi-tenant?',
                 'answer' => 'Yes. Each company gets isolated data, roles, and settings inside a shared platform architecture.',
             ],
             [
@@ -458,7 +458,7 @@ return [
 
     'features_page' => [
         'headline' => 'Every module your revenue team needs',
-        'subheadline' => 'Algos covers the full CRM lifecycle—from first lead to closed customer—with clear permissions, reporting, and multi-tenant control.',
+        'subheadline' => 'NexaCRM covers the full CRM lifecycle—from first lead to closed customer—with clear permissions, reporting, and multi-tenant control.',
         'groups' => [
             [
                 'id' => 'sales',
@@ -639,7 +639,7 @@ return [
 
     'about' => [
         'headline' => 'Built for teams who deserve a calmer CRM',
-        'subheadline' => 'Algos started with a simple belief: revenue software should feel clear, trustworthy, and fast to adopt—not heavy, noisy, or confusing.',
+        'subheadline' => 'NexaCRM started with a simple belief: revenue software should feel clear, trustworthy, and fast to adopt—not heavy, noisy, or confusing.',
         'mission' => [
             'title' => 'Mission',
             'body' => 'Help growing teams close more deals with a CRM that stays out of the way—clear pipelines, accountable follow-ups, and data every stakeholder can trust.',
@@ -649,8 +649,8 @@ return [
             'body' => 'Become the operating system for modern revenue teams: multi-tenant by design, permission-aware by default, and delightful enough that people actually want to use it every day.',
         ],
         'why' => [
-            'title' => 'Why we built Algos',
-            'body' => 'Too many CRMs force teams to choose between power and usability. Spreadsheets break under pressure. Enterprise tools drown reps in configuration. We built Algos so sales and ops can share one workspace—leads, customers, tasks, reports, and admin controls—without the clutter.',
+            'title' => 'Why we built NexaCRM',
+            'body' => 'Too many CRMs force teams to choose between power and usability. Spreadsheets break under pressure. Enterprise tools drown reps in configuration. We built NexaCRM so sales and ops can share one workspace—leads, customers, tasks, reports, and admin controls—without the clutter.',
             'points' => [
                 'Clarity over feature theater',
                 'Tenant isolation and permissions from day one',

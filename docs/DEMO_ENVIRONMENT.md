@@ -1,4 +1,4 @@
-# Algos CRM — Demo Environment
+# NexaCRM — Demo Environment
 
 Polished fictional tenant for the public live demo, screenshots, and marketing.
 

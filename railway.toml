@@ -1,6 +1,6 @@
-# Railway configuration shared by App/Worker/Cron from this repo.
-# HTTP healthcheck is configured on the App service in Railway (not here),
-# so Worker/Cron queue processes are not probed on /up.
+# Optional PaaS deploy hints shared by App/Worker/Cron services from this repo.
+# Configure HTTP healthchecks on the web service only, so queue/cron
+# processes are not probed on /up.
 
 [deploy]
 restartPolicyType = "ON_FAILURE"

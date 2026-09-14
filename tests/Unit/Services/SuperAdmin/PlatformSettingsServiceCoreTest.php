@@ -122,8 +122,8 @@ class PlatformSettingsServiceCoreTest extends TestCase
         PlatformSetting::query()->where('key', 'platform_name')->delete();
         Cache::forget(PlatformSettingsService::CACHE_KEY);
 
-        config(['app.name' => 'Algos CRM']);
+        config(['app.name' => 'NexaCRM']);
 
-        $this->assertSame('Algos CRM', $this->service->platformName());
+        $this->assertSame('NexaCRM', $this->service->platformName());
     }
 }

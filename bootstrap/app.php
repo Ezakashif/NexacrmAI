@@ -21,7 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
         },
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Railway (and other reverse proxies) terminate TLS upstream.
+        // Reverse proxies (load balancers, PaaS hosts) often terminate TLS upstream.
         $middleware->trustProxies(at: '*');
 
         $middleware->alias([

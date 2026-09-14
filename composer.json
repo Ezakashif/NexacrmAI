@@ -1,9 +1,9 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "ezakashif/nexacrm",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "NexaCRM is a modern multi-tenant Laravel CRM SaaS for developers, agencies, and growing businesses.",
+    "keywords": ["nexacrm", "crm", "laravel", "saas", "multi-tenant"],
     "license": "MIT",
     "require": {
         "php": "^8.2",

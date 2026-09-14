@@ -1,13 +1,13 @@
 @props([])
 
-<div {{ $attributes->class(['mk-dashboard-preview relative w-full overflow-hidden']) }} role="img" aria-label="Algos CRM dashboard preview showing pipeline, tasks, and analytics">
+<div {{ $attributes->class(['mk-dashboard-preview relative w-full overflow-hidden']) }} role="img" aria-label="{{ config('marketing.name') }} dashboard preview showing pipeline, tasks, and analytics">
     <div class="mk-dashboard-chrome overflow-hidden rounded-t-xl border border-b-0 border-slate-200 bg-slate-100">
         <div class="flex items-center gap-2 border-b border-slate-200 px-4 py-3">
             <span class="h-2.5 w-2.5 rounded-full bg-slate-300"></span>
             <span class="h-2.5 w-2.5 rounded-full bg-slate-300"></span>
             <span class="h-2.5 w-2.5 rounded-full bg-slate-300"></span>
             <div class="ml-3 flex-1 rounded-md bg-white px-3 py-1.5 text-xs text-slate-400 ring-1 ring-slate-200">
-                app.algos.test/dashboard
+                app.example.com/dashboard
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
                             <path d="M12 4 L5 20" /><path d="M12 4 L19 20" /><path d="M8.5 14.5 H15.5" />
                         </svg>
                     </span>
-                    <span class="text-sm font-semibold text-white">algos<span class="text-sky-400">.</span></span>
+                    <span class="text-sm font-semibold text-white">{{ strtolower((string) config('marketing.name', 'nexacrm')) }}<span class="text-sky-400">.</span></span>
                 </div>
                 <div class="space-y-2">
                     <div class="rounded-md bg-sky-500/20 px-2 py-2 text-[10px] font-medium text-sky-300 sm:text-xs">Dashboard</div>

@@ -78,7 +78,7 @@
                 <figure class="mk-dashboard-preview mk-dashboard-preview-lg">
                     <img
                         src="{{ asset('marketing/screenshots/overview.PNG') }}"
-                        alt="Algos CRM dashboard showing revenue overview, pipeline stages, and today's tasks"
+                        alt="NexaCRM dashboard showing revenue overview, pipeline stages, and today's tasks"
                         class="mk-dashboard-preview-image"
                         fetchpriority="high"
                         decoding="async"
@@ -167,7 +167,7 @@
                     heading-id="how-heading"
                     eyebrow="How it works"
                     title="One connected workflow from first lead to clear decisions"
-                    description="Algos keeps the customer journey moving in one shared workspace—without losing context between sales, service, and reporting."
+                    description="NexaCRM keeps the customer journey moving in one shared workspace—without losing context between sales, service, and reporting."
                 />
                 <div class="mt-7">
                     @if ($trialAvailable)
@@ -209,7 +209,7 @@
             <div data-mk-reveal="left">
                 <x-marketing.section-heading
                     heading-id="why-heading"
-                    eyebrow="Why Algos"
+                    eyebrow="Why NexaCRM"
                     title="Built for teams that outgrow spreadsheets"
                     description="Modern CRM structure without the noise—so your team spends time selling, not configuring."
                 />
@@ -242,7 +242,7 @@
                     heading-id="outcomes-heading"
                     eyebrow="Built for small businesses"
                     title="The structure to grow without the CRM complexity"
-                    description="Algos helps small teams replace scattered work with a clearer, more reliable way to run customer relationships."
+                    description="NexaCRM helps small teams replace scattered work with a clearer, more reliable way to run customer relationships."
                     align="center"
                 />
             </div>

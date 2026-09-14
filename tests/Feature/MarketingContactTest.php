@@ -34,7 +34,7 @@ class MarketingContactTest extends TestCase
         $this->get(route('marketing.contact', ['intent' => 'demo']))
             ->assertOk()
             ->assertSee('Book a demo')
-            ->assertSee('book a demo of Algos', false);
+            ->assertSee('book a demo of NexaCRM', false);
     }
 
     public function test_contact_form_validates_required_fields(): void
@@ -54,7 +54,7 @@ class MarketingContactTest extends TestCase
             'email' => 'alex@example.com',
             'company' => 'Northline',
             'phone' => '+1 555 010 2000',
-            'message' => 'We would like a walkthrough of Algos.',
+            'message' => 'We would like a walkthrough of NexaCRM.',
             'intent' => 'demo',
         ];
 

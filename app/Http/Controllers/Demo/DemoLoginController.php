@@ -58,6 +58,6 @@ class DemoLoginController extends Controller
 
         return redirect()
             ->route('dashboard')
-            ->with('success', 'Welcome to the Algos CRM Demo. Explore the dashboard, pipeline, tasks, and reports — this workspace resets daily.');
+            ->with('success', 'Welcome to the NexaCRM Demo. Explore the dashboard, pipeline, tasks, and reports — this workspace resets daily.');
     }
 }

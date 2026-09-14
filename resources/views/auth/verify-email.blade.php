@@ -1,7 +1,7 @@
 <x-marketing-auth-layout
     title="Verify email"
     heading="Verify your email"
-    subheading="Confirm your email address to unlock your Algos workspace."
+    subheading="Confirm your email address to unlock your NexaCRM workspace."
 >
     @if ($errors->has('email'))
         <div class="mb-5 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-800" role="alert">

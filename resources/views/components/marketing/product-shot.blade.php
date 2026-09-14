@@ -26,11 +26,11 @@
         >
             <div class="mk-product-shot-chrome">
                 <span></span><span></span><span></span>
-                <div class="mk-product-shot-url">app.algos.com/{{ \Illuminate\Support\Str::slug($title) }}</div>
+                <div class="mk-product-shot-url">app.example.com/{{ \Illuminate\Support\Str::slug($title) }}</div>
             </div>
             <div class="mk-product-shot-body">
                 <div class="mk-product-shot-aside" aria-hidden="true">
-                    <div class="mk-product-shot-brand">algos.</div>
+                    <div class="mk-product-shot-brand">{{ strtolower((string) config('marketing.name', 'nexacrm')) }}.</div>
                     <div class="is-active">{{ $title }}</div>
                     <div>Overview</div>
                     <div>Details</div>

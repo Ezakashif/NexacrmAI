@@ -5,7 +5,7 @@
 
 <x-marketing-layout
     title="About"
-    description="Learn about Algos CRM—our mission, vision, story, timeline, and the technology behind the product."
+    description="{{ 'Learn about '.$brand.'—our mission, vision, story, timeline, and the technology behind the product.' }}"
 >
     {{-- Hero --}}
     <section class="mk-atmosphere">
@@ -71,7 +71,7 @@
             <x-marketing.section-heading
                 heading-id="timeline-heading"
                 eyebrow="Timeline"
-                title="How Algos took shape"
+                title="How NexaCRM took shape"
                 description="A short path from the problem to a product ready for growing teams."
                 align="center"
             />
@@ -102,7 +102,7 @@
             <x-marketing.section-heading
                 heading-id="stack-heading"
                 eyebrow="Technology"
-                title="The stack behind Algos"
+                title="The stack behind NexaCRM"
                 description="A practical Laravel foundation—modern frontend for marketing, proven CRM shell for authenticated work."
                 align="center"
             />
@@ -119,6 +119,6 @@
     </section>
 
     <x-marketing.cta
-        title="Want to see Algos in action?"
+        title="Want to see NexaCRM in action?"
     />
 </x-marketing-layout>

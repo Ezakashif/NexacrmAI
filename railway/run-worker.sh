@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Queue worker for Railway Worker service.
+# Queue worker for a dedicated worker process.
 # Make executable: chmod +x railway/run-worker.sh
 set -euo pipefail
 

@@ -1,61 +1,104 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# NexaCRM
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+NexaCRM is a modern multi-tenant CRM SaaS built on Laravel. It is intended as a ready-to-customize codebase for developers, agencies, and businesses that want to run their own CRM platform.
 
-## About Laravel
+**Tagline:** A Modern Multi-Tenant CRM for Growing Businesses
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This repository is the Codester edition. It is independent of any other CRM product or production environment.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## What it includes
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Public marketing site (home, features, pricing, about, contact, documentation, demo)
+- Tenant CRM workspace with AdminLTE
+- Super Admin console for companies, plans, platform settings, and impersonation
+- Company-scoped multi-tenancy (single database)
+- Custom roles and permissions (not Spatie)
+- Leads, customers, tasks, lead activities, and kanban boards
+- Dashboard, reports, CSV import/export, and global search
+- Optional live demo tenant with daily reset
+- Channel webhooks: Generic Webhook, Facebook Lead Ads, and WhatsApp Cloud API
+- Inbox for WhatsApp conversations
+- Plan limits and trial/subscription state (managed in Super Admin; no payment gateway)
 
-## Learning Laravel
+Billing is administrative. There is no Stripe, Cashier, or Paddle checkout in this codebase.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Technology stack
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Layer | Choice |
+|---|---|
+| Backend | PHP 8.2+, Laravel 12 |
+| Auth | Session authentication (Laravel Breeze-style) |
+| Tenant UI | AdminLTE 3 |
+| Marketing UI | Blade, Tailwind CSS, Alpine.js, Vite |
+| Tenancy | Custom `company_id` global scope |
+| RBAC | Config-driven permissions synced to the database |
+| Queues | Database driver by default |
+| PDF | DomPDF |
 
-## Laravel Sponsors
+## Requirements
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- PHP 8.2+ with typical Laravel extensions, including `gd` and `pdo_mysql`
+- Composer 2
+- Node.js 20+ and npm
+- SQLite (local default) or MySQL 8+
+- A queue worker and a cron entry for scheduler jobs in production
 
-### Premium Partners
+## Installation (overview)
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+php artisan db:seed
+php artisan permissions:sync
+php artisan storage:link
+npm install && npm run build
+php artisan serve
+```
 
-## Contributing
+In another terminal:
 
-Outside contributions to **this CRM** are welcome via pull request only. Contributors do not receive production access, Super Admin, or direct push to `main`.
+```bash
+php artisan queue:work --queue=channels,default
+```
 
-Read **[CONTRIBUTING.md](CONTRIBUTING.md)** and the full policy in [docs/development/contributing.md](docs/development/contributing.md) before opening a PR.
+For production, point the web root at `public/`, set `APP_ENV=production`, configure a real mailer, and run `schedule:run` every minute.
 
-## Code of Conduct
+See [docs/getting-started/installation.md](docs/getting-started/installation.md) for the full setup guide.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Default seeded logins (change these after install):
 
-## Security Vulnerabilities
+- Super Admin: `superadmin@example.com`
+- Tenant admin: `admin@example.com`
+- Sales: `sales@example.com`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+The seed password is currently `password`. Treat that as a development default, not a production credential.
 
-## License
+## Multi-tenancy and RBAC
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Each tenant is a `Company`. Tenant models are scoped by `company_id`. Super Admins are platform users (`is_super_admin`) and use `/superadmin`, not the tenant CRM.
+
+Permissions are defined in `config/permissions.php` and synced with `php artisan permissions:sync`. Default company roles are `admin` and `sales`.
+
+## Demo
+
+An optional fictional demo tenant can be seeded separately (`DemoDataSeeder`) when `DEMO_SEED_PASSWORD` is set. Public visitors can use **Try Live Demo** if that tenant exists. Daily reset is off unless `DEMO_RESET_ENABLED=true`.
+
+Details: [docs/DEMO_ENVIRONMENT.md](docs/DEMO_ENVIRONMENT.md).
+
+## White-label / customization
+
+Platform name, logo, favicon, mail from-address, timezone, and marketing contact details can be changed in Super Admin → Settings. Marketing copy also reads from `config/marketing.php` and `APP_NAME` / `MARKETING_*` environment variables.
+
+Replace the packaged branding files under `public/branding/` with your own marks when you customize the product.
+
+## Documentation
+
+In-app docs are available at `/docs` after login. The Markdown sources live in [`docs/`](docs/README.md).
+
+## License and support
+
+The repository currently includes an MIT `LICENSE` file. For a Codester commercial source-code release, that license should be reviewed and replaced with the marketplace terms you intend to ship. Do not treat the current MIT file as the final Codester license until that review is complete.
+
+Support terms for buyers can be added here once they are defined.

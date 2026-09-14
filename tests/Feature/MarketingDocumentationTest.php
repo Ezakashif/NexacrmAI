@@ -10,7 +10,7 @@ class MarketingDocumentationTest extends TestCase
     {
         $this->get(route('marketing.documentation'))
             ->assertOk()
-            ->assertSee('CRM Documentation', false)
+            ->assertSee('NexaCRM Documentation', false)
             ->assertSee('Contents', false)
             ->assertSee('Getting started', false)
             ->assertSee(route('marketing.documentation.show', ['path' => 'getting-started/installation'], false), false);

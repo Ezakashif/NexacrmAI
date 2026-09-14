@@ -217,16 +217,16 @@ class HighPriorityAuditFixesTest extends TestCase
         app(PlatformSettingsService::class)->setMany([
             'default_timezone' => 'America/New_York',
             'default_currency' => 'eur',
-            'mail_from_name' => 'Algos Support',
-            'mail_from_address' => 'support@algos.test',
+            'mail_from_name' => 'NexaCRM Support',
+            'mail_from_address' => 'support@example.com',
         ]);
 
         app(PlatformSettingsService::class)->applyBranding();
 
         $this->assertSame('America/New_York', config('app.timezone'));
         $this->assertSame('EUR', config('app.currency'));
-        $this->assertSame('Algos Support', config('mail.from.name'));
-        $this->assertSame('support@algos.test', config('mail.from.address'));
+        $this->assertSame('NexaCRM Support', config('mail.from.name'));
+        $this->assertSame('support@example.com', config('mail.from.address'));
     }
 
     public function test_soft_deleted_lead_fails_exists_in_company_validation(): void

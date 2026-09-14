@@ -47,7 +47,7 @@
                             :title="$item['title']"
                             :icon="$item['icon'] ?? 'layout-dashboard'"
                             :image="$item['image'] ?? null"
-                            :alt="'Algos '.$item['title'].' screenshot'"
+                            :alt="config('marketing.name').' '.$item['title'].' screenshot'"
                         />
                     </div>
 
@@ -82,7 +82,7 @@
                     <p>Switch between the tools that keep your team organized after the core sales workflow is in motion.</p>
                 </div>
 
-                <div class="mk-showcase-tabs" role="tablist" aria-label="Additional Algos CRM modules">
+                <div class="mk-showcase-tabs" role="tablist" aria-label="Additional {{ config('marketing.name') }} modules">
                     @foreach ($additionalItems as $item)
                         <button
                             type="button"
@@ -116,7 +116,7 @@
                                     :title="$item['title']"
                                     :icon="$item['icon'] ?? 'layout-dashboard'"
                                     :image="$item['image'] ?? null"
-                                    :alt="'Algos '.$item['title'].' workspace preview'"
+                                    :alt="config('marketing.name').' '.$item['title'].' workspace preview'"
                                 />
                             </div>
                             <div class="mk-showcase-copy">

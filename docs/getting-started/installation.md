@@ -36,7 +36,7 @@ php artisan key:generate
 Set at least:
 
 ```env
-APP_NAME="CRM"
+APP_NAME="NexaCRM"
 APP_URL=http://127.0.0.1:8000
 DB_CONNECTION=sqlite
 QUEUE_CONNECTION=database

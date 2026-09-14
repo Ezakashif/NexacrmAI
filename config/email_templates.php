@@ -51,7 +51,7 @@ return [
                 'user_email' => 'alex@example.com',
                 'company_name' => 'Acme Corp',
                 'login_url' => '/login',
-                'platform_name' => 'Algos',
+                'platform_name' => 'NexaCRM',
                 'support_email' => 'hello@example.com',
             ],
         ],
@@ -71,7 +71,7 @@ return [
                 'user_email' => 'alex@example.com',
                 'reset_url' => '/reset-password/sample-token',
                 'expires_minutes' => '60',
-                'platform_name' => 'Algos',
+                'platform_name' => 'NexaCRM',
             ],
         ],
 
@@ -90,7 +90,7 @@ return [
                 'user_email' => 'alex@example.com',
                 'activation_url' => '/verify-email/1/sample-hash',
                 'expires_minutes' => '60',
-                'platform_name' => 'Algos',
+                'platform_name' => 'NexaCRM',
             ],
         ],
 
@@ -115,7 +115,7 @@ return [
                 'role_names' => 'Sales',
                 'invitation_url' => '/invitations/sample-token',
                 'expires_at' => '2026-08-01',
-                'platform_name' => 'Algos',
+                'platform_name' => 'NexaCRM',
             ],
         ],
 
@@ -139,7 +139,7 @@ return [
                 'company_name' => 'Acme Corp',
                 'role_names' => 'Sales',
                 'login_url' => '/login',
-                'platform_name' => 'Algos',
+                'platform_name' => 'NexaCRM',
                 'support_email' => 'hello@example.com',
             ],
         ],
@@ -163,7 +163,7 @@ return [
                 'lead_email' => 'sam@northline.test',
                 'lead_phone' => '+1 555 0100',
                 'lead_url' => '/leads/1',
-                'platform_name' => 'Algos',
+                'platform_name' => 'NexaCRM',
             ],
         ],
 
@@ -184,7 +184,7 @@ return [
                 'due_date' => 'Jul 24, 2026',
                 'tier_label' => 'Due today',
                 'task_url' => '/tasks/1',
-                'platform_name' => 'Algos',
+                'platform_name' => 'NexaCRM',
             ],
         ],
 
@@ -205,7 +205,7 @@ return [
                 'trial_ends_at' => 'Jul 30, 2026',
                 'days_remaining' => '3',
                 'billing_url' => '/dashboard',
-                'platform_name' => 'Algos',
+                'platform_name' => 'NexaCRM',
             ],
         ],
 
@@ -234,7 +234,7 @@ return [
                 'subject_line' => 'Follow-up due today',
                 'body_line' => 'You have a lead follow-up that is due today.',
                 'lead_url' => '/leads/1',
-                'platform_name' => 'Algos',
+                'platform_name' => 'NexaCRM',
             ],
         ],
 
@@ -253,7 +253,7 @@ return [
                 'old_status' => 'Active',
                 'new_status' => 'Suspended',
                 'changed_by' => 'Admin User',
-                'platform_name' => 'Algos',
+                'platform_name' => 'NexaCRM',
             ],
         ],
 
@@ -276,7 +276,7 @@ return [
                 'inquiry_phone' => '+1 555 0100',
                 'inquiry_intent' => 'demo',
                 'inquiry_message' => 'We would like a walkthrough.',
-                'platform_name' => 'Algos',
+                'platform_name' => 'NexaCRM',
             ],
         ],
     ],

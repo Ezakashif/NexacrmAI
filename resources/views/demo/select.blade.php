@@ -1,6 +1,6 @@
 <x-marketing-auth-layout
     title="Try Live Demo"
-    heading="Explore Algos CRM"
+    heading="Explore NexaCRM"
     subheading="Enter your work email, then choose a role. This is a shared demo workspace that resets daily."
     :wide="true"
 >
@@ -65,7 +65,7 @@
                     class="mt-1 rounded border-slate-300 text-sky-600 focus:ring-sky-500"
                     @checked(old('contact_consent'))
                 >
-                <span>It’s okay to contact me about Algos CRM.</span>
+                <span>It’s okay to contact me about NexaCRM.</span>
             </label>
         </div>
 

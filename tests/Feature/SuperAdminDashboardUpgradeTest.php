@@ -197,7 +197,7 @@ class SuperAdminDashboardUpgradeTest extends TestCase
 
         $this->actingAs($superAdmin)
             ->put(route('superadmin.settings.update'), [
-                'platform_name' => 'Algos CRM',
+                'platform_name' => 'NexaCRM',
                 'default_timezone' => 'UTC',
                 'default_currency' => 'USD',
                 'trial_duration_days' => 30,
@@ -271,7 +271,7 @@ class SuperAdminDashboardUpgradeTest extends TestCase
     {
         $settings = app(\App\Services\SuperAdmin\PlatformSettingsService::class);
         $settings->setMany([
-            'platform_name' => 'Algos CRM',
+            'platform_name' => 'NexaCRM',
             'platform_logo_path' => 'platform/dark-logo.png',
             'platform_logo_light_path' => 'platform/light-logo.png',
         ]);

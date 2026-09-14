@@ -42,10 +42,6 @@
                 <p class="mt-4 max-w-xs text-sm leading-relaxed text-slate-400">
                     {{ config('marketing.tagline') }}
                 </p>
-              
-                <div class="mt-4">
-<a href="https://www.producthunt.com/products/algos-crm?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-algos-crm" target="_blank" rel="noopener noreferrer"><img alt="Algos CRM - Simple CRM for growing businesses | Product Hunt" width="200" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1236473&amp;theme=neutral&amp;t=1788174779250"></a>
-</div>
             </div>
 
             
