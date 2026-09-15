@@ -87,26 +87,30 @@ Tests and changelog may mention `algos.` / `algos.test` as **negative assertions
 
 ## Installation verification
 
-Filled after the Phase 8 clean extraction test:
+Recorded from `dist/nexacrm-unreleased-901ade3-codester.zip` extracted to `/tmp/nexacrm-buyer-extract` (clean tree, not Algos/Railway):
 
 | Check | Result |
 |---|---|
-| ZIP generated | _(pending)_ |
-| Extract: no `.git` / `.env` / `vendor` / `node_modules` | _(pending)_ |
-| `composer install` | _(pending)_ |
-| `php artisan migrate` | _(pending)_ |
-| Normal `db:seed` (no demo tenant) | _(pending)_ |
-| `nexacrm:create-super-admin` | _(pending)_ |
-| `npm ci` / `npm run build` | _(pending)_ |
-| HTTP marketing + login (NexaCRM, no Algos hosts) | _(pending)_ |
-| Tenant provision (CompanyProvisioner) | _(pending)_ |
-| `php artisan test` | _(pending)_ |
-| Secrets scan | _(pending)_ |
+| ZIP generated | PASS — `nexacrm-unreleased-901ade3-codester.zip` (10,726,739 bytes / 11 MiB) |
+| Extract: no `.git` / `.env` / Composer `vendor/` / `node_modules` | PASS |
+| Required Laravel + NexaCRM media + docs present | PASS |
+| `composer install` | PASS (from `composer.lock`) |
+| `php artisan migrate` | PASS (SQLite) |
+| Normal `db:seed` (no demo tenant) | PASS (`scripts/ci-assert-normal-seed.php`) |
+| `nexacrm:create-super-admin` | PASS (`buyer-superadmin@nexacrm.test`; throwaway local password, not shipped) |
+| Super Admin `Auth::attempt` | PASS |
+| Tenant provision via `CompanyProvisioner` (same service as Super Admin → Companies) | PASS (`buyer-tenant-co` / `tenant-admin@nexacrm.test`) |
+| Tenant admin `Auth::attempt` | PASS |
+| `npm ci` / `npm run build` | PASS (`public/build/manifest.json`) |
+| HTTP `/` and `/login` | PASS (NexaCRM HTML; no `algoscrm` / `algos.test`) |
+| `php artisan test` | PASS — **888 passed** (3373 assertions) |
+| Secrets scan | PASS — only empty `.env.example` keys, Laravel `env('AWS_SECRET_ACCESS_KEY')` config, docs placeholders, changelog/test **negative** Algos guards. No Product Hunt. `phpunit.xml` `DEMO_SEED_PASSWORD=phpunit-only-demo-secret` is a test placeholder, not a shipped login. |
 
 ## Package artifact
 
 | Item | Value |
 |---|---|
-| Filename | _(pending)_ |
-| Location | `dist/` (gitignored; not committed) |
-| Size | _(pending)_ |
+| Filename | `nexacrm-unreleased-901ade3-codester.zip` |
+| Location | `dist/` on the machine that ran `composer package` (gitignored; **not committed**) |
+| Size | 10,726,739 bytes (~11 MiB) |
+| Git revision inside ZIP | `901ade3ce0e6f4fb8e36a914bba14af6f5b098b0` (`NEXACRM-PACKAGE.txt`) |
