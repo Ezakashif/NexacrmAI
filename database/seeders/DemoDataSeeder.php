@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ActivityLog;
 use App\Models\Company;
 use App\Models\Customer;
 use App\Models\Lead;
@@ -378,6 +379,7 @@ class DemoDataSeeder extends Seeder
         $this->upsertCustomersFromWonLeads();
         $this->upsertLeadActivities();
         $this->upsertTasks();
+        $this->upsertActivityLogs();
 
         $this->command?->info(sprintf(
             'Demo tenant ready: %s (%s) — users=%d leads=%d customers=%d tasks=%d activities=%d',
@@ -853,14 +855,22 @@ class DemoDataSeeder extends Seeder
                 'assignee' => 'manager',
             ],
             [
-                'title' => 'Prepare demo environment screenshots',
-                'description' => 'Capture dashboard, pipeline, and reports for marketing.',
+                'title' => 'Prepare Q3 pipeline recap for leadership',
+                'description' => 'Summarize open deals, conversion, and next-week follow-ups.',
                 'status' => 'in_progress',
                 'priority' => 'low',
                 'due_offset_days' => 6,
                 'assignee' => 'admin',
             ],
         ];
+
+        Task::withoutGlobalScope(CompanyScope::class)
+            ->where('company_id', $this->company->id)
+            ->where('title', 'Prepare demo environment screenshots')
+            ->update([
+                'title' => 'Prepare Q3 pipeline recap for leadership',
+                'description' => 'Summarize open deals, conversion, and next-week follow-ups.',
+            ]);
 
         $sort = 0;
         foreach ($taskBlueprints as $blueprint) {
@@ -893,6 +903,110 @@ class DemoDataSeeder extends Seeder
                 'company_id' => $this->company->id,
             ]);
             $task->save();
+        }
+    }
+
+    private function upsertActivityLogs(): void
+    {
+        $demoIp = '203.0.113.24';
+        $rows = [
+            [
+                'key' => 'lead-created-brightpath',
+                'actor' => 'sales',
+                'action' => 'lead.created',
+                'subject' => $this->leads['brightpath'] ?? null,
+                'hours_ago' => 76,
+                'properties' => ['name' => 'Elena Vasquez'],
+            ],
+            [
+                'key' => 'lead-status-vertex',
+                'actor' => 'sales',
+                'action' => 'lead.status_changed',
+                'subject' => $this->leads['vertex'] ?? null,
+                'hours_ago' => 54,
+                'properties' => ['from' => 'new', 'to' => 'contacted'],
+            ],
+            [
+                'key' => 'task-created-summit',
+                'actor' => 'manager',
+                'action' => 'task.created',
+                'subject' => Task::withoutGlobalScope(CompanyScope::class)
+                    ->where('company_id', $this->company->id)
+                    ->where('title', 'Call Summit Digital stakeholders')
+                    ->first(),
+                'hours_ago' => 40,
+                'properties' => ['title' => 'Call Summit Digital stakeholders'],
+            ],
+            [
+                'key' => 'lead-converted-amelia',
+                'actor' => 'manager',
+                'action' => 'lead.converted',
+                'subject' => $this->leads['clearview'] ?? $this->leads['amelia'] ?? null,
+                'hours_ago' => 28,
+                'properties' => ['name' => 'Amelia Grant'],
+            ],
+            [
+                'key' => 'customer-updated-pulse',
+                'actor' => 'admin',
+                'action' => 'customer.updated',
+                'subject' => $this->customers['pulse'] ?? null,
+                'hours_ago' => 18,
+                'properties' => ['name' => 'Aaron Kim'],
+            ],
+            [
+                'key' => 'lead-assigned-priya',
+                'actor' => 'manager',
+                'action' => 'lead.assigned',
+                'subject' => $this->leads['bluepeak'] ?? null,
+                'hours_ago' => 12,
+                'properties' => ['name' => 'Priya Nair', 'to' => 'Jordan Hale'],
+            ],
+            [
+                'key' => 'user-login-sales',
+                'actor' => 'sales',
+                'action' => 'user.login',
+                'subject' => $this->users['sales'],
+                'hours_ago' => 6,
+                'properties' => [],
+            ],
+            [
+                'key' => 'task-updated-pipeline',
+                'actor' => 'admin',
+                'action' => 'task.updated',
+                'subject' => Task::withoutGlobalScope(CompanyScope::class)
+                    ->where('company_id', $this->company->id)
+                    ->where('title', 'Prepare Q3 pipeline recap for leadership')
+                    ->first(),
+                'hours_ago' => 3,
+                'properties' => ['title' => 'Prepare Q3 pipeline recap for leadership'],
+            ],
+        ];
+
+        foreach ($rows as $row) {
+            if ($row['subject'] === null) {
+                continue;
+            }
+
+            $existing = ActivityLog::withoutGlobalScope(CompanyScope::class)
+                ->where('company_id', $this->company->id)
+                ->get()
+                ->first(fn (ActivityLog $log) => ($log->properties['demo_key'] ?? null) === $row['key']);
+
+            $log = $existing ?? new ActivityLog;
+            $log->fill([
+                'user_id' => $this->users[$row['actor']]->id,
+                'action' => $row['action'],
+                'subject_type' => $row['subject']::class,
+                'subject_id' => $row['subject']->getKey(),
+                'properties' => array_merge($row['properties'], ['demo_key' => $row['key']]),
+                'ip_address' => $demoIp,
+            ]);
+            $log->company_id = $this->company->id;
+            $log->save();
+            $log->forceFill([
+                'created_at' => now()->subHours($row['hours_ago']),
+                'updated_at' => now()->subHours($row['hours_ago']),
+            ])->save();
         }
     }
 }

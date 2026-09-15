@@ -77,7 +77,7 @@
             <div class="mk-float-soft relative">
                 <figure class="mk-dashboard-preview mk-dashboard-preview-lg">
                     <img
-                        src="{{ asset('marketing/screenshots/overview.PNG') }}"
+                        src="{{ asset('marketing/screenshots/nexacrm-overview.png') }}"
                         alt="NexaCRM dashboard showing revenue overview, pipeline stages, and today's tasks"
                         class="mk-dashboard-preview-image"
                         fetchpriority="high"
