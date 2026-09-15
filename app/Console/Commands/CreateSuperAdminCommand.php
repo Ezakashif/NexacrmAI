@@ -66,7 +66,7 @@ class CreateSuperAdminCommand extends Command
 
         $configured = $bootstrap->configuredName();
 
-        if (! $this->input->isInteractive()) {
+        if (! $this->shouldPrompt()) {
             return $configured;
         }
 
@@ -85,7 +85,7 @@ class CreateSuperAdminCommand extends Command
             return $configured;
         }
 
-        if (! $this->input->isInteractive()) {
+        if (! $this->shouldPrompt()) {
             throw new RuntimeException(
                 'Email is required. Pass --email or set SETUP_SUPERADMIN_EMAIL.'
             );
@@ -111,7 +111,7 @@ class CreateSuperAdminCommand extends Command
             return $configured;
         }
 
-        if (! $this->input->isInteractive()) {
+        if (! $this->shouldPrompt()) {
             throw new RuntimeException(
                 'Password is required. Pass --password, set SETUP_SUPERADMIN_PASSWORD, or run this command interactively.'
             );
@@ -129,5 +129,10 @@ class CreateSuperAdminCommand extends Command
         }
 
         return $password;
+    }
+
+    private function shouldPrompt(): bool
+    {
+        return $this->input->isInteractive() && ! app()->runningUnitTests();
     }
 }
