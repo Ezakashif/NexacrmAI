@@ -104,7 +104,11 @@ class WebsiteLeadService
         $admin = User::withoutCompanyScope()
             ->where('company_id', $companyId)
             ->where('status', 'active')
-            ->whereHas('roles', fn ($query) => $query->where('slug', 'admin'))
+            ->whereHas('roles', function ($query) use ($companyId) {
+                $query->withoutCompanyScope()
+                    ->where('slug', 'admin')
+                    ->where('roles.company_id', $companyId);
+            })
             ->orderBy('id')
             ->first();
 
@@ -137,7 +141,9 @@ class WebsiteLeadService
             ->where('status', 'active')
             ->whereNotNull('company_id')
             ->where('is_super_admin', false)
-            ->whereHas('roles', fn ($query) => $query->where('slug', 'admin'))
+            ->whereHas('roles', function ($query) {
+                $query->withoutCompanyScope()->where('slug', 'admin');
+            })
             ->pluck('company_id')
             ->unique()
             ->values();
