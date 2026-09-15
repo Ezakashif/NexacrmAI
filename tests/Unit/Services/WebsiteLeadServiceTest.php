@@ -166,14 +166,42 @@ class WebsiteLeadServiceTest extends TestCase
         $this->assertTrue($company->is($admin->company));
     }
 
-    public function test_resolve_target_company_falls_back_to_default_company(): void
+    public function test_resolve_target_company_uses_unique_tenant_with_admin(): void
     {
-        $default = Company::default();
-        $this->assertNotNull($default);
+        $tenant = Company::factory()->create(['slug' => 'buyer-tenant']);
+        $admin = User::factory()->admin()->create(['company_id' => $tenant->id]);
 
         $company = $this->invokeProtected($this->service, 'resolveTargetCompany');
 
-        $this->assertTrue($company->is($default));
+        $this->assertTrue($company->is($admin->company));
+        $this->assertFalse($company->isDefault());
+    }
+
+    public function test_resolve_target_company_aborts_when_default_shell_has_no_admin(): void
+    {
+        $this->expectExceptionMessage('Website lead webhook has no tenant with an active admin to attach new leads to.');
+
+        $this->invokeProtected($this->service, 'resolveTargetCompany');
+    }
+
+    public function test_resolve_target_company_aborts_when_multiple_tenants_have_admins(): void
+    {
+        User::factory()->admin()->create(['company_id' => Company::factory()->create(['slug' => 'tenant-a'])->id]);
+        User::factory()->admin()->create(['company_id' => Company::factory()->create(['slug' => 'tenant-b'])->id]);
+
+        $this->expectExceptionMessage('Website lead webhook cannot choose a tenant. Set WEBSITE_LEAD_CREATED_BY_EMAIL to an existing tenant admin.');
+
+        $this->invokeProtected($this->service, 'resolveTargetCompany');
+    }
+
+    public function test_resolve_target_company_aborts_when_configured_email_is_unknown(): void
+    {
+        User::factory()->admin()->create();
+        config(['website_leads.created_by_email' => 'missing@example.com']);
+
+        $this->expectExceptionMessage('WEBSITE_LEAD_CREATED_BY_EMAIL does not match an active tenant user.');
+
+        $this->invokeProtected($this->service, 'resolveTargetCompany');
     }
 
     public function test_create_restores_previous_company_context(): void

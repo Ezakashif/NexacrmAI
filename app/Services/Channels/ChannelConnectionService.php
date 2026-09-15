@@ -39,9 +39,9 @@ class ChannelConnectionService
             ? $data['provider']
             : ChannelProvider::from((string) $data['provider']);
 
-        if (! ($this->enabledProviders()[$provider->value] ?? false)) {
+        if (! ($this->enabledProviders()[$provider->value] ?? false) || ! $this->channels->has($provider)) {
             throw ValidationException::withMessages([
-                'provider' => 'This channel provider is not enabled.',
+                'provider' => 'This channel provider is not available.',
             ]);
         }
 
@@ -353,7 +353,13 @@ class ChannelConnectionService
                 continue;
             }
 
-            $options[$value] = ChannelProvider::from($value)->label();
+            $provider = ChannelProvider::from($value);
+
+            if (! $this->channels->has($provider)) {
+                continue;
+            }
+
+            $options[$value] = $provider->label();
         }
 
         return $options;

@@ -172,4 +172,35 @@ class ChannelConnectionsUiTest extends TestCase
             ->get(route('channels.show', $connection))
             ->assertNotFound();
     }
+
+    public function test_connect_form_only_lists_registered_channel_adapters(): void
+    {
+        $admin = User::factory()->admin()->create();
+
+        $this->actingAs($admin)
+            ->get(route('channels.create'))
+            ->assertOk()
+            ->assertSee('Generic Webhook', false)
+            ->assertSee('Facebook Lead Ads', false)
+            ->assertSee('WhatsApp Cloud API', false)
+            ->assertDontSee('Website Forms', false)
+            ->assertDontSee('Facebook Messenger', false)
+            ->assertDontSee('Public API', false);
+    }
+
+    public function test_admin_cannot_connect_provider_without_adapter(): void
+    {
+        $admin = User::factory()->admin()->create();
+
+        $this->actingAs($admin)
+            ->from(route('channels.create'))
+            ->post(route('channels.store'), [
+                'provider' => ChannelProvider::WebsiteForm->value,
+                'name' => 'Broken Form',
+            ])
+            ->assertRedirect(route('channels.create'))
+            ->assertSessionHasErrors('provider');
+
+        $this->assertSame(0, ChannelConnection::query()->count());
+    }
 }

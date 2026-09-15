@@ -22,7 +22,7 @@ php artisan config:cache
 | `APP_ENV` | local | Environment |
 | `APP_KEY` | _(generated)_ | Encryption (required) |
 | `APP_DEBUG` | true | Detailed errors (disable in production) |
-| `APP_URL` | http://localhost | Must match the URL you open (include port) |
+| `APP_URL` | http://127.0.0.1:8000 | Must match the URL you open (include port). `php artisan serve` uses this host and port. |
 | `APP_TIMEZONE` | UTC | Default application timezone |
 | `APP_LOCALE` | en | Locale |
 | `LOG_CHANNEL` | stack | Logging |
@@ -107,7 +107,7 @@ Server-to-server form ingestion (not the Channels “Website Forms” adapter).
 | Variable | Default | Purpose |
 |---|---|---|
 | `WEBSITE_LEAD_WEBHOOK_SECRET` | _(empty)_ | Shared secret header validation — **never** expose in browser JS |
-| `WEBSITE_LEAD_CREATED_BY_EMAIL` | _(empty)_ | Optional owner email for website-form leads. If empty, the first active tenant admin is used. Does not create an account. |
+| `WEBSITE_LEAD_CREATED_BY_EMAIL` | _(empty)_ | Optional owner email for website-form leads. If empty, the webhook uses the unique tenant that has an active admin. Set this when more than one tenant exists. Does not create an account. |
 | `WEBSITE_LEAD_RATE_LIMIT` | 10 | Requests per minute |
 
 Endpoint: `POST /webhooks/leads/website`  

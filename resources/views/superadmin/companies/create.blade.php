@@ -102,8 +102,8 @@
                     class="@error('admin_password') is-invalid @enderror"
                 />
                 <small class="form-text text-muted">
-                    At least 10 characters, with upper and lower case, a number, and a symbol.
-                    Leave blank to auto-generate a strong password.
+                    Required when you enter an admin email. At least 10 characters, with upper and lower case, a number, and a symbol.
+                    Choose a password the tenant admin can use immediately; this form does not email or display a generated password.
                 </small>
                 @error('admin_password')
                     <div class="invalid-feedback d-block">{{ $message }}</div>

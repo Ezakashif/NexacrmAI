@@ -129,14 +129,27 @@ class WebsiteLeadService
             if ($user) {
                 return Company::query()->findOrFail($user->company_id);
             }
+
+            abort(503, 'WEBSITE_LEAD_CREATED_BY_EMAIL does not match an active tenant user.');
         }
 
-        $company = Company::default();
+        $companyIds = User::withoutCompanyScope()
+            ->where('status', 'active')
+            ->whereNotNull('company_id')
+            ->where('is_super_admin', false)
+            ->whereHas('roles', fn ($query) => $query->where('slug', 'admin'))
+            ->pluck('company_id')
+            ->unique()
+            ->values();
 
-        if ($company) {
-            return $company;
+        if ($companyIds->count() === 1) {
+            return Company::query()->findOrFail($companyIds->first());
         }
 
-        abort(503, 'Website lead webhook has no company to attach new leads to.');
+        if ($companyIds->isEmpty()) {
+            abort(503, 'Website lead webhook has no tenant with an active admin to attach new leads to.');
+        }
+
+        abort(503, 'Website lead webhook cannot choose a tenant. Set WEBSITE_LEAD_CREATED_BY_EMAIL to an existing tenant admin.');
     }
 }

@@ -57,7 +57,7 @@ npm install && npm run build
 php artisan serve
 ```
 
-`db:seed` loads plans, permissions, and email templates only. It does not create login accounts. Create the first Super Admin with `php artisan nexacrm:create-super-admin` (interactive) or by setting `SETUP_SUPERADMIN_EMAIL` and `SETUP_SUPERADMIN_PASSWORD` before seeding. Never commit those values.
+`db:seed` loads plans, permissions, and email templates only. It does not create login accounts. It does create a **Default Company** permissions shell — provision a real tenant from Super Admin → Companies. Create the first Super Admin with `php artisan nexacrm:create-super-admin` (interactive) or by setting `SETUP_SUPERADMIN_EMAIL` and `SETUP_SUPERADMIN_PASSWORD` before seeding. Never commit those values.
 
 In another terminal:
 

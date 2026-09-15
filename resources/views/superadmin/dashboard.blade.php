@@ -94,7 +94,12 @@
                         <tbody>
                         @foreach ($recentCompanies as $company)
                             <tr>
-                                <td><a href="{{ route('superadmin.companies.show', $company) }}">{{ $company->name }}</a></td>
+                                <td>
+                                    <a href="{{ route('superadmin.companies.show', $company) }}">{{ $company->name }}</a>
+                                    @if ($company->isDefault())
+                                        <span class="badge badge-info ml-1">Platform shell</span>
+                                    @endif
+                                </td>
                                 <td class="sa-muted">{{ $company->owner?->name ?? '—' }}</td>
                                 <td class="sa-muted">{{ $company->plan?->name ?? '—' }}</td>
                                 <td>{{ $company->users_count }}</td>

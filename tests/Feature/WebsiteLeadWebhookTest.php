@@ -112,4 +112,34 @@ class WebsiteLeadWebhookTest extends TestCase
         $response->assertUnprocessable()
             ->assertJsonValidationErrors(['name', 'email', 'phone']);
     }
+
+    public function test_it_attaches_to_the_unique_tenant_not_the_default_shell(): void
+    {
+        $this->seed(\Database\Seeders\RbacSeeder::class);
+
+        $default = \App\Models\Company::default();
+        $this->assertNotNull($default);
+
+        $tenant = \App\Models\Company::factory()->create(['slug' => 'buyer-tenant']);
+        $admin = User::factory()->admin()->create(['company_id' => $tenant->id]);
+
+        $response = $this->postJson(route('webhooks.leads.website'), [
+            'name' => 'Buyer Lead',
+            'email' => 'buyer-lead@example.com',
+        ], [
+            'Authorization' => 'Bearer '.self::SECRET,
+        ]);
+
+        $response->assertCreated();
+
+        $this->assertDatabaseHas('leads', [
+            'email' => 'buyer-lead@example.com',
+            'created_by' => $admin->id,
+            'company_id' => $tenant->id,
+        ]);
+        $this->assertDatabaseMissing('leads', [
+            'email' => 'buyer-lead@example.com',
+            'company_id' => $default->id,
+        ]);
+    }
 }

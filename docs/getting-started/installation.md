@@ -22,7 +22,7 @@ cd nexacrm
 composer install
 ```
 
-Or use the project setup script (copies `.env` if missing, generates `APP_KEY`, creates `database/database.sqlite` when needed, migrates, seeds platform defaults, links storage, and builds assets):
+Or use the project setup script (copies `.env` if missing, generates `APP_KEY`, creates `database/database.sqlite` when needed, migrates, seeds platform defaults, syncs permissions, links storage, and builds assets):
 
 ```bash
 composer setup
@@ -81,7 +81,7 @@ php artisan permissions:sync
 
 `db:seed` loads **platform defaults only**:
 
-- permissions and default roles for the platform Default Company shell
+- permissions and default roles for the platform Default Company shell (not a login-ready tenant)
 - email templates
 - public plans (Starter, Professional, Enterprise)
 
@@ -125,7 +125,8 @@ If a Super Admin already exists, the command refuses to create another. Add extr
 
 1. Open `/login` and sign in with the Super Admin email you created.
 2. You are redirected to `/superadmin`.
-3. Create a tenant company (with a tenant admin) under **Companies**.
+3. Create a tenant company (with a tenant admin email **and** password) under **Companies**.
+   The **Default Company** row is a platform permissions shell, not a usable CRM tenant.
 4. Sign out, then sign in as that tenant admin to use `/dashboard`.
 
 Public `/register` stays disabled until Super Admin → Settings → **Registration enabled**.

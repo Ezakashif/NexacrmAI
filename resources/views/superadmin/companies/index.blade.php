@@ -47,6 +47,13 @@
     </div>
 </div>
 
+@if ($companies->contains(fn ($company) => $company->isDefault()))
+    <div class="alert alert-info">
+        <strong>Default Company</strong> is a platform shell used for permissions. It is not a tenant workspace.
+        Use <a href="{{ route('superadmin.companies.create') }}" class="alert-link">New company</a> to provision a usable CRM tenant.
+    </div>
+@endif
+
 <div class="sa-card sa-filter-bar">
     <form method="GET" action="{{ route('superadmin.companies.index') }}">
         <div class="sa-filter-bar__grid">
@@ -130,6 +137,9 @@
                     <td>
                         <div class="font-weight-bold text-white">
                             {{ $company->name }}
+                            @if ($company->isDefault())
+                                <span class="badge badge-info ml-1">Platform shell</span>
+                            @endif
                             @if ($company->trashed())
                                 <span class="badge badge-secondary ml-1">Deleted</span>
                             @endif

@@ -25,14 +25,14 @@ class SoftDeletedCompanyCleanupTest extends TestCase
     {
         $superAdmin = User::factory()->superAdmin()->create();
         $company = Company::factory()->create([
-            'name' => 'Kashif & Co',
-            'email' => 'kashif.aijazh@gmail.com',
-            'slug' => 'kashif-co',
+            'name' => 'Northwind Cleanup',
+            'email' => 'admin@cleanup.nexacrm.test',
+            'slug' => 'northwind-cleanup',
         ]);
         $admin = User::factory()->admin()->create([
             'company_id' => $company->id,
-            'name' => 'Kashif Owner',
-            'email' => 'kashif.aijazh@gmail.com',
+            'name' => 'Cleanup Owner',
+            'email' => 'admin@cleanup.nexacrm.test',
         ]);
 
         $this->actingAs($superAdmin)
@@ -40,15 +40,15 @@ class SoftDeletedCompanyCleanupTest extends TestCase
             ->assertRedirect(route('superadmin.companies.index'));
 
         $this->assertSoftDeleted($company);
-        $this->assertNotSame('kashif.aijazh@gmail.com', $admin->fresh()->email);
+        $this->assertNotSame('admin@cleanup.nexacrm.test', $admin->fresh()->email);
         $this->assertSame('inactive', $admin->fresh()->status);
 
-        $results = app(PlatformSearchService::class)->search('Kashif');
+        $results = app(PlatformSearchService::class)->search('Northwind');
         $this->assertTrue($results['companies']->isEmpty());
         $this->assertTrue($results['users']->isEmpty());
 
         $this->actingAs($superAdmin)
-            ->getJson(route('superadmin.search.suggest', ['q' => 'Kashif']))
+            ->getJson(route('superadmin.search.suggest', ['q' => 'Northwind']))
             ->assertOk()
             ->assertJsonPath('companies', [])
             ->assertJsonPath('users', []);
@@ -58,13 +58,13 @@ class SoftDeletedCompanyCleanupTest extends TestCase
     {
         $superAdmin = User::factory()->superAdmin()->create();
         $company = Company::factory()->create([
-            'name' => 'Kashif & Co',
-            'slug' => 'kashif-co',
-            'email' => 'kashif.aijazh@gmail.com',
+            'name' => 'Northwind Cleanup',
+            'slug' => 'northwind-cleanup',
+            'email' => 'admin@cleanup.nexacrm.test',
         ]);
         User::factory()->admin()->create([
             'company_id' => $company->id,
-            'email' => 'kashif.aijazh@gmail.com',
+            'email' => 'admin@cleanup.nexacrm.test',
             'password' => Hash::make('Password1!'),
         ]);
 
@@ -74,25 +74,25 @@ class SoftDeletedCompanyCleanupTest extends TestCase
 
         $this->actingAs($superAdmin)
             ->post(route('superadmin.companies.store'), [
-                'name' => 'Kashif & Co',
-                'slug' => 'kashif-co',
-                'email' => 'kashif.aijazh@gmail.com',
+                'name' => 'Northwind Cleanup',
+                'slug' => 'northwind-cleanup',
+                'email' => 'admin@cleanup.nexacrm.test',
                 'status' => 'active',
                 'subscription_status' => 'trial',
-                'admin_name' => 'Kashif',
-                'admin_email' => 'kashif.aijazh@gmail.com',
+                'admin_name' => 'Cleanup Owner',
+                'admin_email' => 'admin@cleanup.nexacrm.test',
                 'admin_password' => 'Password1!x',
             ])
             ->assertRedirect()
             ->assertSessionHasNoErrors();
 
         $this->assertDatabaseHas('companies', [
-            'name' => 'Kashif & Co',
-            'slug' => 'kashif-co',
+            'name' => 'Northwind Cleanup',
+            'slug' => 'northwind-cleanup',
             'deleted_at' => null,
         ]);
         $this->assertDatabaseHas('users', [
-            'email' => 'kashif.aijazh@gmail.com',
+            'email' => 'admin@cleanup.nexacrm.test',
             'status' => 'active',
         ]);
     }
@@ -101,50 +101,50 @@ class SoftDeletedCompanyCleanupTest extends TestCase
     {
         $superAdmin = User::factory()->superAdmin()->create();
         $company = Company::factory()->create([
-            'name' => 'Kashif & Co',
-            'slug' => 'kashif-co',
-            'email' => 'kashif.aijazh@gmail.com',
+            'name' => 'Northwind Cleanup',
+            'slug' => 'northwind-cleanup',
+            'email' => 'admin@cleanup.nexacrm.test',
         ]);
         $admin = User::factory()->admin()->create([
             'company_id' => $company->id,
-            'email' => 'kashif.aijazh@gmail.com',
+            'email' => 'admin@cleanup.nexacrm.test',
             'password' => Hash::make('Password1!'),
         ]);
 
         // Simulate a soft-delete from before identifier archiving existed.
         $company->delete();
-        $this->assertSame('kashif.aijazh@gmail.com', $admin->fresh()->email);
-        $this->assertSame('kashif-co', $company->fresh()->slug);
+        $this->assertSame('admin@cleanup.nexacrm.test', $admin->fresh()->email);
+        $this->assertSame('northwind-cleanup', $company->fresh()->slug);
 
         // Search hides orphaned users, which previously looked like the email was free.
         $this->actingAs($superAdmin)
-            ->get(route('superadmin.search.index', ['q' => 'kashif.aijazh@gmail.com']))
+            ->get(route('superadmin.search.index', ['q' => 'admin@cleanup.nexacrm.test']))
             ->assertOk()
             ->assertSee('No users matched', false)
             ->assertSee('No companies matched', false);
 
         $this->actingAs($superAdmin)
             ->post(route('superadmin.companies.store'), [
-                'name' => 'Kashif & Co',
-                'slug' => 'kashif-co',
-                'email' => 'kashif.aijazh@gmail.com',
+                'name' => 'Northwind Cleanup',
+                'slug' => 'northwind-cleanup',
+                'email' => 'admin@cleanup.nexacrm.test',
                 'status' => 'active',
                 'subscription_status' => 'trial',
-                'admin_name' => 'Kashif',
-                'admin_email' => 'kashif.aijazh@gmail.com',
+                'admin_name' => 'Cleanup Owner',
+                'admin_email' => 'admin@cleanup.nexacrm.test',
                 'admin_password' => 'Password1!x',
             ])
             ->assertRedirect()
             ->assertSessionHasNoErrors();
 
-        $this->assertNotSame('kashif.aijazh@gmail.com', $admin->fresh()->email);
+        $this->assertNotSame('admin@cleanup.nexacrm.test', $admin->fresh()->email);
         $this->assertDatabaseHas('users', [
-            'email' => 'kashif.aijazh@gmail.com',
+            'email' => 'admin@cleanup.nexacrm.test',
             'status' => 'active',
         ]);
         $this->assertDatabaseHas('companies', [
-            'name' => 'Kashif & Co',
-            'slug' => 'kashif-co',
+            'name' => 'Northwind Cleanup',
+            'slug' => 'northwind-cleanup',
             'deleted_at' => null,
         ]);
     }

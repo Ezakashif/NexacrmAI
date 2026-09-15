@@ -46,6 +46,7 @@
 
     @php
         $hasFilters = collect($filters ?? [])->filter(fn ($value) => filled($value))->isNotEmpty();
+        $canManageChannels = auth()->user()?->can('create', App\Models\ChannelConnection::class) ?? false;
     @endphp
 
     <div class="card">
@@ -57,9 +58,9 @@
                     :title="$hasFilters ? 'No conversations match your filters' : 'Inbox is empty'"
                     :description="$hasFilters
                         ? 'Try clearing filters or broadening your search.'
-                        : 'Inbound WhatsApp messages will appear here after a channel is connected.'"
-                    :action-url="$hasFilters ? route('inbox.index') : null"
-                    :action-label="$hasFilters ? 'Clear filters' : null"
+                        : 'Conversations appear here after you connect WhatsApp or another supported channel.'"
+                    :action-url="$hasFilters ? route('inbox.index') : ($canManageChannels ? route('channels.create') : null)"
+                    :action-label="$hasFilters ? 'Clear filters' : ($canManageChannels ? 'Connect channel' : null)"
                 />
             </div>
         @else

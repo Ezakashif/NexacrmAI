@@ -50,4 +50,13 @@ class BrandingIdentityTest extends TestCase
         $login->assertDontSee('algos.', false);
         $login->assertSee('NexaCRM', false);
     }
+
+    public function test_http_error_pages_are_branded_nexacrm(): void
+    {
+        $this->get('/this-nexacrm-page-does-not-exist')
+            ->assertNotFound()
+            ->assertSee('NexaCRM', false)
+            ->assertSee('Page not found', false)
+            ->assertDontSee('algos', false);
+    }
 }

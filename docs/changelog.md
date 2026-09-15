@@ -25,6 +25,14 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 - Email verification defaults to off on a fresh install so the app stays usable before SMTP is configured.
 - `composer setup` and `post-create-project-cmd` run `php artisan storage:link`.
 - Super Admin chrome and packaged public branding assets use NexaCRM identity instead of the old `algos.` mark.
+- Super Admin company create requires an admin password when an admin email is provided (no silent auto-generated password).
+- Website lead webhook routes to the unique tenant with an active admin instead of the empty Default Company shell.
+- Channels connect form lists only providers that have a registered adapter.
+
+### Fixed
+
+- Fresh-install Super Admin UX around the Default Company platform shell.
+- Branding for HTTP 403/404/500 pages.
 
 ---
 

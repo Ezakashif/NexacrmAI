@@ -148,6 +148,17 @@ class InboxTest extends TestCase
             ->assertNotFound();
     }
 
+    public function test_empty_inbox_prompts_admin_to_connect_a_channel(): void
+    {
+        $admin = User::factory()->admin()->create();
+
+        $this->actingAs($admin)
+            ->get(route('inbox.index'))
+            ->assertOk()
+            ->assertSee('Inbox is empty', false)
+            ->assertSee('Connect channel', false);
+    }
+
     /**
      * @return array{0: Conversation, 1: ChannelConnection, 2: ChannelContact}
      */

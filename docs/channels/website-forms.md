@@ -12,7 +12,7 @@ WEBSITE_LEAD_CREATED_BY_EMAIL=
 WEBSITE_LEAD_RATE_LIMIT=10
 ```
 
-`WEBSITE_LEAD_CREATED_BY_EMAIL` is optional. Leave it empty on a fresh install so the webhook uses the first active tenant admin. Set it only if you want a specific existing user to own inbound website leads. It does not create an account.
+`WEBSITE_LEAD_CREATED_BY_EMAIL` is optional. Leave it empty when this install has exactly one tenant with an active admin. Set it to that admin’s email when more than one tenant exists so inbound leads are not ambiguous. The value must match an existing active tenant user. It does not create an account, and it does not fall back to the empty Default Company shell.
 
 ### Endpoint
 
@@ -50,7 +50,7 @@ Listed in `config/channels.php` as `website_form` but **no channel adapter is re
 - First-class Channels connection + health  
 - Unified event log with other providers  
 
-Until then, the provider may appear in the connect dropdown as **Adapter coming soon**.
+Until then, the provider is **not listed** in the Channels connect form. Use the dedicated website lead webhook above, or Generic Webhook.
 
 ## Related
 

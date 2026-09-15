@@ -26,9 +26,10 @@
                         </select>
                         @error('provider')<span class="invalid-feedback">{{ $message }}</span>@enderror
                         <small class="form-text text-muted">
-                            <strong>Generic Webhook</strong> is the quickest way to test the engine.
+                            <strong>Generic Webhook</strong> is the quickest way to test inbound leads.
                             <strong>Facebook Lead Ads</strong> needs a Page ID + page token.
                             <strong>WhatsApp Cloud API</strong> needs a Phone Number ID + Cloud API token.
+                            Providers without a registered adapter are not listed.
                         </small>
                     </div>
 

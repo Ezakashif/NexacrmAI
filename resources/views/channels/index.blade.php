@@ -2,7 +2,7 @@
     <x-slot name="header">
         <x-page-header
             title="Channels"
-            subtitle="Connect WhatsApp, Meta, website forms, and other inbound sources."
+            subtitle="Connect Facebook Lead Ads, WhatsApp Cloud API, or a generic webhook."
             :breadcrumbs="[
                 ['label' => 'Home', 'url' => route('dashboard')],
                 ['label' => 'Channels'],

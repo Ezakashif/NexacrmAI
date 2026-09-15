@@ -10,6 +10,12 @@
 @endsection
 
 @section('content')
+@if ($company->isDefault() && ! $company->trashed())
+    <div class="alert alert-info">
+        This is the platform Default Company shell. It exists so permissions can be seeded on a fresh install.
+        Do not use it as a customer tenant. Create a new company to provision a CRM workspace.
+    </div>
+@endif
 @if ($company->trashed())
     <div class="alert alert-warning d-flex flex-wrap align-items-center justify-content-between">
         <div class="mb-2 mb-md-0">This company is soft-deleted. Review the profile or restore it to make it active again.</div>
@@ -34,6 +40,9 @@
                 <div>
                     <div class="text-white font-weight-bold">
                         {{ $company->name }}
+                        @if ($company->isDefault())
+                            <span class="badge badge-info ml-1">Platform shell</span>
+                        @endif
                         @if ($company->trashed())
                             <span class="badge badge-secondary ml-1">Deleted</span>
                         @endif
