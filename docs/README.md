@@ -73,6 +73,7 @@ Professional documentation for the multi-tenant Laravel CRM platform.
 | [Troubleshooting](troubleshooting.md) | Common failures & fixes |
 | [Roadmap](roadmap.md) | Delivered milestones & planned work |
 | [Changelog](changelog.md) | High-level product history |
+| [Licensing audit](licensing-audit.md) | MIT vs Codester marketplace terms, third-party notices |
 
 ---
 

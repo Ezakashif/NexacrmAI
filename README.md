@@ -103,6 +103,8 @@ In-app docs are available at `/docs` after login. The Markdown sources live in [
 
 ## License and support
 
-The repository currently includes an MIT `LICENSE` file. For a Codester commercial source-code release, that license should be reviewed and replaced with the marketplace terms you intend to ship. Do not treat the current MIT file as the final Codester license until that review is complete.
+This repository’s software license is **MIT**. See [`LICENSE`](LICENSE). Composer metadata (`ezakashif/nexacrm`) declares the same license.
 
-Support terms for buyers can be added here once they are defined.
+A Codester purchase is a **separate** marketplace license (Regular or Extended) chosen at checkout. Marketplace terms do not automatically replace MIT, and MIT does not authorize resale of NexaCRM as a stock Codester item. Details, third-party notices, and unresolved marketplace questions: [docs/licensing-audit.md](docs/licensing-audit.md).
+
+Support terms for buyers can be added once they are defined.

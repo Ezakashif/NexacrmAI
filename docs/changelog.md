@@ -17,6 +17,7 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 - Public contribution policy: PR-only workflow, no production access, and intellectual-property terms (`CONTRIBUTING.md`, `docs/development/contributing.md`).
 - Pull request template and `CODEOWNERS` so outside contributions stay reviewed.
 - Professional documentation tree under `/docs` (installation, architecture, channels, Super Admin, operations, user manual, roadmap).
+- Licensing audit: MIT remains the repository software license; Codester Regular/Extended remain the marketplace purchase terms (`docs/licensing-audit.md`).
 
 ### Changed
 
