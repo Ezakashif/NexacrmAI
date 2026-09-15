@@ -92,7 +92,7 @@ class MarketingHomeTest extends TestCase
     {
         $this->get(route('marketing.home'))
             ->assertOk()
-            ->assertSee('overview.PNG', false)
+            ->assertSee('nexacrm-overview.png', false)
             ->assertSee('Starter', false)
             ->assertSee('Professional', false)
             ->assertSee('Enterprise', false)

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\ActivityLog;
 use App\Models\Company;
 use App\Models\Customer;
 use App\Models\Lead;
@@ -61,6 +62,10 @@ class DemoDataSeederTest extends TestCase
         $this->assertSame(8, $customerCount);
         $this->assertSame(19, $taskCount);
         $this->assertGreaterThanOrEqual(40, $activityCount);
+        $this->assertGreaterThanOrEqual(
+            8,
+            ActivityLog::withoutGlobalScope(CompanyScope::class)->where('company_id', $company->id)->count()
+        );
 
         $this->assertSame(
             1,

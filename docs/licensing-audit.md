@@ -136,8 +136,8 @@ Chart.js 2.7.0 is loaded from cdnjs (MIT). It is not copied into `public/vendor`
 | Asset | Classification | Licensing note |
 |---|---|---|
 | `public/branding/nexacrm-*` | Original NexaCRM marks generated for this edition | Product identity; keep with the NexaCRM copyright notice |
-| `public/marketing/screenshots/*.PNG` | Product screenshots | No third-party stock license found. **Still show old Algos chrome.** Media-pass issue (branding), not a third-party copyright claim identified in this audit. **Do not recapture in this phase.** |
-| `public/marketing/videos/nexacrm-product-demo.mp4` | Product demo recording | Filename is NexaCRM; encoded video still shows old marketing chrome. Same media-pass issue. **Unchanged.** |
+| `public/marketing/screenshots/nexacrm-*.png` | Product screenshots recaptured from the current NexaCRM UI | No third-party stock license. Buyer-facing chrome is NexaCRM. |
+| `public/marketing/videos/nexacrm-product-demo.mp4` | Product demo recording of the current NexaCRM UI | Filename and encoded frames are NexaCRM. |
 | `public/vendor/**` | Framework / AdminLTE third-party | Keep existing copyright headers |
 | `resources/views/welcome.blade.php` Tailwind CSS comment | Laravel default welcome remnant | MIT notice in generated CSS comment; irrelevant to buyer CRM chrome |
 | Laravel Breeze-style auth views | Framework-derived, MIT | Covered by Laravel/Breeze MIT |
@@ -195,4 +195,4 @@ Buyer-facing documentation should:
 - Point at this audit for third-party notices (especially Dompdf LGPL and Font Awesome Free).
 - Defer listing copy, ZIP contents, and any proprietary EULA to a later packaging phase.
 
-Later packaging (not this phase) should keep third-party license comments in `public/vendor` and, if `vendor/` is included in a ZIP, keep each package’s LICENSE file. Do not recapture marketing screenshots or the demo video here.
+Later packaging (not this phase) should keep third-party license comments in `public/vendor` and, if `vendor/` is included in a ZIP, keep each package’s LICENSE file. Buyer-facing screenshots and the product demo video were recaptured in a later media pass so they show NexaCRM chrome.

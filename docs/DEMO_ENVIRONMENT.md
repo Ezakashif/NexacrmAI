@@ -52,5 +52,15 @@ Passwords exist only as `DEMO_SEED_PASSWORD` (environment secret) and as hashes 
 - 8 customers (from won leads)
 - ~19 tasks (overdue / upcoming / completed)
 - Lead activity timeline entries
+- Sample CRM activity-log rows (fictional TEST-NET IPs, not localhost)
+
+Buyer-facing screenshots live in `public/marketing/screenshots/nexacrm-*.png`. Recapture from a running local app:
+
+```bash
+DEMO_SEED_PASSWORD='...' node scripts/capture-nexacrm-screenshots.mjs
+DEMO_SEED_PASSWORD='...' node scripts/capture-nexacrm-demo-video.mjs
+```
+
+The demo video records the marketing home, sign-in, dashboard, leads pipeline, customers, tasks, reports, users, roles, and a return to the dashboard. Add `CAPTURE_SUPERADMIN=1` plus Super Admin credentials only if you want a platform-console segment.
 
 Not included in production `DatabaseSeeder` auto-run.

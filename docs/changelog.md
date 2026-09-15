@@ -18,6 +18,7 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 - Pull request template and `CODEOWNERS` so outside contributions stay reviewed.
 - Professional documentation tree under `/docs` (installation, architecture, channels, Super Admin, operations, user manual, roadmap).
 - Licensing audit: MIT remains the repository software license; Codester Regular/Extended remain the marketplace purchase terms (`docs/licensing-audit.md`).
+- Recapture helpers `scripts/capture-nexacrm-screenshots.mjs` and `scripts/capture-nexacrm-demo-video.mjs` for buyer-facing media.
 
 ### Changed
 
@@ -29,6 +30,8 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 - Super Admin company create requires an admin password when an admin email is provided (no silent auto-generated password).
 - Website lead webhook routes to the unique tenant with an active admin instead of the empty Default Company shell.
 - Channels connect form lists only providers that have a registered adapter.
+- Buyer-facing marketing screenshots and the product demo video recaptured from the current NexaCRM UI (no old Algos chrome).
+- Demo tenant includes sample activity-log rows so the live demo and screenshots show a used workspace.
 
 ### Fixed
 

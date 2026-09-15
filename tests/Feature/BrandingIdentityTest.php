@@ -51,6 +51,55 @@ class BrandingIdentityTest extends TestCase
         $login->assertSee('NexaCRM', false);
     }
 
+    public function test_buyer_facing_screenshots_use_nexacrm_filenames(): void
+    {
+        $screenshots = [
+            'nexacrm-dashboard.png',
+            'nexacrm-overview.png',
+            'nexacrm-leads.png',
+            'nexacrm-sales-pipeline.png',
+            'nexacrm-customers.png',
+            'nexacrm-tasks.png',
+            'nexacrm-reports.png',
+            'nexacrm-analytics.png',
+            'nexacrm-activity-log.png',
+            'nexacrm-roles-permissions.png',
+            'nexacrm-user-management.png',
+            'nexacrm-pricing.png',
+        ];
+
+        foreach ($screenshots as $file) {
+            $this->assertFileExists(public_path('marketing/screenshots/'.$file));
+        }
+
+        $this->assertFileExists(public_path('marketing/videos/nexacrm-product-demo.mp4'));
+        $this->assertFileExists(public_path('branding/nexacrm-linkedin-cover.png'));
+
+        foreach ([
+            'dashboard.PNG',
+            'leads.PNG',
+            'customers.PNG',
+            'tasks.PNG',
+            'reports.PNG',
+            'dashboard_analytics.PNG',
+            'activity_log.PNG',
+            'roles_and_permissions.PNG',
+            'user_management.PNG',
+            'overview.PNG',
+            'pricing.PNG',
+            'sales_pipeline.png',
+        ] as $legacy) {
+            $this->assertFileDoesNotExist(public_path('marketing/screenshots/'.$legacy));
+        }
+
+        $home = $this->get(route('marketing.home'))->assertOk();
+        $home->assertSee('nexacrm-overview.png', false);
+        $home->assertSee('nexacrm-dashboard.png', false);
+        $home->assertDontSee('overview.PNG', false);
+        $home->assertDontSee('dashboard.PNG', false);
+        $home->assertDontSee('algos-logo', false);
+    }
+
     public function test_http_error_pages_are_branded_nexacrm(): void
     {
         $this->get('/this-nexacrm-page-does-not-exist')
