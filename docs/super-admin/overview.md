@@ -10,6 +10,14 @@ Platform console for operators who manage all tenant companies.
 - Layout: Super Admin (`sa-app`), not AdminLTE tenant chrome
 - Super Admins typically have `company_id = null` and are redirected away from tenant CRM by `EnsureCompanyContext`
 
+On a fresh install there is no Super Admin until you create one:
+
+```bash
+php artisan nexacrm:create-super-admin
+```
+
+Public registration is disabled by default, so this command (or `SETUP_SUPERADMIN_*` during seed) is the first-run path. It works over SSH on a normal VPS or shared host and does not require a web installer. See [Installation](../getting-started/installation.md).
+
 ## Capabilities
 
 | Area | Routes (examples) | Purpose |

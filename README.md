@@ -51,11 +51,13 @@ cp .env.example .env
 php artisan key:generate
 php artisan migrate
 php artisan db:seed
-php artisan permissions:sync
 php artisan storage:link
+php artisan nexacrm:create-super-admin
 npm install && npm run build
 php artisan serve
 ```
+
+`db:seed` loads plans, permissions, and email templates only. It does not create login accounts. Create the first Super Admin with `php artisan nexacrm:create-super-admin` (interactive) or by setting `SETUP_SUPERADMIN_EMAIL` and `SETUP_SUPERADMIN_PASSWORD` before seeding. Never commit those values.
 
 In another terminal:
 
@@ -63,17 +65,13 @@ In another terminal:
 php artisan queue:work --queue=channels,default
 ```
 
+A queue worker is not required for first login. It is required for channel webhooks and scheduled reminder jobs.
+
 For production, point the web root at `public/`, set `APP_ENV=production`, configure a real mailer, and run `schedule:run` every minute.
 
 See [docs/getting-started/installation.md](docs/getting-started/installation.md) for the full setup guide.
 
-Default seeded logins (change these after install):
-
-- Super Admin: `superadmin@example.com`
-- Tenant admin: `admin@example.com`
-- Sales: `sales@example.com`
-
-The seed password is currently `password`. Treat that as a development default, not a production credential.
+Public registration is off until a Super Admin enables it. Email verification is also off on a fresh install so the app stays usable before SMTP is configured.
 
 ## Multi-tenancy and RBAC
 
@@ -83,7 +81,13 @@ Permissions are defined in `config/permissions.php` and synced with `php artisan
 
 ## Demo
 
-An optional fictional demo tenant can be seeded separately (`DemoDataSeeder`) when `DEMO_SEED_PASSWORD` is set. Public visitors can use **Try Live Demo** if that tenant exists. Daily reset is off unless `DEMO_RESET_ENABLED=true`.
+An optional fictional demo tenant can be seeded separately when `DEMO_SEED_PASSWORD` is set:
+
+```bash
+php artisan db:seed --class=DemoDataSeeder
+```
+
+Or set `DEMO_SEED=true` before `php artisan db:seed`. Public visitors can use **Try Live Demo** if that tenant exists. Daily reset is off unless `DEMO_RESET_ENABLED=true`. Demo personas use fictional `@demo.nexacrm.test` addresses. Do not seed this on a buyer production install.
 
 Details: [docs/DEMO_ENVIRONMENT.md](docs/DEMO_ENVIRONMENT.md).
 

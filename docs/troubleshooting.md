@@ -9,7 +9,8 @@ Common issues and fixes.
 | No application encryption key | Missing `APP_KEY` | `php artisan key:generate` |
 | SQLite cannot open DB | File missing | Create `database/database.sqlite` |
 | Mixed content / wrong links | `APP_URL` mismatch | Set `APP_URL` including port |
-| Assets 404 | Frontend not built | `npm run build` |
+| Uploaded files 404 | Missing public disk link | `php artisan storage:link` |
+| Cannot sign in after `db:seed` | Seed does not create users | `php artisan nexacrm:create-super-admin` |
 
 ## Permissions / menus
 
@@ -51,6 +52,7 @@ Common issues and fixes.
 | Symptom | Fix |
 |---|---|
 | No emails arriving | `MAIL_MAILER=log` only writes logs — switch to SMTP/Mailpit |
+| Stuck on verify-email after register | Verification is on and mail is not delivering. Configure SMTP, or leave verification off (the fresh-install default). With `MAIL_MAILER=log`, use the preview link on the verify-email page |
 | Gmail blocked | App Password + correct from address |
 
 ## Scheduler

@@ -80,12 +80,13 @@ Professional documentation for the multi-tenant Laravel CRM platform.
 
 ```bash
 composer setup
-php artisan db:seed
-php artisan permissions:sync
+php artisan nexacrm:create-super-admin
 php artisan serve
 # other terminal:
 php artisan queue:work --queue=channels,default
 ```
+
+`composer setup` migrates, seeds platform defaults, and runs `php artisan storage:link`. It does not create a login. See [Installation](getting-started/installation.md).
 
 Open `APP_URL` (default `http://localhost:8000`).
 

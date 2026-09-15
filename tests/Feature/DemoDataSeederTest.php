@@ -77,7 +77,7 @@ class DemoDataSeederTest extends TestCase
                 0,
                 Lead::withoutGlobalScope(CompanyScope::class)
                     ->where('company_id', $default->id)
-                    ->where('email', 'like', '%@%.demo.algoscrm.test')
+                    ->where('email', 'like', '%@%.demo.nexacrm.test')
                     ->count()
             );
         }

@@ -51,11 +51,12 @@ class PlatformSettingsService
     /**
      * Whether CRM users must verify email before accessing tenant routes.
      *
-     * Defaults to enabled when the setting has not been seeded yet.
+     * Defaults to off so a fresh install remains usable before SMTP is configured.
+     * Enable in Super Admin → Settings after a real mailer is working.
      */
     public function emailVerificationRequired(): bool
     {
-        return $this->getBool('email_verification_required', true);
+        return $this->getBool('email_verification_required', false);
     }
 
     public function getInt(string $key, int $default = 0): int

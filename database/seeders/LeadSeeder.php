@@ -9,6 +9,12 @@ use App\Support\CurrentCompany;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
+/**
+ * Optional sample leads for an existing tenant admin.
+ *
+ * Not called by DatabaseSeeder. Run explicitly if you want sample pipeline data:
+ *   php artisan db:seed --class=LeadSeeder
+ */
 class LeadSeeder extends Seeder
 {
     /**
@@ -30,14 +36,18 @@ class LeadSeeder extends Seeder
     {
         config(['tenancy.fail_closed_without_context' => false]);
 
-        $admin = User::withoutGlobalScope(CompanyScope::class)->where('email', 'admin@example.com')->first()
-            ?? User::withoutGlobalScope(CompanyScope::class)->whereHas('roles', fn ($q) => $q->where('slug', 'admin'))->first();
+        $admin = User::withoutGlobalScope(CompanyScope::class)
+            ->where('is_super_admin', false)
+            ->whereHas('roles', fn ($q) => $q->where('slug', 'admin'))
+            ->first();
 
-        $sales = User::withoutGlobalScope(CompanyScope::class)->where('email', 'sales@example.com')->first()
-            ?? User::withoutGlobalScope(CompanyScope::class)->whereHas('roles', fn ($q) => $q->where('slug', 'sales'))->first();
+        $sales = User::withoutGlobalScope(CompanyScope::class)
+            ->where('is_super_admin', false)
+            ->whereHas('roles', fn ($q) => $q->where('slug', 'sales'))
+            ->first();
 
         if (! $admin) {
-            $this->command?->warn('LeadSeeder skipped: no admin user found. Run DatabaseSeeder first.');
+            $this->command?->warn('LeadSeeder skipped: no tenant admin user found.');
 
             return;
         }

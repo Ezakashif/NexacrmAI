@@ -112,9 +112,17 @@ class PlatformSettingsServiceCoreTest extends TestCase
         $this->assertSame('Scheduled maintenance tonight.', $this->service->announcement());
     }
 
-    public function test_email_verification_required_defaults_to_true(): void
+    public function test_email_verification_required_defaults_to_false(): void
     {
-        $this->assertTrue($this->service->emailVerificationRequired());
+        $this->assertFalse($this->service->emailVerificationRequired());
+    }
+
+    public function test_email_verification_required_service_default_when_unset(): void
+    {
+        PlatformSetting::query()->where('key', 'email_verification_required')->delete();
+        Cache::forget(PlatformSettingsService::CACHE_KEY);
+
+        $this->assertFalse($this->service->emailVerificationRequired());
     }
 
     public function test_platform_name_falls_back_to_app_name(): void

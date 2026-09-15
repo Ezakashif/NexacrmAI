@@ -27,8 +27,13 @@ use RuntimeException;
  * - Never deletes or updates records belonging to other companies.
  * - Safe to re-run: upserts deterministic demo rows (no tenant wipe).
  *
- * Run explicitly:
+ * Run explicitly (also requires DEMO_SEED_PASSWORD):
  *   php artisan db:seed --class=DemoDataSeeder
+ *
+ * Or opt in from DatabaseSeeder:
+ *   DEMO_SEED=true php artisan db:seed
+ *
+ * Never called by a normal buyer install.
  */
 class DemoDataSeeder extends Seeder
 {
@@ -37,7 +42,7 @@ class DemoDataSeeder extends Seeder
 
     public const COMPANY_NAME = 'Northstar Solutions';
 
-    public const COMPANY_EMAIL = 'hello@northstar.demo.algoscrm.test';
+    public const COMPANY_EMAIL = 'hello@northstar.demo.nexacrm.test';
 
     public const COMPANY_PHONE = '+1-555-014-2200';
 
@@ -49,19 +54,19 @@ class DemoDataSeeder extends Seeder
     public const USERS = [
         'admin' => [
             'name' => 'Avery Quinn',
-            'email' => 'admin@demo.algoscrm.test',
+            'email' => 'admin@demo.nexacrm.test',
             'role' => 'admin',
             'legacy_role' => 'admin',
         ],
         'manager' => [
             'name' => 'Jordan Hale',
-            'email' => 'manager@demo.algoscrm.test',
+            'email' => 'manager@demo.nexacrm.test',
             'role' => 'sales_manager',
             'legacy_role' => 'user',
         ],
         'sales' => [
             'name' => 'Casey Morgan',
-            'email' => 'sales@demo.algoscrm.test',
+            'email' => 'sales@demo.nexacrm.test',
             'role' => 'sales',
             'legacy_role' => 'user',
         ],
@@ -81,7 +86,7 @@ class DemoDataSeeder extends Seeder
         [
             'key' => 'brightpath',
             'name' => 'Elena Vasquez',
-            'email' => 'elena.vasquez@brightpath.demo.algoscrm.test',
+            'email' => 'elena.vasquez@brightpath.demo.nexacrm.test',
             'phone' => '+1-555-010-1001',
             'company' => 'BrightPath Consulting',
             'source' => 'website',
@@ -95,7 +100,7 @@ class DemoDataSeeder extends Seeder
         [
             'key' => 'vertex',
             'name' => 'Marcus Chen',
-            'email' => 'marcus.chen@vertex.demo.algoscrm.test',
+            'email' => 'marcus.chen@vertex.demo.nexacrm.test',
             'phone' => '+1-555-010-1002',
             'company' => 'Vertex Retail',
             'source' => 'linkedin',
@@ -109,7 +114,7 @@ class DemoDataSeeder extends Seeder
         [
             'key' => 'bluepeak',
             'name' => 'Priya Nair',
-            'email' => 'priya.nair@bluepeak.demo.algoscrm.test',
+            'email' => 'priya.nair@bluepeak.demo.nexacrm.test',
             'phone' => '+1-555-010-1003',
             'company' => 'BluePeak Logistics',
             'source' => 'referral',
@@ -123,7 +128,7 @@ class DemoDataSeeder extends Seeder
         [
             'key' => 'novatech',
             'name' => 'Owen Brooks',
-            'email' => 'owen.brooks@novatech.demo.algoscrm.test',
+            'email' => 'owen.brooks@novatech.demo.nexacrm.test',
             'phone' => '+1-555-010-1004',
             'company' => 'NovaTech Solutions',
             'source' => 'website',
@@ -137,7 +142,7 @@ class DemoDataSeeder extends Seeder
         [
             'key' => 'cedar',
             'name' => 'Hannah Ortiz',
-            'email' => 'hannah.ortiz@cedar.demo.algoscrm.test',
+            'email' => 'hannah.ortiz@cedar.demo.nexacrm.test',
             'phone' => '+1-555-010-1005',
             'company' => 'Cedar & Co.',
             'source' => 'facebook',
@@ -151,7 +156,7 @@ class DemoDataSeeder extends Seeder
         [
             'key' => 'summit',
             'name' => 'Liam Porter',
-            'email' => 'liam.porter@summit.demo.algoscrm.test',
+            'email' => 'liam.porter@summit.demo.nexacrm.test',
             'phone' => '+1-555-010-1006',
             'company' => 'Summit Digital',
             'source' => 'cold_call',
@@ -165,7 +170,7 @@ class DemoDataSeeder extends Seeder
         [
             'key' => 'urbanedge',
             'name' => 'Sofia Rahman',
-            'email' => 'sofia.rahman@urbanedge.demo.algoscrm.test',
+            'email' => 'sofia.rahman@urbanedge.demo.nexacrm.test',
             'phone' => '+1-555-010-1007',
             'company' => 'UrbanEdge Services',
             'source' => 'whatsapp',
@@ -179,7 +184,7 @@ class DemoDataSeeder extends Seeder
         [
             'key' => 'primeworks',
             'name' => 'Noah Ellis',
-            'email' => 'noah.ellis@primeworks.demo.algoscrm.test',
+            'email' => 'noah.ellis@primeworks.demo.nexacrm.test',
             'phone' => '+1-555-010-1008',
             'company' => 'PrimeWorks',
             'source' => 'referral',
@@ -193,7 +198,7 @@ class DemoDataSeeder extends Seeder
         [
             'key' => 'clearview',
             'name' => 'Amelia Grant',
-            'email' => 'amelia.grant@clearview.demo.algoscrm.test',
+            'email' => 'amelia.grant@clearview.demo.nexacrm.test',
             'phone' => '+1-555-010-1009',
             'company' => 'ClearView Systems',
             'source' => 'linkedin',
@@ -208,7 +213,7 @@ class DemoDataSeeder extends Seeder
         [
             'key' => 'greenline',
             'name' => 'Diego Alvarez',
-            'email' => 'diego.alvarez@greenline.demo.algoscrm.test',
+            'email' => 'diego.alvarez@greenline.demo.nexacrm.test',
             'phone' => '+1-555-010-1010',
             'company' => 'Greenline Distribution',
             'source' => 'website',
@@ -223,7 +228,7 @@ class DemoDataSeeder extends Seeder
         [
             'key' => 'harbor',
             'name' => 'Riley Thompson',
-            'email' => 'riley.thompson@harbor.demo.algoscrm.test',
+            'email' => 'riley.thompson@harbor.demo.nexacrm.test',
             'phone' => '+1-555-010-1011',
             'company' => 'Harbor & Field',
             'source' => 'referral',
@@ -238,7 +243,7 @@ class DemoDataSeeder extends Seeder
         [
             'key' => 'skylight',
             'name' => 'Maya Singh',
-            'email' => 'maya.singh@skylight.demo.algoscrm.test',
+            'email' => 'maya.singh@skylight.demo.nexacrm.test',
             'phone' => '+1-555-010-1012',
             'company' => 'Skylight Media',
             'source' => 'facebook',
@@ -253,7 +258,7 @@ class DemoDataSeeder extends Seeder
         [
             'key' => 'ironclad',
             'name' => 'Ethan Brooks',
-            'email' => 'ethan.brooks@ironclad.demo.algoscrm.test',
+            'email' => 'ethan.brooks@ironclad.demo.nexacrm.test',
             'phone' => '+1-555-010-1013',
             'company' => 'Ironclad Facilities',
             'source' => 'cold_call',
@@ -268,7 +273,7 @@ class DemoDataSeeder extends Seeder
         [
             'key' => 'willow',
             'name' => 'Chloe Bennett',
-            'email' => 'chloe.bennett@willow.demo.algoscrm.test',
+            'email' => 'chloe.bennett@willow.demo.nexacrm.test',
             'phone' => '+1-555-010-1014',
             'company' => 'Willow Creek Partners',
             'source' => 'website',
@@ -283,7 +288,7 @@ class DemoDataSeeder extends Seeder
         [
             'key' => 'pulse',
             'name' => 'Aaron Kim',
-            'email' => 'aaron.kim@pulse.demo.algoscrm.test',
+            'email' => 'aaron.kim@pulse.demo.nexacrm.test',
             'phone' => '+1-555-010-1015',
             'company' => 'Pulse Analytics',
             'source' => 'linkedin',
@@ -298,7 +303,7 @@ class DemoDataSeeder extends Seeder
         [
             'key' => 'ridgeway',
             'name' => 'Natalie Shaw',
-            'email' => 'natalie.shaw@ridgeway.demo.algoscrm.test',
+            'email' => 'natalie.shaw@ridgeway.demo.nexacrm.test',
             'phone' => '+1-555-010-1018',
             'company' => 'Ridgeway Health Group',
             'source' => 'website',
@@ -313,7 +318,7 @@ class DemoDataSeeder extends Seeder
         [
             'key' => 'lumen',
             'name' => 'Grace Patel',
-            'email' => 'grace.patel@lumen.demo.algoscrm.test',
+            'email' => 'grace.patel@lumen.demo.nexacrm.test',
             'phone' => '+1-555-010-1016',
             'company' => 'Lumen Studio',
             'source' => 'whatsapp',
@@ -327,7 +332,7 @@ class DemoDataSeeder extends Seeder
         [
             'key' => 'anchor',
             'name' => 'Benjamin Cole',
-            'email' => 'benjamin.cole@anchor.demo.algoscrm.test',
+            'email' => 'benjamin.cole@anchor.demo.nexacrm.test',
             'phone' => '+1-555-010-1017',
             'company' => 'Anchor Supply Co.',
             'source' => 'referral',

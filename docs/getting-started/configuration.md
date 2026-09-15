@@ -31,6 +31,20 @@ php artisan config:cache
 
 ---
 
+## First-run Super Admin
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `SETUP_SUPERADMIN_NAME` | Super Admin | Display name used if seeding creates the first Super Admin |
+| `SETUP_SUPERADMIN_EMAIL` | _(empty)_ | Optional. Together with the password, creates the first Super Admin during `php artisan db:seed` |
+| `SETUP_SUPERADMIN_PASSWORD` | _(empty)_ | Optional. Never commit a real value. Remove after first-run, before `php artisan config:cache` |
+
+Prefer `php artisan nexacrm:create-super-admin` instead of putting a password in `.env`. If only one of email/password is set, seeding fails. If both are empty, seeding skips account creation.
+
+See [Installation](installation.md).
+
+---
+
 ## Marketing site
 
 | Variable | Default | Purpose |
@@ -81,6 +95,8 @@ See [Queues](../operations/queues.md).
 **Local inbox tip:** Mailpit + `MAIL_MAILER=smtp`, `MAIL_HOST=127.0.0.1`, `MAIL_PORT=1025`.
 
 Auth emails (verification / password reset) send immediately (no queue worker required).
+
+Email verification is **off** after a fresh migrate. Enable it in Super Admin → Settings only after a real mailer is configured. If verification is on while `MAIL_MAILER` is `log` or `array`, the verify-email page shows a local preview link.
 
 ---
 
@@ -140,6 +156,19 @@ See [Scheduler](../operations/scheduler.md).
 
 ---
 
+## Optional demo tenant
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `DEMO_SEED` | false | When true, `php artisan db:seed` also runs `DemoDataSeeder`. Leave false on buyer production installs |
+| `DEMO_SEED_PASSWORD` | _(empty)_ | Required for `DemoDataSeeder` and `php artisan demo:reset`. Never commit the value |
+| `DEMO_RESET_ENABLED` | false | Allows scheduled `demo:reset`. Leave false until you explicitly want daily resets |
+| `DEMO_RESET_TIME` | 03:15 | Clock time for the scheduled reset |
+
+See [Demo environment](../DEMO_ENVIRONMENT.md).
+
+---
+
 ## Tenancy
 
 | Variable | Purpose |
@@ -160,4 +189,6 @@ See [Multi-tenancy](../architecture/multi-tenancy.md).
 | `config/website_leads.php` | Website webhook settings |
 | `config/lead_reminders.php` / `config/task_reminders.php` | Reminder schedules |
 | `config/adminlte.php` | Tenant sidebar / branding |
+| `config/setup.php` | First-run Super Admin env + optional `DEMO_SEED` |
+| `config/demo.php` | Live-demo tenant identity (no passwords) |
 | `config/queue.php` | Queue connections |

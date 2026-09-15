@@ -10,6 +10,8 @@ Polished fictional tenant for the public live demo, screenshots, and marketing.
 php artisan db:seed --class=DemoDataSeeder
 ```
 
+Or set `DEMO_SEED=true` and run `php artisan db:seed`. Normal platform seeding does **not** include demo data.
+
 Safe to re-run. Upserts the Northstar Solutions tenant only; does not wipe other companies.
 
 If a demo persona email already belongs to a different company, seeding **aborts** and does not move or overwrite that user.
@@ -36,6 +38,9 @@ The command is registered on the existing `schedule:run` cron. It uses `withoutO
 |-------|--------|
 | Company | Northstar Solutions |
 | Slug | `northstar-solutions` |
+| Admin | `admin@demo.nexacrm.test` |
+| Sales Manager | `manager@demo.nexacrm.test` |
+| Sales Representative | `sales@demo.nexacrm.test` |
 
 Passwords exist only as `DEMO_SEED_PASSWORD` (environment secret) and as hashes in the database. They must not appear in source, git, HTML, JavaScript, or public docs.
 

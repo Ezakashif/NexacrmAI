@@ -47,11 +47,17 @@ composer install --no-dev --optimize-autoloader
 npm ci && npm run build
 
 php artisan migrate --force
+php artisan storage:link --force
 php artisan permissions:sync
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 php artisan event:cache   # if applicable
+
+# First install only (after migrate):
+# php artisan db:seed --force
+# php artisan nexacrm:create-super-admin
+# Remove SETUP_SUPERADMIN_PASSWORD from the environment before config:cache.
 
 # restart PHP-FPM / Octane / queue workers after deploy
 ```

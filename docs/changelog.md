@@ -11,9 +11,18 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 
 ### Added
 
+- First-run Super Admin creation via `php artisan nexacrm:create-super-admin` or optional `SETUP_SUPERADMIN_*` environment variables during seed.
+- Optional `DEMO_SEED` flag so the fictional demo tenant is never part of a normal install.
 - Public contribution policy: PR-only workflow, no production access, and intellectual-property terms (`CONTRIBUTING.md`, `docs/development/contributing.md`).
 - Pull request template and `CODEOWNERS` so outside contributions stay reviewed.
 - Professional documentation tree under `/docs` (installation, architecture, channels, Super Admin, operations, user manual, roadmap).
+
+### Changed
+
+- `DatabaseSeeder` now seeds platform defaults only (permissions, email templates, plans). It no longer creates known example logins or sample CRM records.
+- Optional demo personas use fictional `@demo.nexacrm.test` addresses.
+- Email verification defaults to off on a fresh install so the app stays usable before SMTP is configured.
+- `composer setup` and `post-create-project-cmd` run `php artisan storage:link`.
 
 ---
 

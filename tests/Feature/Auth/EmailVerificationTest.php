@@ -122,6 +122,36 @@ class EmailVerificationTest extends TestCase
             ->assertOk();
     }
 
+    public function test_fresh_install_does_not_require_email_verification(): void
+    {
+        Notification::fake();
+
+        $this->assertFalse(app(PlatformSettingsService::class)->emailVerificationRequired());
+
+        app(PlatformSettingsService::class)->setMany([
+            'registration_enabled' => true,
+        ]);
+
+        $this->post(route('register'), [
+            'company_name' => 'Fresh Install Co',
+            'name' => 'Owner',
+            'email' => 'owner@fresh.test',
+            'password' => 'SecurePass1!',
+            'password_confirmation' => 'SecurePass1!',
+        ])->assertRedirect(route('dashboard'));
+
+        $user = User::withoutCompanyScope()->where('email', 'owner@fresh.test')->first();
+
+        $this->assertNotNull($user);
+        $this->assertTrue($user->hasVerifiedEmail());
+        Notification::assertSentTo($user, \App\Notifications\WelcomeNotification::class);
+        Notification::assertNotSentTo($user, AccountActivationNotification::class);
+
+        $this->actingAs($user)
+            ->get(route('dashboard'))
+            ->assertOk();
+    }
+
     public function test_public_registration_skips_verification_when_disabled(): void
     {
         Notification::fake();

@@ -19,17 +19,17 @@ return [
 
     'personas' => [
         'admin' => [
-            'email' => 'admin@demo.algoscrm.test',
+            'email' => 'admin@demo.nexacrm.test',
             'label' => 'Admin Demo',
             'description' => 'Explore the full CRM administration experience.',
         ],
         'sales_manager' => [
-            'email' => 'manager@demo.algoscrm.test',
+            'email' => 'manager@demo.nexacrm.test',
             'label' => 'Sales Manager Demo',
             'description' => 'Manage teams, leads, customers and sales activity.',
         ],
         'sales' => [
-            'email' => 'sales@demo.algoscrm.test',
+            'email' => 'sales@demo.nexacrm.test',
             'label' => 'Sales Representative Demo',
             'description' => 'Work with leads, customers and tasks.',
         ],

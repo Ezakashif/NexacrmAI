@@ -177,9 +177,9 @@
                         </div>
                         <div class="custom-control custom-checkbox mb-3">
                             <input type="hidden" name="email_verification_required" value="0">
-                            <input type="checkbox" class="custom-control-input" id="email_verification_required" name="email_verification_required" value="1" @checked(old('email_verification_required', ($settings['email_verification_required'] ?? '1') === '1'))>
+                            <input type="checkbox" class="custom-control-input" id="email_verification_required" name="email_verification_required" value="1" @checked(old('email_verification_required', ($settings['email_verification_required'] ?? '0') === '1'))>
                             <label class="custom-control-label" for="email_verification_required">Require email verification</label>
-                            <div class="sa-muted small mt-1">When on, public self-registration and unverified tenant users must confirm email before using the CRM. Super Admins and admin-provisioned accounts stay verified.</div>
+                            <div class="sa-muted small mt-1">Off by default so a fresh install works before SMTP is configured. When on, public self-registration and unverified tenant users must confirm email before using the CRM. Super Admins and admin-provisioned accounts stay verified. Enable only after a real mailer is configured; with <code>MAIL_MAILER=log</code> or <code>array</code>, the verify-email page still shows a local preview link.</div>
                         </div>
                         <div class="custom-control custom-checkbox">
                             <input type="hidden" name="maintenance_mode" value="0">

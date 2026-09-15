@@ -24,7 +24,7 @@ return new class extends Migration
 
         DB::table('platform_settings')->insert([
             'key' => 'email_verification_required',
-            'value' => '1',
+            'value' => '0',
             'created_at' => $now,
             'updated_at' => $now,
         ]);

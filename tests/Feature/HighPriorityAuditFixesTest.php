@@ -27,6 +27,8 @@ class HighPriorityAuditFixesTest extends TestCase
 
     public function test_unverified_user_cannot_access_crm_routes(): void
     {
+        app(PlatformSettingsService::class)->setMany(['email_verification_required' => true]);
+
         $user = User::factory()->unverified()->admin()->create();
 
         $this->actingAs($user)
