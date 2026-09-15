@@ -15,7 +15,7 @@ This repository is independent of any other CRM product. CI never talks to Railw
 | Permissions | `contents: read` only. No deploy job. No production secrets. |
 | PHP | 8.2 (matches `composer.json` `^8.2`) |
 | Node | 20 (matches `package.json` `engines.node`) |
-| Database | Isolated SQLite file for the install path; PHPUnit uses in-memory SQLite (`phpunit.xml`, `force="true"` so CI env cannot leak a file DB) |
+| Database | Isolated SQLite file for the install path; PHPUnit uses in-memory SQLite (`phpunit.xml`) |
 | Composer | `composer validate --no-check-publish` then `composer install` from `composer.lock` |
 | Frontend | `npm ci` then `npm run build` (Vite) |
 | Tests | `php artisan test` (full PHPUnit suite) |
@@ -29,6 +29,8 @@ The workflow also:
 5. Asserts the demo tenant was **not** created (`scripts/ci-assert-normal-seed.php`)
 6. Runs `storage:link`, `optimize:clear`, `config:clear`, `route:clear`, `view:clear`
 7. Serves the app briefly and checks `/` and `/login` return NexaCRM HTML
+
+Job-level GitHub Actions env is only `APP_NAME`. Session, queue, cache, and mail drivers come from `.env.example` during the install path, and from `phpunit.xml` (`<env>` + `<server>`) during tests. Putting `SESSION_DRIVER=database` on the job breaks PHPUnit: Laravel reads `$_SERVER` before `$_ENV`, so HTTP tests lose the session.
 
 Laravel Pint is installed (`laravel/pint`) and useful locally. It is **not** a blocking CI gate: `vendor/bin/pint --test` currently reports style drift across many existing files. Fixing that is a separate cleanup, not part of release validation.
 
@@ -156,8 +158,8 @@ Recorded during Phase 7 (local, this Codester repository only):
 | Demo tenant absent after normal seed | PASS (`scripts/ci-assert-normal-seed.php`) |
 | Optional `DemoDataSeeder` | PASS (separate SQLite; created `northstar-solutions`; not run in CI) |
 | HTTP smoke `/` and `/login` | PASS (NexaCRM HTML; no `algoscrm` / `algos.test`) |
-| `php artisan test` | PASS — **887 passed** (3339 assertions) in 25.65s |
-| GitHub Actions | Workflow added; result recorded from the pull request run |
+| `php artisan test` | PASS — **887 passed** (3339 assertions) in 25.65s locally. First GitHub Actions run failed (195 tests) because job-level `SESSION_DRIVER=database` leaked into `$_SERVER`; fixed in `phpunit.xml` + workflow env. |
+| GitHub Actions | Re-run after the session-driver leak fix |
 
 Pint `--test` was inspected and **fails** on existing style drift. Not used as a CI gate.
 

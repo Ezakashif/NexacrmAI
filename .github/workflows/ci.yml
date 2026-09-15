@@ -20,12 +20,6 @@ jobs:
 
     env:
       APP_NAME: NexaCRM
-      APP_ENV: local
-      APP_DEBUG: 'false'
-      MAIL_MAILER: log
-      QUEUE_CONNECTION: database
-      CACHE_STORE: database
-      SESSION_DRIVER: database
 
     steps:
       - name: Checkout

@@ -18,7 +18,11 @@
         </include>
     </source>
     <php>
-        <!-- force=true so a CI/shell .env leak cannot point tests at a file DB or empty demo password -->
+        <!--
+            <env force> updates putenv/$_ENV. GitHub Actions also injects $_SERVER.
+            Laravel Env reads $_SERVER first, so matching <server> entries are required
+            or a job-level SESSION_DRIVER=database leak will break HTTP tests.
+        -->
         <env name="APP_ENV" value="testing" force="true"/>
         <env name="APP_MAINTENANCE_DRIVER" value="file" force="true"/>
         <env name="BCRYPT_ROUNDS" value="4" force="true"/>
@@ -38,5 +42,18 @@
         <env name="SETUP_SUPERADMIN_EMAIL" value="" force="true"/>
         <env name="SETUP_SUPERADMIN_PASSWORD" value="" force="true"/>
         <env name="WEBSITE_LEAD_CREATED_BY_EMAIL" value="" force="true"/>
+        <server name="APP_ENV" value="testing"/>
+        <server name="CACHE_STORE" value="array"/>
+        <server name="DB_CONNECTION" value="sqlite"/>
+        <server name="DB_DATABASE" value=":memory:"/>
+        <server name="DB_URL" value=""/>
+        <server name="MAIL_MAILER" value="array"/>
+        <server name="QUEUE_CONNECTION" value="sync"/>
+        <server name="SESSION_DRIVER" value="array"/>
+        <server name="DEMO_SEED" value="false"/>
+        <server name="DEMO_SEED_PASSWORD" value="phpunit-only-demo-secret"/>
+        <server name="SETUP_SUPERADMIN_EMAIL" value=""/>
+        <server name="SETUP_SUPERADMIN_PASSWORD" value=""/>
+        <server name="WEBSITE_LEAD_CREATED_BY_EMAIL" value=""/>
     </php>
 </phpunit>
