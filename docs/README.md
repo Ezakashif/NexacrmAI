@@ -53,7 +53,8 @@ Professional documentation for the multi-tenant Laravel CRM platform.
 |---|---|
 | [Queues](operations/queues.md) | Database queue, `channels` queue, workers |
 | [Scheduler](operations/scheduler.md) | Cron / `schedule:run`, reminders, pruning |
-| [CI/CD](operations/cicd.md) | **Recommended** pipeline (not yet in repo) |
+| [CI/CD](operations/cicd.md) | GitHub Actions workflow (tests, install path, no deploy) |
+| [Release readiness](release-readiness.md) | CI, local validation, seed behavior, production env notes |
 
 ### Development
 | Doc | Description |

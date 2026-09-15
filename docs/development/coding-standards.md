@@ -5,13 +5,13 @@ Conventions for PHP/Laravel work in this CRM.
 ## Style
 
 - Use **Laravel Pint** (default Laravel preset; no custom `pint.json` in repo).
-- Run before commit:
+- Run before commit when you touch PHP:
 
 ```bash
 vendor/bin/pint
 ```
 
-CI should use `vendor/bin/pint --test` (**Recommended** — see [CI/CD](../operations/cicd.md)).
+Pint is **not** a blocking CI check. The current tree still has style drift; do not treat `vendor/bin/pint --test` as a merge requirement until that cleanup is an explicit task. CI runs Composer validation, the Vite build, migrations, normal seed, and PHPUnit — see [CI/CD](../operations/cicd.md).
 
 ## PHP / Laravel
 

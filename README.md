@@ -49,15 +49,20 @@ Billing is administrative. There is no Stripe, Cashier, or Paddle checkout in th
 composer install
 cp .env.example .env
 php artisan key:generate
+touch database/database.sqlite
 php artisan migrate
 php artisan db:seed
 php artisan storage:link
 php artisan nexacrm:create-super-admin
-npm install && npm run build
+npm ci && npm run build
 php artisan serve
 ```
 
+`npm install && npm run build` also works. `npm ci` is what CI uses because it follows `package-lock.json`.
+
 `db:seed` loads plans, permissions, and email templates only. It does not create login accounts. It does create a **Default Company** permissions shell — provision a real tenant from Super Admin → Companies. Create the first Super Admin with `php artisan nexacrm:create-super-admin` (interactive) or by setting `SETUP_SUPERADMIN_EMAIL` and `SETUP_SUPERADMIN_PASSWORD` before seeding. Never commit those values.
+
+Alternatively, `composer setup` runs install, env, migrate, **normal** seed, `storage:link`, and the frontend build. It still does not create a login — run `nexacrm:create-super-admin` after it.
 
 In another terminal:
 
@@ -100,6 +105,20 @@ Replace the packaged branding files under `public/branding/` (`nexacrm-logo.png`
 ## Documentation
 
 In-app docs are available at `/docs` after login. The Markdown sources live in [`docs/`](docs/README.md).
+
+## Checks before a pull request
+
+```bash
+composer ci
+```
+
+That validates Composer metadata and runs PHPUnit. For the same frontend lockfile install + Vite build that GitHub Actions runs:
+
+```bash
+bash scripts/validate-release.sh
+```
+
+CI workflow: [`.github/workflows/ci.yml`](.github/workflows/ci.yml). Maintainer notes: [docs/release-readiness.md](docs/release-readiness.md).
 
 ## License and support
 

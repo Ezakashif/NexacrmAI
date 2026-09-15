@@ -1,68 +1,35 @@
 # CI/CD
 
-> **Status: Recommended** — this repository does not currently ship a project-specific GitHub Actions workflow under `.github/` (beyond whatever may exist upstream). The following is the **recommended** pipeline to add.
+Automated checks for this Codester edition. CI does **not** deploy, and it never connects to Railway, Algos CRM, or any production database.
 
-## Goals
+## GitHub Actions
 
-- Run automated tests on every pull request  
-- Enforce code style (Pint)  
-- Block merge on failure  
-- Optional: deploy to staging/production on `main`
+Workflow: [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml)
 
-## Recommended GitHub Actions (PR)
+Runs on pull requests and on pushes to `main`.
 
-```yaml
-name: CI
+| Step | What it proves |
+|---|---|
+| `composer validate --no-check-publish` | `composer.json` / lock file are valid |
+| `composer install` | PHP dependencies install from `composer.lock` |
+| `npm ci` + `npm run build` | Vite marketing/app assets build from `package-lock.json` |
+| `php artisan migrate --force` | A clean SQLite database can be created |
+| `php artisan db:seed --force` | Normal seed stays production-safe (`DEMO_SEED=false`) |
+| `php artisan nexacrm:create-super-admin` | First-run Super Admin command works without SMTP |
+| `php artisan test` | Full PHPUnit suite (in-memory SQLite) |
 
-on:
-  pull_request:
-  push:
-    branches: [main]
+PHP 8.2, Node 20, `contents: read` only. Details: [Release readiness](../release-readiness.md).
 
-jobs:
-  tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-          extensions: mbstring, pdo_sqlite, gd
-          coverage: none
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: npm
-      - run: composer install --no-interaction --prefer-dist
-      - run: cp .env.example .env
-      - run: php artisan key:generate
-      - run: npm ci
-      - run: npm run build
-      - run: vendor/bin/pint --test
-      - run: php artisan test
-```
-
-## Recommended deploy job (outline)
-
-On push to `main` (or tags):
-
-1. SSH / container deploy  
-2. `composer install --no-dev`  
-3. `php artisan migrate --force`  
-4. `php artisan permissions:sync`  
-5. `php artisan config:cache && route:cache && view:cache`  
-6. Restart PHP-FPM + `queue:restart`  
-
-See [Deployment](../getting-started/deployment.md).
-
-## Local pre-push checklist
+## Local pre-push
 
 ```bash
-vendor/bin/pint
-php artisan test
+composer ci
+# or, including the frontend lockfile install + build:
+bash scripts/validate-release.sh
 ```
 
-## Related
+Laravel Pint is optional locally (`vendor/bin/pint`). It is not a merge gate.
 
-- [Coding standards](../development/coding-standards.md)
-- [Contributing](../development/contributing.md)
+## Production deploy
+
+CI does not deploy. When you deploy your own copy, see [Deployment](../getting-started/deployment.md).

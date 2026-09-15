@@ -1,0 +1,142 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    name: Release checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    env:
+      APP_NAME: NexaCRM
+      APP_ENV: local
+      APP_DEBUG: 'false'
+      MAIL_MAILER: log
+      QUEUE_CONNECTION: database
+      CACHE_STORE: database
+      SESSION_DRIVER: database
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, pdo_sqlite, sqlite3, pdo_mysql, gd, fileinfo, ctype, tokenizer, xml, bcmath
+          coverage: none
+          tools: composer:v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Validate Composer
+        run: composer validate --no-check-publish
+
+      - name: Cache Composer packages
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: composer-${{ runner.os }}-8.2-${{ hashFiles('composer.lock') }}
+
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress --no-ansi
+
+      - name: Configure application
+        run: |
+          cp .env.example .env
+          php artisan key:generate --ansi --no-interaction --force
+          mkdir -p database
+          touch database/database.sqlite
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build frontend assets
+        run: npm run build
+
+      - name: Run migrations
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ${{ github.workspace }}/database/database.sqlite
+          DEMO_SEED: 'false'
+          DEMO_SEED_PASSWORD: ''
+          SETUP_SUPERADMIN_EMAIL: ''
+          SETUP_SUPERADMIN_PASSWORD: ''
+        run: php artisan migrate --force --no-interaction --ansi
+
+      - name: Seed platform defaults
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ${{ github.workspace }}/database/database.sqlite
+          DEMO_SEED: 'false'
+          DEMO_SEED_PASSWORD: ''
+          SETUP_SUPERADMIN_EMAIL: ''
+          SETUP_SUPERADMIN_PASSWORD: ''
+        run: php artisan db:seed --force --no-interaction --ansi
+
+      - name: Create Super Admin
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ${{ github.workspace }}/database/database.sqlite
+          DEMO_SEED: 'false'
+          SETUP_SUPERADMIN_EMAIL: ''
+          SETUP_SUPERADMIN_PASSWORD: ''
+        run: php artisan nexacrm:create-super-admin --name="CI Super Admin" --email="ci-superadmin@nexacrm.test" --password="CiRelease#9x"
+
+      - name: Confirm normal seed stayed production-safe
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ${{ github.workspace }}/database/database.sqlite
+          DEMO_SEED: 'false'
+        run: php scripts/ci-assert-normal-seed.php
+
+      - name: Application maintenance commands
+        run: |
+          php artisan storage:link --force --ansi
+          php artisan optimize:clear --ansi
+          php artisan config:clear --ansi
+          php artisan route:clear --ansi
+          php artisan view:clear --ansi
+
+      - name: PHPUnit
+        run: php artisan test
+
+      - name: HTTP smoke (marketing + login)
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ${{ github.workspace }}/database/database.sqlite
+          DEMO_SEED: 'false'
+        run: |
+          php artisan serve --host=127.0.0.1 --port=8000 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for _ in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8000/login >/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          curl -fsS -o /tmp/nexacrm-home.html http://127.0.0.1:8000/
+          curl -fsS -o /tmp/nexacrm-login.html http://127.0.0.1:8000/login
+          grep -q 'NexaCRM' /tmp/nexacrm-home.html
+          grep -q 'NexaCRM' /tmp/nexacrm-login.html
+          if grep -qiE 'algoscrm|algos crm|algos\.test' /tmp/nexacrm-home.html /tmp/nexacrm-login.html; then
+            echo 'Unexpected Algos branding in marketing/login HTML' >&2
+            exit 1
+          fi

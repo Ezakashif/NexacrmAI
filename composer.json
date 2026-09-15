@@ -66,6 +66,10 @@
             "@php artisan config:clear --ansi",
             "@php artisan test"
         ],
+        "ci": [
+            "@composer validate --no-check-publish",
+            "@test"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

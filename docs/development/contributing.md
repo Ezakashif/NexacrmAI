@@ -6,13 +6,12 @@ This is the Codester edition of NexaCRM, a commercial Laravel CRM codebase. Cust
 
 1. Follow [Installation](../getting-started/installation.md).
 2. Keep feature work on a branch.
-3. Run Pint and tests before merging.
+3. Run tests before opening a PR (`composer ci`). Pint remains optional.
 
 ```bash
-vendor/bin/pint
-php artisan test
-# if permissions config changed:
-php artisan permissions:sync
+composer ci
+# including frontend:
+bash scripts/validate-release.sh
 ```
 
 ## Tenant safety

@@ -157,11 +157,14 @@ Do not enable verification in production until outbound mail is working.
 Skip this section if you already ran `composer setup`.
 
 ```bash
-npm install
+npm ci
 npm run build
+# npm install && npm run build also works for a local checkout
 # or for hot reload during development:
 npm run dev
 ```
+
+GitHub Actions uses `npm ci` so the build matches `package-lock.json`. See [Release readiness](../release-readiness.md).
 
 ## 8. Run the app
 
