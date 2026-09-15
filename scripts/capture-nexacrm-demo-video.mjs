@@ -8,7 +8,8 @@
  *   CAPTURE_SUPERADMIN=1 SUPERADMIN_EMAIL / SUPERADMIN_PASSWORD
  *   to include a Super Admin console segment (off by default to keep the demo short).
  *
- * Records the live UI via Chrome screencast (no desktop/browser chrome).
+ * Records the live UI via Chrome screencast (no desktop/browser chrome),
+ * then holds each unique frame for its real on-screen duration.
  * Does not print or write passwords to disk.
  */
 import fs from 'node:fs';
@@ -37,6 +38,7 @@ if (!password) {
 
 const chrome = process.env.CHROME_PATH || '/usr/bin/google-chrome-stable';
 const framesDir = fs.mkdtempSync(path.join(os.tmpdir(), 'nexacrm-demo-frames-'));
+const recorded = [];
 let frameIndex = 0;
 let writeQueue = Promise.resolve();
 
@@ -136,7 +138,8 @@ await page.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 1 });
 const client = await page.createCDPSession();
 
 client.on('Page.screencastFrame', (event) => {
-    const dest = path.join(framesDir, `frame-${String(frameIndex).padStart(5, '0')}.jpg`);
+    const dest = path.join(framesDir, `cap-${String(frameIndex).padStart(5, '0')}.jpg`);
+    recorded.push({ dest, at: Date.now() });
     frameIndex += 1;
     writeQueue = writeQueue.then(() => fs.promises.writeFile(dest, Buffer.from(event.data, 'base64')));
     client.send('Page.screencastFrameAck', { sessionId: event.sessionId }).catch(() => {});
@@ -144,7 +147,6 @@ client.on('Page.screencastFrame', (event) => {
 
 try {
     await gotoReady(page, '/', 400);
-
     await client.send('Page.startScreencast', {
         format: 'jpeg',
         quality: 84,
@@ -153,44 +155,59 @@ try {
         maxHeight: 1080,
     });
 
-    await sleep(2200);
+    await sleep(2400);
     await login(page, email, password);
-    await gotoReady(page, '/dashboard', 2400);
+    await gotoReady(page, '/dashboard', 3200);
     await page.evaluate(() => window.scrollTo(0, 240));
-    await sleep(1100);
+    await sleep(1200);
     await page.evaluate(() => window.scrollTo(0, 0));
-    await sleep(600);
-    await gotoReady(page, '/leads', 2600);
-    await page.evaluate(() => {
-        document.querySelector('.crm-kanban')?.scrollIntoView({ block: 'nearest' });
-    });
-    await sleep(1400);
-    await gotoReady(page, '/customers', 2200);
-    await gotoReady(page, '/tasks', 2200);
-    await gotoReady(page, '/reports', 2600);
-    await gotoReady(page, '/users', 2000);
-    await gotoReady(page, '/roles', 2000);
+    await sleep(800);
+    await gotoReady(page, '/leads', 3400);
+    await sleep(800);
+    await gotoReady(page, '/customers', 3200);
+    await gotoReady(page, '/tasks', 3200);
+    await gotoReady(page, '/reports', 3400);
+    await gotoReady(page, '/users', 3000);
+    await gotoReady(page, '/roles', 3000);
 
     if (includeSuperAdmin) {
         await logout(page);
         await sleep(400);
         await login(page, superEmail, superPassword);
-        await gotoReady(page, '/superadmin', 2400);
+        await gotoReady(page, '/superadmin', 2800);
         await logout(page);
         await sleep(400);
         await login(page, email, password);
     }
 
-    await gotoReady(page, '/dashboard', 2200);
-
+    await gotoReady(page, '/dashboard', 2800);
     await client.send('Page.stopScreencast').catch(() => {});
     await writeQueue;
 } finally {
     await browser.close();
 }
 
-if (frameIndex < 20) {
-    throw new Error(`Too few screencast frames (${frameIndex}); aborting video encode.`);
+if (recorded.length < 20) {
+    throw new Error(`Too few screencast frames (${recorded.length}); aborting video encode.`);
+}
+
+const fps = 12;
+const expandedDir = fs.mkdtempSync(path.join(os.tmpdir(), 'nexacrm-demo-expanded-'));
+const endedAt = Date.now();
+let outIndex = 0;
+
+for (let i = 0; i < recorded.length; i++) {
+    const start = recorded[i].at;
+    const end = recorded[i + 1]?.at ?? (endedAt + 1500);
+    const seconds = Math.max(0.08, (end - start) / 1000);
+    const copies = Math.min(48, Math.max(1, Math.round(seconds * fps)));
+    for (let copy = 0; copy < copies; copy++) {
+        fs.copyFileSync(
+            recorded[i].dest,
+            path.join(expandedDir, `frame-${String(outIndex).padStart(5, '0')}.jpg`),
+        );
+        outIndex += 1;
+    }
 }
 
 fs.mkdirSync(path.dirname(outFile), { recursive: true });
@@ -198,8 +215,8 @@ const tmpOut = `${outFile}.tmp.mp4`;
 
 await runFfmpeg([
     '-y',
-    '-framerate', '12',
-    '-i', path.join(framesDir, 'frame-%05d.jpg'),
+    '-framerate', String(fps),
+    '-i', path.join(expandedDir, 'frame-%05d.jpg'),
     '-c:v', 'libx264',
     '-pix_fmt', 'yuv420p',
     '-vf', 'scale=1920:1080',
@@ -211,4 +228,5 @@ await runFfmpeg([
 
 fs.renameSync(tmpOut, outFile);
 fs.rmSync(framesDir, { recursive: true, force: true });
-console.log('wrote', path.relative(root, outFile), `(${frameIndex} frames)`);
+fs.rmSync(expandedDir, { recursive: true, force: true });
+console.log('wrote', path.relative(root, outFile), `(${recorded.length} unique frames, ${outIndex} held frames)`);
