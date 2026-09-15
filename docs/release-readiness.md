@@ -156,7 +156,9 @@ Recorded during Phase 7 (local, this Codester repository only):
 | Demo tenant absent after normal seed | PASS (`scripts/ci-assert-normal-seed.php`) |
 | Optional `DemoDataSeeder` | PASS (separate SQLite; created `northstar-solutions`; not run in CI) |
 | HTTP smoke `/` and `/login` | PASS (NexaCRM HTML; no `algoscrm` / `algos.test`) |
-| `php artisan test` | _(running; count recorded after the suite finishes)_ |
-| GitHub Actions | Added; first run is the pull request |
+| `php artisan test` | PASS — **887 passed** (3339 assertions) in 25.65s |
+| GitHub Actions | Workflow added; result recorded from the pull request run |
 
 Pint `--test` was inspected and **fails** on existing style drift. Not used as a CI gate.
+
+`npm audit` reported 6 vulnerabilities after `npm ci`. Packages were **not** upgraded in this phase. Composer/npm identity and versions are unchanged.
