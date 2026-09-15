@@ -33,5 +33,6 @@
         <env name="TELESCOPE_ENABLED" value="false"/>
         <env name="NIGHTWATCH_ENABLED" value="false"/>
         <env name="DEMO_SEED_PASSWORD" value="phpunit-only-demo-secret"/>
+        <env name="WEBSITE_LEAD_CREATED_BY_EMAIL" value="" force="true"/>
     </php>
 </phpunit>

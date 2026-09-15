@@ -29,7 +29,21 @@ class WebsiteLeadDemoController extends Controller
             ], 503);
         }
 
-        $lead = $this->websiteLeads->create($request->all());
+        $previousEmail = config('website_leads.created_by_email');
+        config(['website_leads.created_by_email' => $request->user()->email]);
+
+        try {
+            $lead = $this->websiteLeads->create($request->only([
+                'name',
+                'email',
+                'phone',
+                'company',
+                'message',
+                'notes',
+            ]));
+        } finally {
+            config(['website_leads.created_by_email' => $previousEmail]);
+        }
 
         return response()->json([
             'message' => 'Lead created.',

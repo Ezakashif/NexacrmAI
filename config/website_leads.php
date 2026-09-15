@@ -20,7 +20,8 @@ return [
     |--------------------------------------------------------------------------
     |
     | Webhook-created leads require a created_by user. Set an admin email here,
-    | or leave null to use the first active admin in the database.
+    | or leave empty to use the unique tenant that has an active admin.
+    | Set the email when more than one tenant exists.
     |
     */
 

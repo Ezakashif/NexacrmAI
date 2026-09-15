@@ -17,7 +17,10 @@ class WebsiteLeadDemoTest extends TestCase
     {
         parent::setUp();
 
-        config(['website_leads.webhook_secret' => self::SECRET]);
+        config([
+            'website_leads.webhook_secret' => self::SECRET,
+            'website_leads.created_by_email' => null,
+        ]);
     }
 
     public function test_admin_can_view_demo_form(): void
@@ -56,6 +59,8 @@ class WebsiteLeadDemoTest extends TestCase
             'name' => 'Demo Visitor',
             'email' => 'visitor@example.com',
             'source' => 'website',
+            'company_id' => $admin->company_id,
+            'created_by' => $admin->id,
         ]);
 
         $this->assertSame(1, Lead::count());
