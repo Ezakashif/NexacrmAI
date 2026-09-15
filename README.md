@@ -76,6 +76,10 @@ For production, point the web root at `public/`, set `APP_ENV=production`, confi
 
 See [docs/getting-started/installation.md](docs/getting-started/installation.md) for the full setup guide.
 
+If you received a Codester ZIP (no Git history), follow [docs/codester-installation.md](docs/codester-installation.md) instead of cloning.
+
+Maintainers can build that ZIP with `composer package` (writes a gitignored file under `dist/`).
+
 Public registration is off until a Super Admin enables it. Email verification is also off on a fresh install so the app stays usable before SMTP is configured.
 
 ## Multi-tenancy and RBAC

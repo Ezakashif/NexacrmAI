@@ -19,6 +19,8 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 - Professional documentation tree under `/docs` (installation, architecture, channels, Super Admin, operations, user manual, roadmap).
 - Licensing audit: MIT remains the repository software license; Codester Regular/Extended remain the marketplace purchase terms (`docs/licensing-audit.md`).
 - Recapture helpers `scripts/capture-nexacrm-screenshots.mjs` and `scripts/capture-nexacrm-demo-video.mjs` for buyer-facing media.
+- GitHub Actions CI (`.github/workflows/ci.yml`) plus `composer ci` / `scripts/validate-release.sh`.
+- Codester source ZIP builder (`composer package`), `THIRD-PARTY-NOTICES.md`, and buyer install guide (`docs/codester-installation.md`).
 
 ### Changed
 

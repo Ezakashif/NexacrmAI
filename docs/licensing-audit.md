@@ -195,4 +195,4 @@ Buyer-facing documentation should:
 - Point at this audit for third-party notices (especially Dompdf LGPL and Font Awesome Free).
 - Defer listing copy, ZIP contents, and any proprietary EULA to a later packaging phase.
 
-Later packaging (not this phase) should keep third-party license comments in `public/vendor` and, if `vendor/` is included in a ZIP, keep each package’s LICENSE file. Buyer-facing screenshots and the product demo video were recaptured in a later media pass so they show NexaCRM chrome.
+The Codester source ZIP (Phase 8) **does not** include `vendor/`. Buyers run `composer install`. Third-party notices for that path are in `THIRD-PARTY-NOTICES.md`. `public/vendor` AdminLTE/Font Awesome files remain in the ZIP with their in-file copyright headers. Buyer-facing screenshots and the product demo video were recaptured in a later media pass so they show NexaCRM chrome.

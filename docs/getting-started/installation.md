@@ -4,6 +4,8 @@ Fresh setup for NexaCRM on a local machine or a typical VPS / shared-hosting acc
 
 This is a normal Laravel install. There is no web installer. Public registration stays **off** until a Super Admin enables it.
 
+Codester ZIP buyers (no Git clone): [Codester installation](../codester-installation.md).
+
 ## Requirements
 
 | Component | Version / notes |

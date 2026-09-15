@@ -14,6 +14,8 @@ Professional documentation for the multi-tenant Laravel CRM platform.
 | Doc | Description |
 |---|---|
 | [Installation](getting-started/installation.md) | Local setup (Composer, env, migrate, seed, assets) |
+| [Codester installation](codester-installation.md) | Buyer ZIP extract → install (no Git required) |
+| [Codester package audit](codester-package-audit.md) | ZIP inclusion/exclusion, vendor decision, verification |
 | [Configuration](getting-started/configuration.md) | Environment variables reference |
 | [Deployment](getting-started/deployment.md) | Production deploy checklist (web, queue, scheduler) |
 

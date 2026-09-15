@@ -42,6 +42,9 @@ jobs:
       - name: Validate Composer
         run: composer validate --no-check-publish
 
+      - name: Codester package scan
+        run: bash scripts/build-codester-package.sh
+
       - name: Cache Composer packages
         uses: actions/cache@v4
         with:
