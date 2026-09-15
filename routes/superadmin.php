@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\LeaveImpersonationController;
+use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\SuperAdmin\AccountController;
 use App\Http\Controllers\SuperAdmin\AnalyticsController;
 use App\Http\Controllers\SuperAdmin\CompanyController;
 use App\Http\Controllers\SuperAdmin\CompanyExportController;
@@ -86,6 +88,9 @@ Route::middleware(['auth', 'active', 'superadmin'])
         Route::get('settings', [SettingsController::class, 'edit'])->name('settings.edit');
         Route::put('settings', [SettingsController::class, 'update'])->name('settings.update');
         Route::put('settings/announcement', [SettingsController::class, 'announcement'])->name('settings.announcement');
+
+        Route::get('account', [AccountController::class, 'edit'])->name('account.edit');
+        Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
         Route::get('email-templates/{email_template}/preview', [EmailTemplateController::class, 'preview'])
             ->name('email-templates.preview');

@@ -103,7 +103,7 @@ NexaCRM never ships a known default password. Create the first platform operator
 php artisan nexacrm:create-super-admin
 ```
 
-The command prompts for name, email, and password. Passwords must meet the application rules (minimum 10 characters, mixed case, and a symbol). The first Super Admin is created as a verified, active platform user (`company_id` null) and signs in at `/login`, then uses `/superadmin`.
+The command prompts for name, email, and password. Passwords must meet the application rules (minimum 10 characters, mixed case, and a symbol). The first Super Admin is created as a verified, active platform user (`company_id` null) and signs in at `/login`, then uses `/superadmin`. Change that password later from Super Admin → **Account** (`/superadmin/account`).
 
 Non-interactive example (do not commit the password):
 

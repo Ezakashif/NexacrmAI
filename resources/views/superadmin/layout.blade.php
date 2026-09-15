@@ -17,7 +17,9 @@
     $platformSettings = app(\App\Services\SuperAdmin\PlatformSettingsService::class);
     $platformLogo = $platformSettings->logoUrl();
     $flashes = collect([
-        'success' => session('success'),
+        'success' => session('success') ?? (session('status') === 'password-updated'
+            ? 'Password updated. Other devices were signed out.'
+            : null),
         'error' => session('error') ?? session('danger'),
         'warning' => session('warning'),
         'info' => session('info'),
@@ -88,6 +90,9 @@
             <i class="fas fa-search" aria-hidden="true"></i> Search
         </a>
         <hr class="sa-nav-divider">
+        <a href="{{ route('superadmin.account.edit') }}" class="sa-nav-link {{ request()->routeIs('superadmin.account.*') ? 'active' : '' }}">
+            <i class="fas fa-user-lock" aria-hidden="true"></i> Account
+        </a>
         <form method="POST" action="{{ route('logout') }}" data-sa-no-loading="1">
             @csrf
             <button type="submit" class="sa-nav-logout">
@@ -158,14 +163,17 @@
                     </div>
                 </div>
 
-                <div class="sa-muted small">{{ auth()->user()->name }}</div>
+                <a href="{{ route('superadmin.account.edit') }}" class="sa-muted small">{{ auth()->user()->name }}</a>
             </div>
         </div>
 
-        @if ($errors->any())
+        @php
+            $visibleErrors = collect($errors->getBags())->flatMap(fn ($bag) => $bag->all())->unique()->values();
+        @endphp
+        @if ($visibleErrors->isNotEmpty())
             <div class="alert alert-danger sa-keep-alert">
                 <ul class="mb-0 pl-3">
-                    @foreach ($errors->all() as $error)
+                    @foreach ($visibleErrors as $error)
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>

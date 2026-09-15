@@ -11,6 +11,7 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 
 ### Added
 
+- Super Admin **Account** page (`/superadmin/account`) so platform operators can change their own password without using the tenant profile screen.
 - First-run Super Admin creation via `php artisan nexacrm:create-super-admin` or optional `SETUP_SUPERADMIN_*` environment variables during seed.
 - Optional `DEMO_SEED` flag so the fictional demo tenant is never part of a normal install.
 - Packaged NexaCRM wordmark, mark, and light-on-dark logo for Super Admin, favicon, and Open Graph fallbacks.

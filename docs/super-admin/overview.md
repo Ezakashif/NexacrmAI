@@ -30,6 +30,7 @@ Public registration is disabled by default, so this command (or `SETUP_SUPERADMI
 | Plans | `superadmin.plans.*` | Plans, limits, import/export, duplicate, bulk |
 | Super Admins | `superadmin.super-admins.*` | Manage platform operators |
 | Settings | `superadmin.settings.*` | Platform branding, announcement |
+| Account | `superadmin.account.*`, `superadmin.password.update` | Change your own Super Admin password |
 | Email templates | `superadmin.email-templates.*` | Template CRUD, preview, test send |
 | Contact inquiries | `superadmin.contact-inquiries.*` | Marketing contact/demo form submissions |
 | Notifications | `superadmin.notifications.*` | Platform notifications |
@@ -54,8 +55,9 @@ Scheduler writes `scheduler_last_run_at` platform setting every five minutes —
 
 1. Minimize Super Admin accounts  
 2. Prefer impersonation over sharing tenant passwords  
-3. Audit impersonation / company changes via activity logs  
-4. Keep platform settings changes rare and documented  
+3. Change your Super Admin password from **Account** after first login and whenever it may have been shared  
+4. Audit impersonation / company changes via activity logs  
+5. Keep platform settings changes rare and documented  
 
 ## Related
 
