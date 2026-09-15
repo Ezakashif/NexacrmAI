@@ -10,7 +10,7 @@
         fn ($url) => filled($url) && $url !== '#'
     ));
     $logoUrl = app(\App\Services\SuperAdmin\PlatformSettingsService::class)->logoUrl()
-        ?: url('/branding/algos-logo.png');
+        ?: url('/'.ltrim((string) config('marketing.assets.og_image', 'branding/nexacrm-logo.png'), '/'));
 
     $organization = [
         '@context' => 'https://schema.org',

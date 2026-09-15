@@ -16,6 +16,6 @@ class MarketingRoutesTest extends TestCase
         $this->get(route('marketing.watch-demo'))
             ->assertOk()
             ->assertSee('See NexaCRM in action', false)
-            ->assertSee('marketing/videos/algos-crm-product-demo.mp4', false);
+            ->assertSee('marketing/videos/nexacrm-product-demo.mp4', false);
     }
 }

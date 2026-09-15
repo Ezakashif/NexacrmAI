@@ -70,7 +70,7 @@ class MarketingCta
 
     public static function watchDemoSrc(): string
     {
-        $path = (string) config('marketing.cta.watch_demo_src', 'marketing/videos/algos-crm-product-demo.mp4');
+        $path = (string) config('marketing.cta.watch_demo_src', 'marketing/videos/nexacrm-product-demo.mp4');
         $src = asset($path);
         $mtime = @filemtime(public_path($path));
 

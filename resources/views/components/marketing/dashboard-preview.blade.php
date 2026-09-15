@@ -18,9 +18,7 @@
             <aside class="border-r border-slate-200 bg-slate-900 p-3 text-slate-300 sm:p-4">
                 <div class="mb-5 hidden items-center gap-2 sm:flex">
                     <span class="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-slate-800 text-sky-400">
-                        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M12 4 L5 20" /><path d="M12 4 L19 20" /><path d="M8.5 14.5 H15.5" />
-                        </svg>
+                        <x-marketing.mark class="h-4 w-4" />
                     </span>
                     <span class="text-sm font-semibold text-white">{{ strtolower((string) config('marketing.name', 'nexacrm')) }}<span class="text-sky-400">.</span></span>
                 </div>

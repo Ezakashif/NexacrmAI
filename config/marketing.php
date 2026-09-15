@@ -17,6 +17,23 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Packaged branding assets (public/ relative)
+    |--------------------------------------------------------------------------
+    |
+    | Super Admin uploads override these. Keep filenames NexaCRM-neutral.
+    |
+    */
+
+    'assets' => [
+        'logo' => 'branding/nexacrm-logo.png',
+        'logo_light' => 'branding/nexacrm-logo-light.png',
+        'logo_svg' => 'branding/nexacrm-logo.svg',
+        'favicon' => 'branding/nexacrm-mark.svg',
+        'og_image' => 'branding/nexacrm-logo.png',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Contact & company
     |--------------------------------------------------------------------------
     */
@@ -47,7 +64,7 @@ return [
         'demo_query' => ['intent' => 'demo'],
         'live_demo_route' => 'demo.select',
         'watch_demo_route' => 'marketing.watch-demo',
-        'watch_demo_src' => 'marketing/videos/algos-crm-product-demo.mp4',
+        'watch_demo_src' => env('MARKETING_WATCH_DEMO_SRC', 'marketing/videos/nexacrm-product-demo.mp4'),
     ],
 
     /*
@@ -693,5 +710,3 @@ return [
     ],
 
 ];
-
-

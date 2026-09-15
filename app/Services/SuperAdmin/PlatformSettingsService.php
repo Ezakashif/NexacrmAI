@@ -3,8 +3,9 @@
 namespace App\Services\SuperAdmin;
 
 use App\Models\PlatformSetting;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Schema;
 
 class PlatformSettingsService
 {
@@ -17,7 +18,7 @@ class PlatformSettingsService
     {
         return Cache::remember(self::CACHE_KEY, 300, function () {
             try {
-                if (! \Illuminate\Support\Facades\Schema::hasTable('platform_settings')) {
+                if (! Schema::hasTable('platform_settings')) {
                     return [];
                 }
 
@@ -126,8 +127,8 @@ class PlatformSettingsService
                 return 'storage/'.ltrim((string) $light, '/');
             }
 
-            if (is_file(public_path('branding/algos-logo-light.png'))) {
-                return 'branding/algos-logo-light.png';
+            if (is_file(public_path((string) config('marketing.assets.logo_light', 'branding/nexacrm-logo-light.png')))) {
+                return (string) config('marketing.assets.logo_light', 'branding/nexacrm-logo-light.png');
             }
         }
 
@@ -137,8 +138,8 @@ class PlatformSettingsService
             return 'storage/'.ltrim((string) $path, '/');
         }
 
-        if (is_file(public_path('branding/algos-logo.png'))) {
-            return 'branding/algos-logo.png';
+        if (is_file(public_path((string) config('marketing.assets.logo', 'branding/nexacrm-logo.png')))) {
+            return (string) config('marketing.assets.logo', 'branding/nexacrm-logo.png');
         }
 
         return null;
@@ -169,6 +170,13 @@ class PlatformSettingsService
 
         if (filled($path) && is_file(public_path('storage/'.ltrim((string) $path, '/')))) {
             return asset('storage/'.ltrim((string) $path, '/')).'?v='.filemtime(public_path('storage/'.ltrim((string) $path, '/')));
+        }
+
+        $packaged = (string) config('marketing.assets.favicon', 'branding/nexacrm-mark.svg');
+        if ($packaged !== '' && is_file(public_path($packaged))) {
+            $absolute = public_path($packaged);
+
+            return asset($packaged).'?v='.filemtime($absolute);
         }
 
         return null;

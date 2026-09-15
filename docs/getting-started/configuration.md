@@ -104,11 +104,11 @@ Email verification is **off** after a fresh migrate. Enable it in Super Admin �
 
 Server-to-server form ingestion (not the Channels “Website Forms” adapter).
 
-| Variable | Purpose |
-|---|---|
-| `WEBSITE_LEAD_WEBHOOK_SECRET` | Shared secret header validation — **never** expose in browser JS |
-| `WEBSITE_LEAD_CREATED_BY_EMAIL` | Fallback owner email for created leads |
-| `WEBSITE_LEAD_RATE_LIMIT` | Requests per minute (default 10) |
+| Variable | Default | Purpose |
+|---|---|---|
+| `WEBSITE_LEAD_WEBHOOK_SECRET` | _(empty)_ | Shared secret header validation — **never** expose in browser JS |
+| `WEBSITE_LEAD_CREATED_BY_EMAIL` | _(empty)_ | Optional owner email for website-form leads. If empty, the first active tenant admin is used. Does not create an account. |
+| `WEBSITE_LEAD_RATE_LIMIT` | 10 | Requests per minute |
 
 Endpoint: `POST /webhooks/leads/website`  
 Docs: [Website Forms](../channels/website-forms.md).
@@ -191,4 +191,5 @@ See [Multi-tenancy](../architecture/multi-tenancy.md).
 | `config/adminlte.php` | Tenant sidebar / branding |
 | `config/setup.php` | First-run Super Admin env + optional `DEMO_SEED` |
 | `config/demo.php` | Live-demo tenant identity (no passwords) |
+| `config/marketing.php` | Public brand name, tagline, contact, and packaged logo/favicon paths |
 | `config/queue.php` | Queue connections |

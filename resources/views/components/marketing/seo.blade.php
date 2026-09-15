@@ -12,7 +12,7 @@
         ? $title.' · '.$brand
         : $brand.' · '.config('marketing.tagline');
     $pageDescription = $description ?? config('marketing.description');
-    $ogImage = $image ?? url('/branding/algos-logo.png');
+    $ogImage = $image ?? url('/'.ltrim((string) config('marketing.assets.og_image', 'branding/nexacrm-logo.png'), '/'));
     $canonical = url()->current();
 @endphp
 

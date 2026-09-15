@@ -16,7 +16,7 @@
     <x-marketing.json-ld type="website" />
 
     @php($platformFavicon = app(\App\Services\SuperAdmin\PlatformSettingsService::class)->faviconUrl())
-    <link rel="icon" href="{{ $platformFavicon ?: asset('branding/algos-logo.svg') }}" @if (! $platformFavicon) type="image/svg+xml" @endif>
+    <link rel="icon" href="{{ $platformFavicon ?: asset(config('marketing.assets.favicon', 'branding/nexacrm-mark.svg')) }}" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
     <link rel="preload" as="style" href="https://fonts.bunny.net/css?family=plus-jakarta-sans:400,500,600,700,800&display=swap">
     <link href="https://fonts.bunny.net/css?family=plus-jakarta-sans:400,500,600,700,800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">

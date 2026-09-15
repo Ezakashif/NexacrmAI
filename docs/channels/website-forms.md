@@ -8,9 +8,11 @@ Independent of the Channels UI “Website Forms” provider. Server-to-server PO
 
 ```env
 WEBSITE_LEAD_WEBHOOK_SECRET=long-random-secret
-WEBSITE_LEAD_CREATED_BY_EMAIL=admin@example.com
+WEBSITE_LEAD_CREATED_BY_EMAIL=
 WEBSITE_LEAD_RATE_LIMIT=10
 ```
+
+`WEBSITE_LEAD_CREATED_BY_EMAIL` is optional. Leave it empty on a fresh install so the webhook uses the first active tenant admin. Set it only if you want a specific existing user to own inbound website leads. It does not create an account.
 
 ### Endpoint
 

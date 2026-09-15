@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 class OptimizePlatformLogoCommand extends Command
 {
     protected $signature = 'platform:optimize-logo
-        {--packaged=branding/algos-logo.png : Packaged public asset to install when no logo exists}
+        {--packaged= : Packaged public asset to install when no logo exists}
         {--force-packaged : Replace the current logo with the packaged transparent asset}';
 
     protected $description = 'Make the platform logo transparent, trim empty padding, and normalize size';
@@ -19,12 +19,18 @@ class OptimizePlatformLogoCommand extends Command
     {
         $current = $settings->get('platform_logo_path');
 
-        if ($this->option('force-packaged') || blank($current) || ! Storage::disk('public')->exists((string) $current)) {
-            $path = $processor->storePackagedAsset((string) $this->option('packaged'));
-            $lightPath = null;
+        $packaged = (string) $this->option('packaged');
+        if ($packaged === '') {
+            $packaged = (string) config('marketing.assets.logo', 'branding/nexacrm-logo.png');
+        }
 
-            if (is_file(public_path('branding/algos-logo-light.png'))) {
-                $lightPath = $processor->storePackagedAsset('branding/algos-logo-light.png');
+        if ($this->option('force-packaged') || blank($current) || ! Storage::disk('public')->exists((string) $current)) {
+            $path = $processor->storePackagedAsset($packaged);
+            $lightPath = null;
+            $lightPackaged = (string) config('marketing.assets.logo_light', 'branding/nexacrm-logo-light.png');
+
+            if (is_file(public_path($lightPackaged))) {
+                $lightPath = $processor->storePackagedAsset($lightPackaged);
             }
 
             $settings->setMany(array_filter([

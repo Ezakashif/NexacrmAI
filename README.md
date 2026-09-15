@@ -95,7 +95,7 @@ Details: [docs/DEMO_ENVIRONMENT.md](docs/DEMO_ENVIRONMENT.md).
 
 Platform name, logo, favicon, mail from-address, timezone, and marketing contact details can be changed in Super Admin → Settings. Marketing copy also reads from `config/marketing.php` and `APP_NAME` / `MARKETING_*` environment variables.
 
-Replace the packaged branding files under `public/branding/` with your own marks when you customize the product.
+Replace the packaged branding files under `public/branding/` (`nexacrm-logo.png`, `nexacrm-logo-light.png`, `nexacrm-mark.svg`) with your own marks when you customize the product.
 
 ## Documentation
 

@@ -26,7 +26,8 @@ class SuperAdminPanelTest extends TestCase
         $this->actingAs($superAdmin)
             ->get(route('superadmin.dashboard'))
             ->assertOk()
-            ->assertSee('Platform overview');
+            ->assertSee('Platform overview')
+            ->assertDontSee('algos.', false);
     }
 
     public function test_tenant_admin_cannot_access_superadmin(): void

@@ -13,6 +13,7 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 
 - First-run Super Admin creation via `php artisan nexacrm:create-super-admin` or optional `SETUP_SUPERADMIN_*` environment variables during seed.
 - Optional `DEMO_SEED` flag so the fictional demo tenant is never part of a normal install.
+- Packaged NexaCRM wordmark, mark, and light-on-dark logo for Super Admin, favicon, and Open Graph fallbacks.
 - Public contribution policy: PR-only workflow, no production access, and intellectual-property terms (`CONTRIBUTING.md`, `docs/development/contributing.md`).
 - Pull request template and `CODEOWNERS` so outside contributions stay reviewed.
 - Professional documentation tree under `/docs` (installation, architecture, channels, Super Admin, operations, user manual, roadmap).
@@ -23,6 +24,7 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 - Optional demo personas use fictional `@demo.nexacrm.test` addresses.
 - Email verification defaults to off on a fresh install so the app stays usable before SMTP is configured.
 - `composer setup` and `post-create-project-cmd` run `php artisan storage:link`.
+- Super Admin chrome and packaged public branding assets use NexaCRM identity instead of the old `algos.` mark.
 
 ---
 

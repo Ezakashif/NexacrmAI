@@ -4,11 +4,10 @@
  * Build a LinkedIn company cover (1584x396) with a clear bottom-left
  * safe zone for the overlapping circular company logo.
  */
-
 $W = 1584;
 $H = 396;
-$outPath = $argv[1] ?? __DIR__.'/../public/branding/algos-crm-linkedin-cover.png';
-$logoPath = __DIR__.'/../public/branding/algos-logo.png';
+$outPath = $argv[1] ?? __DIR__.'/../public/branding/nexacrm-linkedin-cover.png';
+$logoPath = __DIR__.'/../public/branding/nexacrm-logo.png';
 $uiSrcPath = $argv[2] ?? null;
 
 $out = imagecreatetruecolor($W, $H);
@@ -75,8 +74,12 @@ imagefilledellipse($out, $W - 60, 30, 200, 120, $blob);
 $blob2 = imagecolorallocatealpha($out, 56, 189, 248, 105);
 imagefilledellipse($out, $W - 200, -10, 160, 100, $blob2);
 
-$fontBold = is_file('C:/Windows/Fonts/segoeuib.ttf') ? 'C:/Windows/Fonts/segoeuib.ttf' : 'C:/Windows/Fonts/arialbd.ttf';
-$fontReg = is_file('C:/Windows/Fonts/segoeui.ttf') ? 'C:/Windows/Fonts/segoeui.ttf' : 'C:/Windows/Fonts/arial.ttf';
+$fontBold = is_file('/usr/share/fonts/truetype/macos/Inter-Bold.ttf')
+    ? '/usr/share/fonts/truetype/macos/Inter-Bold.ttf'
+    : (is_file('C:/Windows/Fonts/segoeuib.ttf') ? 'C:/Windows/Fonts/segoeuib.ttf' : 'C:/Windows/Fonts/arialbd.ttf');
+$fontReg = is_file('/usr/share/fonts/truetype/macos/Inter-Regular.ttf')
+    ? '/usr/share/fonts/truetype/macos/Inter-Regular.ttf'
+    : (is_file('C:/Windows/Fonts/segoeui.ttf') ? 'C:/Windows/Fonts/segoeui.ttf' : 'C:/Windows/Fonts/arial.ttf');
 
 // Keep copy in the upper band and right of the avatar circle.
 $contentX = 400;
@@ -98,17 +101,17 @@ for ($i = 0; $i < 6; $i++) {
         imagesetpixel($out, $markX + $markSize - $i, $markY + $markSize - $j, $white);
     }
 }
-// Cyan "A" strokes
+// Cyan "N" strokes
 imagesetthickness($out, 3);
-imageline($out, $markX + 20, $markY + 10, $markX + 10, $markY + 30, $sky);
-imageline($out, $markX + 20, $markY + 10, $markX + 30, $markY + 30, $sky);
-imageline($out, $markX + 14, $markY + 23, $markX + 26, $markY + 23, $sky);
+imageline($out, $markX + 12, $markY + 30, $markX + 12, $markY + 10, $sky);
+imageline($out, $markX + 12, $markY + 10, $markX + 28, $markY + 30, $sky);
+imageline($out, $markX + 28, $markY + 30, $markX + 28, $markY + 10, $sky);
 imagesetthickness($out, 1);
 imagettftext($out, 22, 0, $markX + $markSize + 12, $markY + 30, $slate, $fontBold, 'nexacrm.');
 
-imagettftext($out, 26, 0, $contentX, 100, $slate, $fontBold, 'Simple CRM.');
-imagettftext($out, 18, 0, $contentX, 130, $accent, $fontBold, 'Smarter Customer Management.');
-imagettftext($out, 12, 0, $contentX, 156, $muted, $fontReg, 'Leads, customers, tasks & pipeline — in one place.');
+imagettftext($out, 22, 0, $contentX, 100, $slate, $fontBold, 'A Modern Multi-Tenant CRM');
+imagettftext($out, 16, 0, $contentX, 130, $accent, $fontBold, 'for Growing Businesses');
+imagettftext($out, 12, 0, $contentX, 156, $muted, $fontReg, 'A ready-to-customize Laravel CRM SaaS for developers, agencies, and businesses.');
 
 // CTAs stay in the upper clear band (above avatar)
 $btnY = 172;

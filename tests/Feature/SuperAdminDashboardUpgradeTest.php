@@ -10,6 +10,8 @@ use App\Models\Plan;
 use App\Models\PlatformSetting;
 use App\Models\User;
 use App\Services\SuperAdmin\ImpersonationService;
+use App\Services\SuperAdmin\PlatformLogoProcessor;
+use App\Services\SuperAdmin\PlatformSettingsService;
 use Database\Seeders\RbacSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -238,7 +240,7 @@ class SuperAdminDashboardUpgradeTest extends TestCase
         $this->assertStringEndsWith('.png', $storedPath);
         Storage::disk('public')->assertExists($storedPath);
 
-        app(\App\Services\SuperAdmin\PlatformSettingsService::class)->applyBranding();
+        app(PlatformSettingsService::class)->applyBranding();
         $this->assertSame(
             'storage/'.PlatformSetting::query()->where('key', 'platform_logo_path')->value('value'),
             config('adminlte.auth_logo.img.path')
@@ -255,11 +257,11 @@ class SuperAdminDashboardUpgradeTest extends TestCase
 
     public function test_platform_logo_processor_removes_black_background(): void
     {
-        $source = base_path('public/branding/algos-logo.png');
+        $source = base_path('public/branding/nexacrm-logo.png');
         $this->assertFileExists($source);
 
         $output = sys_get_temp_dir().'/processed-logo-test.png';
-        app(\App\Services\SuperAdmin\PlatformLogoProcessor::class)
+        app(PlatformLogoProcessor::class)
             ->processToTransparentPng($source, $output);
 
         $this->assertFileExists($output);
@@ -269,7 +271,7 @@ class SuperAdminDashboardUpgradeTest extends TestCase
 
     public function test_dark_sidebar_uses_light_logo_variant(): void
     {
-        $settings = app(\App\Services\SuperAdmin\PlatformSettingsService::class);
+        $settings = app(PlatformSettingsService::class);
         $settings->setMany([
             'platform_name' => 'NexaCRM',
             'platform_logo_path' => 'platform/dark-logo.png',

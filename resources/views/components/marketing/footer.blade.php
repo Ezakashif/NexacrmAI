@@ -28,11 +28,7 @@
                         <img src="{{ $logoUrl }}" alt="{{ $brand }}" class="h-9 w-auto max-w-[10rem] object-contain">
                     @else
                         <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-slate-800 text-sky-400" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 4 L5 20" />
-                                <path d="M12 4 L19 20" />
-                                <path d="M8.5 14.5 H15.5" />
-                            </svg>
+                            <x-marketing.mark class="h-5 w-5" />
                         </span>
                         <span class="text-xl font-bold tracking-tight text-white">
                             {{ strtolower($brand) }}<span class="text-sky-400">.</span>
