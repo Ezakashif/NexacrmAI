@@ -19,7 +19,7 @@ This repository is independent of any other CRM product. CI never talks to Railw
 | Composer | `composer validate --no-check-publish` then `composer install` from `composer.lock` |
 | Frontend | `npm ci` then `npm run build` (Vite) |
 | Tests | `php artisan test` (full PHPUnit suite) |
-| Codester ZIP | `bash scripts/build-codester-package.sh` (scan only; ZIP is not committed) |
+| Codester ZIP | `bash scripts/build-codester-package.sh` (scan only; ZIP is not committed). PHP ZipArchive fallback is checked separately. |
 
 The workflow also:
 

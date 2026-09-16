@@ -78,7 +78,7 @@ See [docs/getting-started/installation.md](docs/getting-started/installation.md)
 
 If you received a Codester ZIP (no Git history), follow [docs/codester-installation.md](docs/codester-installation.md) instead of cloning.
 
-Maintainers can build that ZIP with `composer package` (writes a gitignored file under `dist/`).
+Maintainers can build that ZIP with `composer package`. The archive is written to `dist/` on **your computer** (for example `dist/nexacrm-unreleased-<revision>-codester.zip`). `dist/` is gitignored, so a GitHub clone never contains the ZIP. Git for Windows / Git Bash does not include the `zip` command; the builder then uses PHP `ZipArchive` (enable `extension=zip` in php.ini — XAMPP usually has it) or PowerShell.
 
 Public registration is off until a Super Admin enables it. Email verification is also off on a fresh install so the app stays usable before SMTP is configured.
 

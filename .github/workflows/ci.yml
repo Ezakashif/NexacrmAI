@@ -45,6 +45,17 @@ jobs:
       - name: Codester package scan
         run: bash scripts/build-codester-package.sh
 
+      - name: Codester ZIP PHP fallback
+        run: |
+          fixture="$(mktemp -d)"
+          mkdir -p "${fixture}/sample/subdir"
+          printf 'APP_KEY=\n' > "${fixture}/sample/.env.example"
+          printf 'ok\n' > "${fixture}/sample/subdir/readme.txt"
+          php scripts/codester-zip.php create "${fixture}/sample" "${fixture}/out.zip"
+          php scripts/codester-zip.php list "${fixture}/out.zip" | grep -F 'sample/.env.example'
+          php scripts/codester-zip.php list "${fixture}/out.zip" | grep -F 'sample/subdir/readme.txt'
+          test -s "${fixture}/out.zip"
+
       - name: Cache Composer packages
         uses: actions/cache@v4
         with:

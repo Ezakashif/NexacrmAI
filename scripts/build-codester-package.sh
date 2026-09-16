@@ -6,10 +6,189 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
-if ! command -v zip >/dev/null 2>&1; then
-    echo "zip is required" >&2
+native_path() {
+    if command -v cygpath >/dev/null 2>&1; then
+        cygpath -m "$1"
+    else
+        printf '%s\n' "$1"
+    fi
+}
+
+win_path() {
+    if command -v cygpath >/dev/null 2>&1; then
+        cygpath -w "$1"
+    else
+        printf '%s\n' "$1"
+    fi
+}
+
+php_bin() {
+    if command -v php >/dev/null 2>&1; then
+        command -v php
+        return 0
+    fi
+    return 1
+}
+
+php_has_zip() {
+    local php
+    php="$(php_bin)" || return 1
+    "$php" -r 'exit(class_exists("ZipArchive") ? 0 : 1);' >/dev/null 2>&1
+}
+
+powershell_bin() {
+    if command -v powershell.exe >/dev/null 2>&1; then
+        command -v powershell.exe
+        return 0
+    fi
+    if command -v powershell >/dev/null 2>&1; then
+        command -v powershell
+        return 0
+    fi
+    return 1
+}
+
+seven_zip_bin() {
+    if command -v 7z >/dev/null 2>&1; then
+        command -v 7z
+        return 0
+    fi
+    if command -v 7z.exe >/dev/null 2>&1; then
+        command -v 7z.exe
+        return 0
+    fi
+    return 1
+}
+
+resolve_zip_method() {
+    local forced="${CODESTER_ZIP_METHOD:-auto}"
+    case "$forced" in
+        zip|php|7z|powershell)
+            printf '%s\n' "$forced"
+            return 0
+            ;;
+        auto) ;;
+        *)
+            echo "Unknown CODESTER_ZIP_METHOD=${forced} (use auto, zip, php, 7z, or powershell)" >&2
+            exit 1
+            ;;
+    esac
+
+    if command -v zip >/dev/null 2>&1; then
+        echo zip
+        return 0
+    fi
+    if php_has_zip; then
+        echo php
+        return 0
+    fi
+    if seven_zip_bin >/dev/null; then
+        echo 7z
+        return 0
+    fi
+    if powershell_bin >/dev/null; then
+        echo powershell
+        return 0
+    fi
+
+    echo "Cannot create a ZIP." >&2
+    echo "" >&2
+    echo "Git for Windows / Git Bash does not ship the Info-ZIP \"zip\" command." >&2
+    echo "Use one of these, then re-run: composer package" >&2
+    echo "  1. Enable PHP zip (php -m should list zip). On XAMPP, uncomment extension=zip in php.ini." >&2
+    echo "  2. Install zip, for example: pacman -S zip   or   scoop install zip" >&2
+    echo "  3. Install 7-Zip and add 7z.exe to PATH" >&2
+    echo "" >&2
+    echo "The ZIP is written to dist/ which is gitignored. It is never committed to GitHub." >&2
     exit 1
-fi
+}
+
+create_zip() {
+    local dest="$1"
+    local zip_path="$2"
+    local stage="$3"
+    local name="$4"
+
+    rm -f "$zip_path"
+
+    case "$ZIP_METHOD" in
+        zip)
+            (
+                cd "$stage"
+                zip -r -X -q "$zip_path" "$name"
+            )
+            ;;
+        php)
+            "$(php_bin)" "${ROOT}/scripts/codester-zip.php" create "$(native_path "$dest")" "$(native_path "$zip_path")"
+            ;;
+        7z)
+            (
+                cd "$stage"
+                "$(seven_zip_bin)" a -tzip -bd "$zip_path" "$name" >/dev/null
+            )
+            ;;
+        powershell)
+            "$(powershell_bin)" -NoProfile -NonInteractive -ExecutionPolicy Bypass \
+                -File "$(win_path "${ROOT}/scripts/codester-zip.ps1")" \
+                -Action create \
+                -Path "$(win_path "$dest")" \
+                -Destination "$(win_path "$zip_path")"
+            ;;
+        *)
+            echo "internal error: unknown zip method ${ZIP_METHOD}" >&2
+            exit 1
+            ;;
+    esac
+}
+
+list_zip_entries() {
+    local zip_path="$1"
+
+    if command -v unzip >/dev/null 2>&1; then
+        unzip -Z1 "$zip_path"
+        return 0
+    fi
+
+    case "$ZIP_METHOD" in
+        php)
+            "$(php_bin)" "${ROOT}/scripts/codester-zip.php" list "$(native_path "$zip_path")"
+            return 0
+            ;;
+        powershell)
+            "$(powershell_bin)" -NoProfile -NonInteractive -ExecutionPolicy Bypass \
+                -File "$(win_path "${ROOT}/scripts/codester-zip.ps1")" \
+                -Action list \
+                -Path "$(win_path "$zip_path")"
+            return 0
+            ;;
+        7z)
+            "$(seven_zip_bin)" l -ba -slt "$zip_path" | awk '/^Path = /{sub(/^Path = /,""); print}'
+            return 0
+            ;;
+    esac
+
+    if php_has_zip; then
+        "$(php_bin)" "${ROOT}/scripts/codester-zip.php" list "$(native_path "$zip_path")"
+        return 0
+    fi
+    if powershell_bin >/dev/null; then
+        "$(powershell_bin)" -NoProfile -NonInteractive -ExecutionPolicy Bypass \
+            -File "$(win_path "${ROOT}/scripts/codester-zip.ps1")" \
+            -Action list \
+            -Path "$(win_path "$zip_path")"
+        return 0
+    fi
+    if seven_zip_bin >/dev/null; then
+        "$(seven_zip_bin)" l -ba -slt "$zip_path" | awk '/^Path = /{sub(/^Path = /,""); print}'
+        return 0
+    fi
+
+    echo "Cannot list ZIP entries (install unzip, or enable PHP zip)." >&2
+    exit 1
+}
+
+ZIP_METHOD="$(resolve_zip_method)"
+echo "==> zip method: ${ZIP_METHOD}"
 
 REV="$(git -C "$ROOT" rev-parse --short HEAD)"
 FULL_REV="$(git -C "$ROOT" rev-parse HEAD)"
@@ -17,7 +196,7 @@ FULL_REV="$(git -C "$ROOT" rev-parse HEAD)"
 VERSION_LABEL="unreleased"
 STAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 NAME="nexacrm-${VERSION_LABEL}-${REV}-codester"
-STAGE="$(mktemp -d /tmp/nexacrm-codester-XXXXXX)"
+STAGE="$(mktemp -d "${TMPDIR:-/tmp}/nexacrm-codester-XXXXXX")"
 DEST="${STAGE}/${NAME}"
 DIST="${ROOT}/dist"
 ZIP_PATH="${DIST}/${NAME}.zip"
@@ -54,6 +233,8 @@ rm -f \
     "${DEST}/scripts/build-linkedin-cover.php" \
     "${DEST}/scripts/render-nexacrm-logos.php" \
     "${DEST}/scripts/build-codester-package.sh" \
+    "${DEST}/scripts/codester-zip.php" \
+    "${DEST}/scripts/codester-zip.ps1" \
     "${DEST}/scripts/codester-package.exclude"
 rm -rf "${DEST}/public/hot" "${DEST}/public/build" "${DEST}/public/storage"
 
@@ -122,19 +303,19 @@ if grep -RInE --binary-files=without-match 'algoscrm\.com|algos\.test' "$DEST" \
 fi
 
 echo "==> writing ${ZIP_PATH}"
-rm -f "$ZIP_PATH"
-(
-    cd "$STAGE"
-    zip -r -X -q "$ZIP_PATH" "$NAME"
-)
+create_zip "$DEST" "$ZIP_PATH" "$STAGE" "$NAME"
 
-if unzip -Z1 "$ZIP_PATH" | grep -E '(^|/)\.env$|/\.git/|/node_modules/' >/dev/null; then
+ENTRIES="$(list_zip_entries "$ZIP_PATH")"
+if ! printf '%s\n' "$ENTRIES" | grep -E '(^|/)\.env\.example$' >/dev/null; then
+    fail "zip missing .env.example"
+fi
+if printf '%s\n' "$ENTRIES" | grep -E '(^|/)\.env$|/\.git/|/node_modules/' >/dev/null; then
     fail "zip contains .env, .git, or node_modules"
 fi
-if unzip -Z1 "$ZIP_PATH" | grep -E '^[^/]+/vendor/' >/dev/null; then
+if printf '%s\n' "$ENTRIES" | grep -E '^[^/]+/vendor/' >/dev/null; then
     fail "zip contains Composer vendor/"
 fi
-echo "ZIP entries: $(unzip -Z1 "$ZIP_PATH" | wc -l)"
+echo "ZIP entries: $(printf '%s\n' "$ENTRIES" | wc -l)"
 
 SIZE="$(du -h "$ZIP_PATH" | awk '{print $1}')"
 echo "PACKAGE OK: ${ZIP_PATH} (${SIZE})"

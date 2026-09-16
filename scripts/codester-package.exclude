@@ -52,4 +52,6 @@ scripts/capture-nexacrm-screenshots.mjs
 scripts/build-linkedin-cover.php
 scripts/render-nexacrm-logos.php
 scripts/build-codester-package.sh
+scripts/codester-zip.php
+scripts/codester-zip.ps1
 scripts/codester-package.exclude

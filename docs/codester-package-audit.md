@@ -12,10 +12,24 @@ How the NexaCRM Codester source ZIP is built. This is not listing copy (Phase 9)
 | Application license | MIT (`LICENSE`) |
 | Declared product version | **unreleased** — `docs/changelog.md` has no numbered release; `composer.json` has no `version` field. No `v1.0.0` was invented. |
 | Source `main` at packaging | includes Phase 7 `6a9762323e064ab7f88b1433a54fdf296db6c290` |
-| Builder | `scripts/build-codester-package.sh` |
+| Builder | `scripts/build-codester-package.sh` (`composer package`) |
+| ZIP helpers | `scripts/codester-zip.php`, `scripts/codester-zip.ps1` (seller-only; used when Info-ZIP `zip` is missing) |
 | Exclude list | `scripts/codester-package.exclude` |
 
 `NEXACRM-PACKAGE.txt` inside each ZIP records the git revision and UTC build time.
+
+`dist/` is **gitignored**. Cloning this repository never gives you a ZIP. Run `composer package` on your machine; the file appears under `dist/nexacrm-unreleased-<revision>-codester.zip`.
+
+### Windows / Git Bash
+
+Git for Windows does not ship the Info-ZIP `zip` command, so an older builder stopped with `zip is required`. The script now picks the first available writer:
+
+1. `zip` CLI (Linux, macOS, MSYS2 `pacman -S zip`)
+2. PHP `ZipArchive` (`php -m` must list `zip`; on XAMPP enable `extension=zip` in `php.ini`)
+3. `7z`
+4. PowerShell (includes hidden/dotfiles such as `.env.example`)
+
+Force a method with `CODESTER_ZIP_METHOD=php composer package`. `unzip` is optional; the same helpers can list the archive.
 
 Codester’s public upload guide ([codester.com/info/upload](https://www.codester.com/info/upload)) requires a main `.zip` with documentation, English docs, and a clean layout. It does **not** require `vendor/` or `node_modules/` to be pre-bundled. Seller pages ask for a clean archive and removal of temporary/private files.
 
@@ -50,7 +64,7 @@ Laravel application source the buyer must have to install:
 | `.github/` | Seller CI, not a buyer install requirement |
 | `railway/`, `railway.toml`, `nixpacks.toml` | PaaS leftovers; not required to install NexaCRM |
 | `scripts/capture-nexacrm-*.mjs` and logo renderers | Maintainer media recapture, not install |
-| Package builder itself | Seller-only |
+| Package builder itself (`scripts/build-codester-package.sh`, `scripts/codester-zip.php`, `scripts/codester-zip.ps1`, `scripts/codester-package.exclude`) | Seller-only |
 | Empty root files `guest`, `php`, `pricing` | Accidental tracked empty files |
 | IDE/OS junk, coverage, phpunit cache | Development artifacts |
 
