@@ -22,6 +22,7 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 - Recapture helpers `scripts/capture-nexacrm-screenshots.mjs` and `scripts/capture-nexacrm-demo-video.mjs` for buyer-facing media.
 - GitHub Actions CI (`.github/workflows/ci.yml`) plus `composer ci` / `scripts/validate-release.sh`.
 - Codester source ZIP builder (`composer package`), `THIRD-PARTY-NOTICES.md`, and buyer install guide (`docs/codester-installation.md`). `composer package` now works on Windows Git Bash without Info-ZIP `zip` (PHP ZipArchive or PowerShell).
+- Codester listing draft, media audit, and submission readiness review (`docs/codester-listing.md`, `docs/codester-media-audit.md`, `docs/codester-submission-review.md`).
 
 ### Changed
 

@@ -196,3 +196,20 @@ Buyer-facing documentation should:
 - Defer listing copy, ZIP contents, and any proprietary EULA to a later packaging phase.
 
 The Codester source ZIP (Phase 8) **does not** include `vendor/`. Buyers run `composer install`. Third-party notices for that path are in `THIRD-PARTY-NOTICES.md`. `public/vendor` AdminLTE/Font Awesome files remain in the ZIP with their in-file copyright headers. Buyer-facing screenshots and the product demo video were recaptured in a later media pass so they show NexaCRM chrome.
+
+---
+
+## Phase 9 addendum — live license re-check (17 September 2026)
+
+Phase 9 re-read https://www.codester.com/info/licenses and https://www.codester.com/info/member_terms on **17 September 2026**.
+
+**Live licenses page (authoritative for listing copy):**
+
+- Items are licensed, not sold; author keeps ownership.
+- Permissions apply to all purchases regardless of purchase date (live page wording).
+- **Regular:** one project; personal **and** commercial use; client work for that one project; no resale; no source-file distribution.
+- **Extended:** unlimited / multiple projects; personal and commercial use; source may be distributed/sublicensed as part of a larger project; item may not be resold as-is.
+
+**Correction:** The Phase 5 summary above that described Regular as personal/non-commercial-only and Extended as a single commercial end product does **not** match the live licenses page checked on 17 September 2026. Prefer this addendum and `docs/codester-listing.md` / `docs/codester-submission-review.md` for marketplace wording.
+
+MIT in `LICENSE` is unchanged. No proprietary EULA was added.

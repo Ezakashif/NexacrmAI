@@ -130,4 +130,6 @@ This repository’s software license is **MIT**. See [`LICENSE`](LICENSE). Compo
 
 A Codester purchase is a **separate** marketplace license (Regular or Extended) chosen at checkout. Marketplace terms do not automatically replace MIT, and MIT does not authorize resale of NexaCRM as a stock Codester item. Details, third-party notices, and unresolved marketplace questions: [docs/licensing-audit.md](docs/licensing-audit.md).
 
+Codester seller drafts (Phase 9): [listing copy](docs/codester-listing.md), [media audit](docs/codester-media-audit.md), [submission readiness](docs/codester-submission-review.md). Buyer ZIP install: [codester-installation.md](docs/codester-installation.md).
+
 Support terms for buyers can be added once they are defined.
