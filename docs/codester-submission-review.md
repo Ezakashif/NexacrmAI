@@ -136,24 +136,21 @@ No application code was modified for Phase 9.
 
 ---
 
-## Remaining blockers (seller upload, not code)
+## Remaining blockers (seller account / hosting — not missing repo assets)
 
-1. Create **800×400** preview image (do not stretch LinkedIn cover).
-2. Export **200×200** PNG icon from `public/branding/nexacrm-mark.svg` (not a screenshot).
-3. Build screenshots ZIP with **3–9 unique** PNGs (see media audit).
-4. Host a **live demo** URL on a NexaCRM instance; iframe-test it; no off-site purchase CTA; list demo emails only (no password).
-5. Set Regular/Extended **prices** and optional development hours (seller decision; not invented here).
-6. Complete Codester **author profile**.
-7. Optional: upload demo MP4 to YouTube and paste Video URL.
-8. Re-open https://www.codester.com/info/licenses and the upload form on submission day in case Codester changed copy.
+1. [x] Create **800×400** preview — `codester-upload/nexacrm-codester-preview-800x400.png`
+2. [x] Export **200×200** PNG icon — `codester-upload/nexacrm-codester-icon-200x200.png`
+3. [x] Build screenshots ZIP with **3–9 unique** PNGs — `codester-upload/nexacrm-codester-screenshots.zip` (8)
+4. [ ] Host a **live demo** HTTPS URL on **your** paid host; iframe-test it; no off-site purchase CTA; list demo emails only (no password). Local iframe headers verified 18 Sep 2026 (no `X-Frame-Options` / CSP `frame-ancestors` block).
+5. [ ] Enter Regular/Extended **prices** on Codester (recommended **$49** / **$129** in `codester-upload/README.md`) and complete **author profile** (paste-ready bio in the same README).
 
 ---
 
 ## Ready for manual Codester submission?
 
-**Conditionally yes for package + listing materials; not yet click-submit complete.**
+**Almost — package + listing + visual assets are ready.**
 
-- Source ZIP, English docs, MIT notices, listing draft, media audit, and requirement cross-check are ready.
-- Upload is still blocked until preview **800×400**, icon **200×200**, screenshots ZIP, live demo URL, and seller pricing/profile are done outside this repository.
+- Source ZIP tooling, English docs, MIT notices, listing draft, media audit, preview, icon, and screenshots ZIP are ready.
+- Upload still needs **your** live demo HTTPS URL and Codester account fields (prices + author profile). Those cannot be finished from this repository alone.
 
-No application code change is required for Phase 9.
+No application feature/schema change was required for these assets.

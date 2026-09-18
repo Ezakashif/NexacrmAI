@@ -55,9 +55,16 @@ Do not tag AI, invoicing, Stripe, or SSO. Those are not in this package.
 
 Codester lets the seller set the item price. The public upload guide’s rule of thumb is development hours × 1.2; that is guidance, not a required formula.
 
-This repository does **not** record a billed hour count. Do not invent hours or a dollar price in git.
+Comparable items in the same CRM PHP category (observed 17 September 2026) listed from about **$22 to $155**.
 
-Comparable items in the same CRM PHP category (observed 17 September 2026) listed from about **$22 to $155**. Choose a price that matches your support commitment. Codester member terms also say the marketplace may determine the fee.
+**Recommended Codester item prices** (seller may adjust; see `codester-upload/README.md`):
+
+| License | Recommended |
+|---|---|
+| Regular | **$49** |
+| Extended | **$129** |
+
+Enter **your real** development hours only if the form asks — do not invent hours. These marketplace prices are not the in-app Starter/Professional/Enterprise plan amounts.
 
 Offer **Regular** and **Extended** licenses using Codester’s checkout options. See [License](#license) below.
 
@@ -313,16 +320,16 @@ No custom EULA was added to this repository.
 
 Codester’s current upload guide ([codester.com/info/upload](https://www.codester.com/info/upload), 17 September 2026):
 
-| Asset | Requirement |
-|---|---|
-| Preview image | **800×400** PNG or JPG |
-| Icon | **200×200** PNG or JPG (not a raw screenshot) |
-| Screenshots ZIP | JPG or PNG, **at least 3 and at most 9** |
-| Main file | `.zip` with documentation inside |
-| Demo URL | Live demo (PHP scripts); no “buy elsewhere” CTA |
-| Video URL | YouTube (additional) |
+| Asset | Requirement | Ready file |
+|---|---|---|
+| Preview image | **800×400** PNG or JPG | `codester-upload/nexacrm-codester-preview-800x400.png` |
+| Icon | **200×200** PNG or JPG (not a raw screenshot) | `codester-upload/nexacrm-codester-icon-200x200.png` |
+| Screenshots ZIP | JPG or PNG, **at least 3 and at most 9** | `codester-upload/nexacrm-codester-screenshots.zip` (8 unique) |
+| Main file | `.zip` with documentation inside | Phase 8 `composer package` output |
+| Demo URL | Live demo (PHP scripts); no “buy elsewhere” CTA | Seller hosts (see `codester-upload/README.md`) |
+| Video URL | YouTube (additional) | Optional: upload `public/marketing/videos/nexacrm-product-demo.mp4` |
 
-This package contains twelve 2880×1800 product screenshots and an SVG mark, but **not** an 800×400 preview or a 200×200 PNG icon. Create those two images before upload (do not stretch a screenshot). Which screenshots to put in the screenshot ZIP: see `docs/codester-media-audit.md`.
+Regenerate preview/icon/screenshots ZIP with `python3 scripts/build-codester-upload-assets.py`.
 
 An older support article still mentions a 1600×800 preview. Prefer the live upload guide (800×400) unless the upload form itself asks for a different size that day.
 
@@ -332,17 +339,17 @@ An older support article still mentions a 1600×800 preview. Prefer the live upl
 
 Copy this into your Codester author notes:
 
-1. [ ] Main file = `nexacrm-unreleased-de7387f-codester.zip` (or a newer `composer package` build from `main`)
+1. [ ] Main file = `composer package` ZIP from current `main`
 2. [ ] Documentation inside the ZIP (`docs/codester-installation.md` present)
-3. [ ] 800×400 preview created (not stretched)
-4. [ ] 200×200 icon created from the NexaCRM mark (not a screenshot)
-5. [ ] Screenshots ZIP with 3–9 **unique** PNGs (see media audit)
+3. [x] 800×400 preview — `codester-upload/nexacrm-codester-preview-800x400.png`
+4. [x] 200×200 icon — `codester-upload/nexacrm-codester-icon-200x200.png`
+5. [x] Screenshots ZIP — `codester-upload/nexacrm-codester-screenshots.zip` (8 unique)
 6. [ ] Title, short description (≤130 characters), full description pasted from this file
 7. [ ] Category PHP Scripts / CRM; tags from this file
-8. [ ] Regular + Extended prices set by you
-9. [ ] Live demo URL on a NexaCRM instance, iframe-tested, no off-site purchase CTA
+8. [ ] Regular **$49** + Extended **$129** (or your adjusted prices)
+9. [ ] Live demo URL on **your** NexaCRM host, iframe-tested, no off-site purchase CTA
 10. [ ] Demo emails listed as demo-only; **no password** on the listing
 11. [ ] Optional YouTube URL of `nexacrm-product-demo.mp4`
-12. [ ] Author profile complete (Codester upload checklist)
+12. [ ] Author profile complete (paste from `codester-upload/README.md`)
 13. [ ] License text matches the live Codester licenses page
 14. [ ] No “Algos CRM”, Railway, or Product Hunt on the listing

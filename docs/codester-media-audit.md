@@ -91,14 +91,14 @@ Package that ZIP **separately** from the product source ZIP. Codester’s form a
 
 ---
 
-## Missing Codester listing images (blocking for upload, not for this audit’s recapture)
+## Missing Codester listing images
 
 | Required by live upload guide | Present in repo? |
 |---|---|
-| 800×400 preview | **No** exact asset |
-| 200×200 icon (not a screenshot) | **No** PNG; SVG mark exists |
+| 800×400 preview | **Yes** — `public/branding/nexacrm-codester-preview-800x400.png` (and `codester-upload/` copy) |
+| 200×200 icon (not a screenshot) | **Yes** — `public/branding/nexacrm-codester-icon-200x200.png` (exported from SVG mark) |
 
-Create those two files before submitting. Do not stretch `nexacrm-linkedin-cover.png` (1584×396) to 800×400.
+Regenerate with `python3 scripts/build-codester-upload-assets.py`. Screenshots ZIP for the form: `codester-upload/nexacrm-codester-screenshots.zip` (8 unique images).
 
 ---
 
@@ -113,4 +113,4 @@ Create those two files before submitting. Do not stretch `nexacrm-linkedin-cover
 | Exposes credentials/secrets | No (demo emails only) |
 | Consistent with current UI | Yes, Northstar demo tenant chrome |
 | Represents real modules | Yes for dashboard, leads, customers, tasks, reports, users, roles, activity, marketing pricing |
-| Ready to drop into Codester as-is | Screenshots yes (after deduping to ≤9). Preview 800×400 and icon 200×200 still need to be made. Video suitable for YouTube. |
+| Ready for Codester upload assets | **Yes** for preview, icon, and screenshots ZIP. Video suitable for YouTube. Live demo URL still requires seller hosting. |

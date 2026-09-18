@@ -23,6 +23,7 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 - GitHub Actions CI (`.github/workflows/ci.yml`) plus `composer ci` / `scripts/validate-release.sh`.
 - Codester source ZIP builder (`composer package`), `THIRD-PARTY-NOTICES.md`, and buyer install guide (`docs/codester-installation.md`). `composer package` now works on Windows Git Bash without Info-ZIP `zip` (PHP ZipArchive or PowerShell).
 - Codester listing draft, media audit, and submission readiness review (`docs/codester-listing.md`, `docs/codester-media-audit.md`, `docs/codester-submission-review.md`).
+- Codester upload kit: 800×400 preview, 200×200 icon, 8-image screenshots ZIP, and seller price/profile paste notes (`codester-upload/`, `scripts/build-codester-upload-assets.py`).
 
 ### Changed
 
