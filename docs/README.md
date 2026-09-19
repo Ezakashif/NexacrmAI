@@ -95,8 +95,8 @@ Open `APP_URL` (default `http://localhost:8000`).
 
 While logged in (tenant CRM or Super Admin), open:
 
-- [`/docs`](/docs) — documentation home  
-- [`/docs/getting-started/installation`](/docs/getting-started/installation) — example page  
+- `/docs` — documentation home  
+- `/docs/getting-started/installation` — example page  
 
 Sidebar: **Account → Documentation** (CRM) or **Documentation** (Super Admin).
 
