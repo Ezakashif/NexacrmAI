@@ -63,4 +63,12 @@ DEMO_SEED_PASSWORD='...' node scripts/capture-nexacrm-demo-video.mjs
 
 The demo video records the marketing home, sign-in, dashboard, leads pipeline, customers, tasks, reports, users, roles, and a return to the dashboard. Add `CAPTURE_SUPERADMIN=1` plus Super Admin credentials only if you want a platform-console segment.
 
+To add narration and a soft ambient music bed (no third-party music license required):
+
+```bash
+./scripts/add-demo-video-audio.sh
+```
+
+Edit the spoken script in `scripts/demo-video-narration.txt` first if you want different wording. Requires `ffmpeg`, `sox`, and `edge-tts`.
+
 Not included in production `DatabaseSeeder` auto-run.
