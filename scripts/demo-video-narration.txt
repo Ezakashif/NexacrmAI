@@ -1,0 +1,19 @@
+Welcome to NexaCRM — a modern multi-tenant CRM for growing businesses.
+
+From the marketing home page, customers can explore features, pricing, and start a free trial.
+
+Sign in to your company workspace securely.
+
+Your dashboard brings leads, customers, tasks, and key performance metrics together in one place.
+
+Next, manage your sales pipeline. Capture leads, update stages, and keep every opportunity moving forward.
+
+Then open customers to see organized relationship history — contacts, notes, and activity in a clean list.
+
+Stay on top of follow-ups with tasks, so nothing slips through the cracks.
+
+Reports give you a clear view of performance — so your team can make better decisions, faster.
+
+Invite teammates under users, and fine-tune permissions with roles, so everyone has the right access.
+
+And that’s NexaCRM — a polished, multi-tenant CRM ready for agencies and growing teams.
