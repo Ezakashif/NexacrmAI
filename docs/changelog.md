@@ -20,7 +20,7 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 - Professional documentation tree under `/docs` (installation, architecture, channels, Super Admin, operations, user manual, roadmap).
 - Licensing audit: MIT remains the repository software license; Codester Regular/Extended remain the marketplace purchase terms (`docs/licensing-audit.md`).
 - Recapture helpers `scripts/capture-nexacrm-screenshots.mjs` and `scripts/capture-nexacrm-demo-video.mjs` for buyer-facing media.
-- GitHub Actions CI (`.github/workflows/ci.yml`) plus `composer ci` / `scripts/validate-release.sh`.
+- Maintainer CI via `composer ci` and `scripts/validate-release.sh` (seller repository only; not included in the Codester buyer ZIP).
 - Codester source ZIP builder (`composer package`), `THIRD-PARTY-NOTICES.md`, and buyer install guide (`docs/codester-installation.md`). `composer package` now works on Windows Git Bash without Info-ZIP `zip` (PHP ZipArchive or PowerShell).
 - Codester listing draft, media audit, and submission readiness review (`docs/codester-listing.md`, `docs/codester-media-audit.md`, `docs/codester-submission-review.md`).
 - Codester upload kit: 800×400 preview, 200×200 icon, 8-image screenshots ZIP, and seller price/profile paste notes (`codester-upload/`, `scripts/build-codester-upload-assets.py`).
