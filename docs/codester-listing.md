@@ -221,7 +221,7 @@ Do not list Spatie, Livewire, or Stripe. They are not dependencies.
 
 **Required to install and sign in**
 
-- PHP 8.2+ with `pdo`, `pdo_mysql`, `mbstring`, `openssl`, `tokenizer`, `xml`, `ctype`, `json`, `fileinfo`, `gd` (`pdo_mysql` is required by Composer because MySQL 8+ is supported; `bcmath` is not required)
+- PHP 8.2+ with `pdo`, `pdo_mysql`, `mbstring`, `openssl`, `tokenizer`, `xml`, `ctype`, `json`, `fileinfo`, `gd` (`pdo_mysql` is required by Composer because MySQL 8+ is supported)
 - Composer 2.x
 - Node.js 20+ and npm
 - SQLite **or** MySQL 8+

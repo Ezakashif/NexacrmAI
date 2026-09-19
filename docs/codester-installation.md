@@ -16,8 +16,6 @@ Git clone instructions for maintainers: [getting-started/installation.md](gettin
 | Database | SQLite (simplest local default) or MySQL 8+ (recommended for production) |
 | Web server | Document root must be the `public/` directory in production |
 
-`bcmath` is **not** listed in `composer.json` and is not required to install or sign in.
-
 A queue worker and a scheduler cron entry are **not** required to finish first-run or sign in. They are required in production for channel webhooks and reminder emails.
 
 ## 1. Extract the package

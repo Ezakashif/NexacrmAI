@@ -47,7 +47,7 @@ MIT in `LICENSE` remains the software license inside the ZIP. Codester Regular/E
 | Listing draft | `docs/codester-listing.md` | Complete (verified facts only; short descriptions ≤130 chars) |
 | Media audit | `docs/codester-media-audit.md` | Complete; no recapture required |
 | Buyer install guide | `docs/codester-installation.md` | Already present (Phase 8); consistent with package |
-| Package audit | `docs/codester-package-audit.md` (GitHub only; excluded from buyer ZIP) | Already present (Phase 8) |
+| Package audit | Removed from the repository (was Phase 8 maintainer notes; not buyer docs) | N/A |
 | This submission review | `docs/codester-submission-review.md` | Complete |
 
 ---
@@ -106,7 +106,7 @@ Scanned `dist/nexacrm-unreleased-de7387f-codester.zip` (~10.7 MiB, 1113 entries)
 | `.git/`, Composer `vendor/`, `node_modules/`, `database.sqlite` | Absent |
 | `railway.toml` / Nixpacks / Railway app hosts | Absent from ZIP paths; no `railway.app` content hits |
 | AWS key / private key / Stripe live key shapes | None |
-| Algos CRM buyer branding | Not in media; remaining historical Algos hostname strings are **docs/tests negative assertions or notes** (GitHub maintainer docs such as the package audit / release-readiness / CI notes, plus one feature test) — not listing copy |
+| Algos CRM buyer branding | Not in media; remaining historical Algos hostname strings are **test negative assertions or changelog notes** only — not listing copy |
 | Product Hunt | No product references; Font Awesome brand stylesheet contains a generic `product-hunt` icon glyph name (third-party asset, not a NexaCRM Product Hunt integration) |
 | `phpunit.xml` `DEMO_SEED_PASSWORD` | Test placeholder only; not a shipped demo login |
 | Docs webhook example | Placeholder assignment in `docs/channels/website-forms.md`, not a live secret |
