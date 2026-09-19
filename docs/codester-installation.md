@@ -10,11 +10,13 @@ Git clone instructions for maintainers: [getting-started/installation.md](gettin
 
 | Component | Version / notes |
 |---|---|
-| PHP | 8.2+ with `pdo`, `pdo_mysql`, `mbstring`, `openssl`, `tokenizer`, `xml`, `ctype`, `json`, `bcmath`, `fileinfo`, `gd` |
+| PHP | 8.2+ with `pdo`, `mbstring`, `openssl`, `tokenizer`, `xml`, `ctype`, `json`, `fileinfo`, `gd`. Composer also requires the `pdo_mysql` extension (`ext-pdo_mysql` in `composer.json`) even when you use SQLite locally, because MySQL 8+ is a supported production database. |
 | Composer | 2.x |
 | Node.js | 20+ (see `.node-version`) and npm |
-| Database | SQLite (simplest local default) or MySQL 8+ |
+| Database | SQLite (simplest local default) or MySQL 8+ (recommended for production) |
 | Web server | Document root must be the `public/` directory in production |
+
+`bcmath` is **not** listed in `composer.json` and is not required to install or sign in.
 
 A queue worker and a scheduler cron entry are **not** required to finish first-run or sign in. They are required in production for channel webhooks and reminder emails.
 

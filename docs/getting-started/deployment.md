@@ -156,4 +156,3 @@ Details: [Scheduler](../operations/scheduler.md).
 
 - [Installation](installation.md)
 - [Configuration](configuration.md)
-- [CI/CD (recommended)](../operations/cicd.md)

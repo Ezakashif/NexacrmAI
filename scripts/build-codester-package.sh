@@ -235,7 +235,10 @@ rm -f \
     "${DEST}/scripts/build-codester-package.sh" \
     "${DEST}/scripts/codester-zip.php" \
     "${DEST}/scripts/codester-zip.ps1" \
-    "${DEST}/scripts/codester-package.exclude"
+    "${DEST}/scripts/codester-package.exclude" \
+    "${DEST}/docs/codester-package-audit.md" \
+    "${DEST}/docs/release-readiness.md" \
+    "${DEST}/docs/operations/cicd.md"
 rm -rf "${DEST}/public/hot" "${DEST}/public/build" "${DEST}/public/storage"
 
 # Keep storage and bootstrap cache placeholders only (no logs, compiled views, uploads).
@@ -296,8 +299,12 @@ if grep -RInE --binary-files=without-match \
     fail "credential-like secret material found"
 fi
 
+[[ ! -f "${DEST}/docs/codester-package-audit.md" ]] || fail "maintainer package audit doc must not ship"
+[[ ! -f "${DEST}/docs/release-readiness.md" ]] || fail "maintainer release-readiness doc must not ship"
+[[ ! -f "${DEST}/docs/operations/cicd.md" ]] || fail "maintainer CI/CD doc must not ship"
+
 if grep -RInE --binary-files=without-match 'algoscrm\.com|algos\.test' "$DEST" \
-    | grep -vE 'tests/|docs/(changelog|release-readiness|operations/cicd|codester-package-audit)|scripts/ci-assert|\.github/' \
+    | grep -vE 'tests/|docs/changelog\.md|scripts/ci-assert' \
     >/dev/null; then
     fail "unexpected Algos production host in buyer package"
 fi

@@ -37,7 +37,7 @@ Billing is administrative. There is no Stripe, Cashier, or Paddle checkout in th
 
 ## Requirements
 
-- PHP 8.2+ with typical Laravel extensions, including `gd` and `pdo_mysql`
+- PHP 8.2+ with typical Laravel extensions, including `gd`, plus `pdo_mysql` (Composer platform requirement for the supported MySQL install path)
 - Composer 2
 - Node.js 20+ and npm
 - SQLite (local default) or MySQL 8+
@@ -116,13 +116,13 @@ In-app docs are available at `/docs` after login. The Markdown sources live in [
 composer ci
 ```
 
-That validates Composer metadata and runs PHPUnit. For the same frontend lockfile install + Vite build that GitHub Actions runs:
+That validates Composer metadata and runs PHPUnit. For a fuller local check (Composer + npm lockfile install + Vite build + PHPUnit):
 
 ```bash
 bash scripts/validate-release.sh
 ```
 
-CI workflow: [`.github/workflows/ci.yml`](.github/workflows/ci.yml). Maintainer notes: [docs/release-readiness.md](docs/release-readiness.md).
+Contributors who clone this repository from GitHub can also rely on the repository’s CI workflow. That workflow and maintainer release notes are GitHub-only and are not part of the Codester buyer ZIP.
 
 ## License and support
 

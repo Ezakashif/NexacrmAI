@@ -55,3 +55,8 @@ scripts/build-codester-package.sh
 scripts/codester-zip.php
 scripts/codester-zip.ps1
 scripts/codester-package.exclude
+
+# Maintainer / internal docs (kept in GitHub; not buyer install docs)
+docs/codester-package-audit.md
+docs/release-readiness.md
+docs/operations/cicd.md

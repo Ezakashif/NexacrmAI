@@ -10,7 +10,7 @@ Codester ZIP buyers (no Git clone): [Codester installation](../codester-installa
 
 | Component | Version / notes |
 |---|---|
-| PHP | 8.2+ with extensions typical for Laravel (`pdo`, `mbstring`, `openssl`, `tokenizer`, `xml`, `ctype`, `json`, `bcmath`, `fileinfo`, `gd`) |
+| PHP | 8.2+ with extensions typical for Laravel (`pdo`, `mbstring`, `openssl`, `tokenizer`, `xml`, `ctype`, `json`, `fileinfo`, `gd`). Composer also requires `pdo_mysql` (`ext-pdo_mysql`) because MySQL 8+ is a supported production database. |
 | Composer | 2.x |
 | Node.js + npm | For Vite frontend assets |
 | Database | SQLite (default) or MySQL 8+ |
@@ -166,7 +166,7 @@ npm run build
 npm run dev
 ```
 
-GitHub Actions uses `npm ci` so the build matches `package-lock.json`. See [Release readiness](../release-readiness.md).
+GitHub Actions (GitHub clones only) uses `npm ci` so the build matches `package-lock.json`.
 
 ## 8. Run the app
 

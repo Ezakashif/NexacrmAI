@@ -54,4 +54,4 @@ Delivered and planned work for the omnichannel multi-tenant CRM.
 
 - [Channels overview](channels/overview.md)
 - [Changelog](changelog.md)
-- [CI/CD](operations/cicd.md)
+- CI/CD for GitHub maintainers (repository workflow; not shipped in the Codester buyer ZIP)

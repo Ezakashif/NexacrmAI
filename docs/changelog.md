@@ -108,4 +108,4 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 ## Notes
 
 - Channel providers may appear in the UI before adapters ship; see [Channels overview](channels/overview.md) status matrix.
-- CI/CD workflows are **Recommended** and documented under [CI/CD](operations/cicd.md).
+- CI/CD workflows are **Recommended** for GitHub maintainers (not part of the Codester buyer ZIP).
