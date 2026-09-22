@@ -1,4 +1,4 @@
-# NexaCRM — Codester listing copy (draft)
+# NexaCRM AI — Codester listing copy (draft)
 
 Seller-facing draft for the Codester item page. Paste into the upload form; do not treat this file as a custom EULA.
 
@@ -12,7 +12,7 @@ Do not use “Algos CRM” anywhere on the Codester listing.
 
 ## Product title
 
-NexaCRM — Modern Multi-Tenant CRM SaaS
+NexaCRM AI — Modern Multi-Tenant CRM SaaS
 
 ---
 
@@ -22,11 +22,11 @@ Codester’s upload guide allows **130 characters**. Count includes spaces.
 
 **Recommended (122 characters):**
 
-NexaCRM is a self-hostable Laravel multi-tenant CRM for developers and agencies: leads, customers, tasks, and Super Admin.
+NexaCRM AI is a self-hostable Laravel multi-tenant CRM with optional AI lead assist: leads, customers, tasks, Super Admin.
 
 **Keyword-oriented alternative (115 characters):**
 
-NexaCRM is a Laravel PHP CRM: multi-tenant companies, pipelines, customers, tasks, and a Super Admin you self-host.
+NexaCRM AI is a Laravel PHP CRM: multi-tenant companies, AI lead assist, pipelines, customers, tasks, Super Admin.
 
 ---
 
@@ -45,9 +45,9 @@ Framework attribute: **Laravel**.
 
 ## Suggested tags
 
-crm, laravel, php, saas, multi-tenant, kanban, lead-management, customer-management, task-management, adminlte
+crm, laravel, php, saas, multi-tenant, ai, kanban, lead-management, customer-management, task-management, adminlte
 
-Do not tag AI, invoicing, Stripe, or SSO. Those are not in this package.
+This AI edition may use AI-related tags. Do not claim invoicing, Stripe, or SSO unless implemented.
 
 ---
 

@@ -29,7 +29,7 @@
         <div class="mk-container relative">
             <div class="mk-hero-copy mx-auto max-w-4xl text-center">
                 <p class="mk-brand-hero mb-6" aria-label="{{ $brand }}">
-                    {{ strtolower($brand) }}<span class="dot">.</span>
+                    {{ config('marketing.wordmark', 'nexacrm.ai') }}<span class="dot">.</span>
                 </p>
                 <h1 class="mk-display text-3xl sm:text-4xl lg:text-5xl">
                     {{ $home['headline'] }}
@@ -78,7 +78,7 @@
                 <figure class="mk-dashboard-preview mk-dashboard-preview-lg">
                     <img
                         src="{{ asset('marketing/screenshots/nexacrm-overview.png') }}"
-                        alt="NexaCRM dashboard showing revenue overview, pipeline stages, and today's tasks"
+                        alt="NexaCRM AI dashboard showing revenue overview, pipeline stages, and today's tasks"
                         class="mk-dashboard-preview-image"
                         fetchpriority="high"
                         decoding="async"
@@ -167,7 +167,7 @@
                     heading-id="how-heading"
                     eyebrow="How it works"
                     title="One connected workflow from first lead to clear decisions"
-                    description="NexaCRM keeps the customer journey moving in one shared workspace—without losing context between sales, service, and reporting."
+                    description="NexaCRM AI keeps the customer journey moving in one shared workspace—without losing context between sales, service, and reporting."
                 />
                 <div class="mt-7">
                     @if ($trialAvailable)
@@ -209,7 +209,7 @@
             <div data-mk-reveal="left">
                 <x-marketing.section-heading
                     heading-id="why-heading"
-                    eyebrow="Why NexaCRM"
+                    eyebrow="Why NexaCRM AI"
                     title="Built for teams that outgrow spreadsheets"
                     description="Modern CRM structure without the noise—so your team spends time selling, not configuring."
                 />
@@ -242,7 +242,7 @@
                     heading-id="outcomes-heading"
                     eyebrow="Built for small businesses"
                     title="The structure to grow without the CRM complexity"
-                    description="NexaCRM helps small teams replace scattered work with a clearer, more reliable way to run customer relationships."
+                    description="NexaCRM AI helps small teams replace scattered work with a clearer, more reliable way to run customer relationships."
                     align="center"
                 />
             </div>

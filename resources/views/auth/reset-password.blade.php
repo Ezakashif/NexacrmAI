@@ -1,7 +1,7 @@
 <x-marketing-auth-layout
     title="Reset password"
     heading="Reset password"
-    subheading="Choose a new password for your NexaCRM account. You’ll sign in again after resetting."
+    subheading="Choose a new password for your NexaCRM AI account. You’ll sign in again after resetting."
 >
     <form method="POST" action="{{ route('password.store') }}" class="space-y-5" novalidate>
         @csrf

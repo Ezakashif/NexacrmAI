@@ -75,7 +75,7 @@ class DocsController extends Controller
         }
 
         $pdf = Pdf::loadView('docs.pdf', [
-            'documentTitle' => 'NexaCRM Documentation',
+            'documentTitle' => 'NexaCRM AI Documentation',
             'scopeLabel' => 'Full documentation',
             'generatedAt' => now(),
             'toc' => $nav,

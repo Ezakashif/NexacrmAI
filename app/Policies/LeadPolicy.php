@@ -73,4 +73,13 @@ class LeadPolicy
 
         return $user->ownsLead($lead) || $user->canViewAllLeads();
     }
+
+    public function aiAssist(User $user, Lead $lead): bool
+    {
+        if (! $this->sameCompany($user, $lead) || ! $user->hasPermission('ai_assist.leads')) {
+            return false;
+        }
+
+        return $user->ownsLead($lead) || $user->canViewAllLeads();
+    }
 }

@@ -20,7 +20,7 @@
                     <span class="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-slate-800 text-sky-400">
                         <x-marketing.mark class="h-4 w-4" />
                     </span>
-                    <span class="text-sm font-semibold text-white">{{ strtolower((string) config('marketing.name', 'nexacrm')) }}<span class="text-sky-400">.</span></span>
+                    <span class="text-sm font-semibold text-white">{{ config('marketing.wordmark', 'nexacrm.ai') }}</span>
                 </div>
                 <div class="space-y-2">
                     <div class="rounded-md bg-sky-500/20 px-2 py-2 text-[10px] font-medium text-sky-300 sm:text-xs">Dashboard</div>

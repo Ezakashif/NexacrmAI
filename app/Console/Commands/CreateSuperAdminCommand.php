@@ -15,7 +15,7 @@ class CreateSuperAdminCommand extends Command
                             {--email= : Super Admin email}
                             {--password= : Super Admin password (prefer a prompt or SETUP_SUPERADMIN_PASSWORD)}';
 
-    protected $description = 'Create the first platform Super Admin for a fresh NexaCRM install';
+    protected $description = 'Create the first platform Super Admin for a fresh NexaCRM AI install';
 
     public function handle(SuperAdminBootstrap $bootstrap): int
     {

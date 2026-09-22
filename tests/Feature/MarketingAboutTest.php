@@ -15,9 +15,9 @@ class MarketingAboutTest extends TestCase
             ->assertSee(config('marketing.about.mission.body'))
             ->assertSee('Vision')
             ->assertSee(config('marketing.about.vision.body'))
-            ->assertSee('Why we built NexaCRM')
-            ->assertSee('How NexaCRM took shape')
-            ->assertSee('The stack behind NexaCRM')
+            ->assertSee('Why we built NexaCRM AI')
+            ->assertSee('How NexaCRM AI took shape')
+            ->assertSee('The stack behind NexaCRM AI')
             ->assertSee('Laravel')
             ->assertSee('Tailwind CSS')
             ->assertSee('Alpine.js');

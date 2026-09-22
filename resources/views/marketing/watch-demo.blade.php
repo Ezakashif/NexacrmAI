@@ -13,7 +13,7 @@
         <div class="mk-container mk-section pb-8 md:pb-12">
             <div class="mk-hero-copy mx-auto max-w-3xl text-center">
                 <p class="mk-brand-hero mk-brand-hero-page mb-5" aria-label="{{ $brand }}">
-                    {{ strtolower($brand) }}<span class="dot">.</span>
+                    {{ config('marketing.wordmark', 'nexacrm.ai') }}<span class="dot">.</span>
                 </p>
                 <h1 class="mk-display mk-page-title">
                     See {{ $brand }} in action

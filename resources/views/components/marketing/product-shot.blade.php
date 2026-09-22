@@ -30,7 +30,7 @@
             </div>
             <div class="mk-product-shot-body">
                 <div class="mk-product-shot-aside" aria-hidden="true">
-                    <div class="mk-product-shot-brand">{{ strtolower((string) config('marketing.name', 'nexacrm')) }}.</div>
+                    <div class="mk-product-shot-brand">{{ config('marketing.wordmark', 'nexacrm.ai') }}</div>
                     <div class="is-active">{{ $title }}</div>
                     <div>Overview</div>
                     <div>Details</div>

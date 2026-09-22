@@ -14,7 +14,7 @@
         <div class="mk-container mk-section pb-10 md:pb-12">
             <div class="mk-hero-copy mx-auto max-w-3xl text-center">
                 <p class="mk-brand-hero mk-brand-hero-page mb-5" aria-label="{{ config('marketing.name') }}">
-                    {{ strtolower(config('marketing.name')) }}<span class="dot">.</span>
+                    {{ config('marketing.wordmark', 'nexacrm.ai') }}<span class="dot">.</span>
                 </p>
                 <h1 class="mk-display mk-page-title">
                     {{ $pricing['headline'] }}

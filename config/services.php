@@ -35,4 +35,16 @@ return [
         ],
     ],
 
+
+    'openai' => [
+        'key' => env('AI_OPENAI_API_KEY'),
+        'base_url' => env('AI_OPENAI_BASE_URL', 'https://api.openai.com/v1'),
+        'model' => env('AI_OPENAI_MODEL', 'gpt-4o-mini'),
+    ],
+
+    'anthropic' => [
+        'key' => env('AI_ANTHROPIC_API_KEY'),
+        'model' => env('AI_ANTHROPIC_MODEL', 'claude-sonnet-4-20250514'),
+    ],
+
 ];

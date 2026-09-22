@@ -30,7 +30,7 @@ class DocsViewerTest extends TestCase
         $this->actingAs($admin)
             ->get(route('docs.index'))
             ->assertOk()
-            ->assertSee('NexaCRM Documentation', false)
+            ->assertSee('NexaCRM AI Documentation', false)
             ->assertSee('Contents', false);
 
         $this->actingAs($admin)
@@ -59,7 +59,7 @@ class DocsViewerTest extends TestCase
             ->get(route('docs.show', ['path' => 'development/contributing']))
             ->assertOk()
             ->assertSee('Development notes', false)
-            ->assertSee('Codester edition of NexaCRM', false)
+            ->assertSee('AI edition of NexaCRM', false)
             ->assertSee('Tenant safety', false)
             ->assertSee('CompanyScope', false);
     }

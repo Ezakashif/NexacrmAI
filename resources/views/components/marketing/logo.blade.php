@@ -12,6 +12,6 @@
         <x-marketing.mark class="h-5 w-5" />
     </span>
     <span class="text-xl font-bold tracking-tight text-slate-900">
-        {{ strtolower($brand) }}<span class="text-sky-500">.</span>
+        {{ config('marketing.wordmark', 'nexacrm.ai') }}
     </span>
 </a>

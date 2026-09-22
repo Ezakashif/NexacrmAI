@@ -179,6 +179,8 @@
         </div>
 
         <div class="col-lg-8">
+            @include('leads.partials.ai-assist')
+
             @can('createActivity', $lead)
                 <div class="card card-outline card-success mb-3">
                     <div class="card-header">

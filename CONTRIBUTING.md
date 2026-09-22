@@ -1,6 +1,6 @@
 # Contributing
 
-NexaCRM is a commercial source-code product. Buyers customize their own copy.
+NexaCRM AI is a commercial source-code product. Buyers customize their own copy.
 
 If you are working in this repository:
 

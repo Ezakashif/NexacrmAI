@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 200" fill="none" role="img" aria-label="NexaCRM">
-  <title>NexaCRM</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 200" fill="none" role="img" aria-label="NexaCRM AI">
+  <title>NexaCRM AI</title>
   <rect x="20" y="36" width="128" height="128" rx="32" fill="#0F172A"/>
   <path d="M56 148 V52 L112 148 V52" stroke="#38BDF8" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <text x="176" y="120" fill="#0F172A" font-family="Inter, Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="84" font-weight="700" letter-spacing="-2.5">nexacrm.</text>
+  <text x="176" y="120" fill="#0F172A" font-family="Inter, Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="84" font-weight="700" letter-spacing="-2.5">nexacrm.ai</text>
 </svg>

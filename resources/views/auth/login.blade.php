@@ -1,7 +1,7 @@
 <x-marketing-auth-layout
     title="Sign in"
     heading="Sign in"
-    subheading="Enter your credentials to continue to your NexaCRM workspace."
+    subheading="Enter your credentials to continue to your NexaCRM AI workspace."
 >
     @if (session('status'))
         <div class="mb-5 rounded-xl border border-sky-200 bg-sky-50 px-4 py-3 text-sm text-sky-900" role="status">
@@ -73,7 +73,7 @@
 
     @if (! empty($registrationEnabled))
         <p class="mt-3 text-center text-sm text-slate-600">
-            New to NexaCRM?
+            New to NexaCRM AI?
             <a href="{{ route('register') }}" class="font-semibold text-sky-700 hover:text-sky-800">Create a workspace</a>
         </p>
     @endif

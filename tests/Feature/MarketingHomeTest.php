@@ -32,7 +32,7 @@ class MarketingHomeTest extends TestCase
             ->assertSee('One connected workflow from first lead to clear decisions', false)
             ->assertSee('Lead created', false)
             ->assertSeeText('Reports & analytics')
-            ->assertSee('Why NexaCRM', false)
+            ->assertSee('Why NexaCRM AI', false)
             ->assertSee('The structure to grow without the CRM complexity', false)
             ->assertSee('Leave spreadsheets behind', false)
             ->assertSee('Plans that scale with your team', false)

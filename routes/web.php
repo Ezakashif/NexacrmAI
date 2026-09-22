@@ -7,6 +7,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\LeadActivityController;
+use App\Http\Controllers\LeadAiController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\GlobalSearchController;
 use App\Http\Controllers\TaskController;
@@ -123,6 +124,10 @@ Route::middleware(['auth', 'verified.when_required', 'active', 'company'])->grou
         ->name('leads.convert');
     Route::post('/leads/board/update', [LeadController::class, 'updateBoard'])
         ->name('leads.board.update');
+    Route::post('/leads/{lead}/ai/suggest', [LeadAiController::class, 'suggest'])
+        ->middleware('throttle:20,1')
+        ->name('leads.ai.suggest');
+
     Route::post('/leads/{lead}/activities', [LeadActivityController::class, 'store'])
         ->name('leads.activities.store');
 

@@ -19,7 +19,7 @@ jobs:
     timeout-minutes: 25
 
     env:
-      APP_NAME: NexaCRM
+      APP_NAME: "NexaCRM AI"
 
     steps:
       - name: Checkout

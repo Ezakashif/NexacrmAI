@@ -1,9 +1,17 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "ezakashif/nexacrm",
+    "name": "ezakashif/nexacrm-ai",
     "type": "project",
-    "description": "NexaCRM is a modern multi-tenant Laravel CRM SaaS for developers, agencies, and growing businesses.",
-    "keywords": ["nexacrm", "crm", "laravel", "saas", "multi-tenant"],
+    "description": "NexaCRM AI is a modern multi-tenant Laravel CRM with AI-assisted lead coaching for developers, agencies, and growing businesses.",
+    "keywords": [
+        "nexacrm-ai",
+        "nexacrm",
+        "crm",
+        "ai",
+        "laravel",
+        "saas",
+        "multi-tenant"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.2",

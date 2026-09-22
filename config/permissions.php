@@ -32,6 +32,7 @@ return [
                 'assign' => 'Assign',
                 'convert' => 'Convert',
                 'log' => 'Log Activities',
+                'ai_assist' => 'AI Assist',
             ],
         ],
         'tasks' => [

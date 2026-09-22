@@ -12,7 +12,7 @@
         <div class="mk-container mk-section pb-12 md:pb-16">
             <div class="mk-hero-copy mx-auto max-w-3xl text-center">
                 <p class="mk-brand-hero mk-brand-hero-page mb-5" aria-label="{{ $brand }}">
-                    {{ strtolower($brand) }}<span class="dot">.</span>
+                    {{ config('marketing.wordmark', 'nexacrm.ai') }}<span class="dot">.</span>
                 </p>
                 <h1 class="mk-display mk-page-title">
                     {{ $about['headline'] }}
@@ -71,7 +71,7 @@
             <x-marketing.section-heading
                 heading-id="timeline-heading"
                 eyebrow="Timeline"
-                title="How NexaCRM took shape"
+                title="How NexaCRM AI took shape"
                 description="A short path from the problem to a product ready for growing teams."
                 align="center"
             />
@@ -102,7 +102,7 @@
             <x-marketing.section-heading
                 heading-id="stack-heading"
                 eyebrow="Technology"
-                title="The stack behind NexaCRM"
+                title="The stack behind NexaCRM AI"
                 description="A practical Laravel foundation—modern frontend for marketing, proven CRM shell for authenticated work."
                 align="center"
             />
@@ -119,6 +119,6 @@
     </section>
 
     <x-marketing.cta
-        title="Want to see NexaCRM in action?"
+        title="Want to see NexaCRM AI in action?"
     />
 </x-marketing-layout>

@@ -8,11 +8,12 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'name' => env('MARKETING_BRAND_NAME', 'NexaCRM'),
-    'tagline' => env('MARKETING_TAGLINE', 'A Modern Multi-Tenant CRM for Growing Businesses'),
+    'name' => env('MARKETING_BRAND_NAME', 'NexaCRM AI'),
+    'wordmark' => env('MARKETING_WORDMARK', 'nexacrm.ai'),
+    'tagline' => env('MARKETING_TAGLINE', 'AI-Assisted Multi-Tenant CRM for Growing Businesses'),
     'description' => env(
         'MARKETING_DESCRIPTION',
-        'NexaCRM is a modern multi-tenant CRM for lead management, customer success, tasks, and team collaboration.'
+        'NexaCRM AI is a modern multi-tenant CRM with AI-assisted lead coaching—lead management, customer success, tasks, and team collaboration.'
     ),
 
     /*
@@ -161,7 +162,7 @@ return [
             [
                 'id' => 'trial-pricing',
                 'question' => 'Do plans include a free trial?',
-                'answer' => 'Starter and Professional include a free trial so you can evaluate NexaCRM before paying. Enterprise starts with a guided demo.',
+                'answer' => 'Starter and Professional include a free trial so you can evaluate NexaCRM AI before paying. Enterprise starts with a guided demo.',
             ],
             [
                 'id' => 'limits',
@@ -202,8 +203,8 @@ return [
     */
 
     'home' => [
-        'headline' => 'Run your entire sales pipeline in one CRM your team will actually open every day',
-        'subheadline' => 'NexaCRM unifies leads, customers, tasks, kanban boards, and reports so growing teams stop losing follow-ups in spreadsheets and inboxes.',
+        'headline' => 'Run your sales pipeline with AI-assisted follow-ups your team will actually use every day',
+        'subheadline' => 'NexaCRM AI unifies leads, customers, tasks, kanban boards, and reports so growing teams stop losing follow-ups in spreadsheets and inboxes.',
         'trust_chips' => [
             'Multi-tenant SaaS',
             'Secure authentication',
@@ -221,7 +222,7 @@ return [
         ],
         'product_showcase' => [
             'headline' => 'See the CRM in Action',
-            'subheadline' => 'Explore the real NexaCRM workspace—dashboards, pipelines, tasks, reports, and admin controls—before you start your trial.',
+            'subheadline' => 'Explore the real NexaCRM AI workspace—dashboards, pipelines, tasks, reports, and admin controls—before you start your trial.',
             'items' => [
                 [
                     'id' => 'dashboard',
@@ -303,6 +304,15 @@ return [
                 'solution' => 'Capture every lead with owners, stages, and history.',
                 'benefit' => 'Fewer dropped follow-ups and a pipeline you can trust.',
                 'description' => 'Capture every inquiry, score interest, and move deals through a clear pipeline.',
+            ],
+
+            [
+                'icon' => 'sparkles',
+                'title' => 'AI lead assist',
+                'problem' => 'Reps guess the next email or call script under pressure.',
+                'solution' => 'Optional AI suggests next steps and talk tracks from lead context.',
+                'benefit' => 'Faster, more consistent follow-ups without leaving the CRM.',
+                'description' => 'Generate next-step suggestions and talk tracks from the lead record when AI is enabled.',
             ],
             [
                 'icon' => 'users',
@@ -451,7 +461,7 @@ return [
             ],
             [
                 'id' => 'tenants',
-                'question' => 'Is NexaCRM multi-tenant?',
+                'question' => 'Is NexaCRM AI multi-tenant?',
                 'answer' => 'Yes. Each company gets isolated data, roles, and settings inside a shared platform architecture.',
             ],
             [
@@ -475,7 +485,7 @@ return [
 
     'features_page' => [
         'headline' => 'Every module your revenue team needs',
-        'subheadline' => 'NexaCRM covers the full CRM lifecycle—from first lead to closed customer—with clear permissions, reporting, and multi-tenant control.',
+        'subheadline' => 'NexaCRM AI covers the full CRM lifecycle—from first lead to closed customer—with clear permissions, reporting, and multi-tenant control.',
         'groups' => [
             [
                 'id' => 'sales',
@@ -656,7 +666,7 @@ return [
 
     'about' => [
         'headline' => 'Built for teams who deserve a calmer CRM',
-        'subheadline' => 'NexaCRM started with a simple belief: revenue software should feel clear, trustworthy, and fast to adopt—not heavy, noisy, or confusing.',
+        'subheadline' => 'NexaCRM AI started with a simple belief: revenue software should feel clear, trustworthy, and fast to adopt—not heavy, noisy, or confusing.',
         'mission' => [
             'title' => 'Mission',
             'body' => 'Help growing teams close more deals with a CRM that stays out of the way—clear pipelines, accountable follow-ups, and data every stakeholder can trust.',
@@ -666,8 +676,8 @@ return [
             'body' => 'Become the operating system for modern revenue teams: multi-tenant by design, permission-aware by default, and delightful enough that people actually want to use it every day.',
         ],
         'why' => [
-            'title' => 'Why we built NexaCRM',
-            'body' => 'Too many CRMs force teams to choose between power and usability. Spreadsheets break under pressure. Enterprise tools drown reps in configuration. We built NexaCRM so sales and ops can share one workspace—leads, customers, tasks, reports, and admin controls—without the clutter.',
+            'title' => 'Why we built NexaCRM AI',
+            'body' => 'Too many CRMs force teams to choose between power and usability. Spreadsheets break under pressure. Enterprise tools drown reps in configuration. We built NexaCRM AI so sales and ops can share one workspace—leads, customers, tasks, reports, and admin controls—without the clutter.',
             'points' => [
                 'Clarity over feature theater',
                 'Tenant isolation and permissions from day one',
